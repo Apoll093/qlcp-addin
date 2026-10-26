@@ -86,6 +86,9 @@ textarea.t{resize:vertical;min-height:52px}
 .sw i{flex:none;width:38px;height:21px;border-radius:11px;background:#cbd5e1;position:relative;margin-right:9px;transition:background .2s}
 .sw i:after{content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:left .2s}
 .sw.on i{background:#1e88e5}.sw.on i:after{left:19px}
+.sw.dis{opacity:.45;cursor:default}
+.lkmsg{display:none;background:#fff8e1;border-left:4px solid #f9a825;border-radius:6px;padding:8px 10px;color:#8d6e00;font-size:12px;margin-bottom:12px}
+body.lk .lkmsg{display:block}
 .note{font-size:11.5px;color:#6b7280;margin-top:4px}
 .kpi{padding:7px 0;border-bottom:1px dashed #e8edf3}
 .kpi:last-child{border-bottom:0}
@@ -120,6 +123,7 @@ textarea.t{resize:vertical;min-height:52px}
  <div class="pg on" id="pg1">
   <div class="card">
    <div class="info">&#128161; Các trường có dấu <b style="color:#d32f2f">*</b> là bắt buộc. Nhấn [Lưu] để lưu dự án.</div>
+   <div class="lkmsg">&#128274; Dự án mới: nhập <b>Tên dự án</b> và <b>Chủ đầu tư</b> trước – các mục còn lại, tab Pháp lý &amp; tiến độ và Tổng mức đầu tư sẽ mở khóa sau đó.</div>
    <div id="g1"></div>
    <div class="btns" data-acts="1"></div>
   </div>
@@ -131,6 +135,7 @@ textarea.t{resize:vertical;min-height:52px}
  </div>
  <div class="pg" id="pg2">
   <div class="card">
+   <div class="lkmsg">&#128274; Đang khóa – nhập Tên dự án và Chủ đầu tư ở tab Thông tin chung để mở.</div>
    <div class="sec">Quyết định phê duyệt dự án</div><div id="g2a"></div>
    <div class="sec" style="margin-top:6px">Tiến độ kế hoạch</div><div id="g2b"></div>
    <div class="kpi"><div class="kl"><span>Thời gian thực hiện</span><b id="tgth">-</b></div><div class="bar"><i id="barTG"></i></div><div class="bt" id="pctTG"></div></div>
@@ -139,6 +144,7 @@ textarea.t{resize:vertical;min-height:52px}
  </div>
  <div class="pg" id="pg3">
   <div class="card">
+   <div class="lkmsg">&#128274; Đang khóa – nhập Tên dự án và Chủ đầu tư ở tab Thông tin chung để mở.</div>
    <div class="sw" id="swTM"><i></i>Nhập / cập nhật tổng mức đầu tư khi lưu</div>
    <div id="g3"></div>
    <div class="note" id="pbInfo" style="margin:-4px 0 10px"></div>
@@ -163,7 +169,8 @@ textarea.t{resize:vertical;min-height:52px}
 var TBLS=["tbl_DuAn","tbl_TMDT","tbl_KhoanMuc","tbl_GoiThau","tbl_HopDong","tbl_PhuLuc","tbl_NghiemThu","tbl_ThanhToan","tbl_DieuKhoanTU","tbl_BaoLanh"];
 var LSTS=["lst_NhomDA","lst_NguonVon","lst_GiaiDoan","lst_TrangThaiDong","lst_ThueVAT","lst_PhienBanTMDT"];
 var NEWPB="(+ Thêm phiên bản mới)";
-var S={T:{},L:{},km:[],ma:"",tm:false,HD:"Hoạt động",HUY:"Đã hủy",dd:{},ready:false};
+var S={T:{},L:{},km:[],ma:"",tm:false,HD:"Hoạt động",HUY:"Đã hủy",dd:{},ready:false,open:null};
+var LK=["nhom","nv","dd","gd","tt","soqd","ngqd","kc","ht"];
 var F=[
  {id:"ten",col:"Tên dự án",lb:"Tên dự án",req:1,k:"ta",tab:1},
  {id:"cdt",col:"Chủ đầu tư",lb:"Chủ đầu tư",req:1,k:"t",tab:1},
@@ -258,7 +265,7 @@ function build(){
  document.body.addEventListener("input",function(e){var t=e.target;if(t.id==="tim"){renderList();return;}if(t.getAttribute("data-km")!==null){fmtNum(t);calcTM();}onChange();});
  document.body.addEventListener("keyup",function(e){var t=e.target;if(t.id==="tim")renderList();});
  $("tabs").onclick=function(e){var t=e.target;while(t&&t.tagName!=="A")t=t.parentNode;if(t)tab(+t.getAttribute("data-t"));};
- $("swTM").onclick=function(){S.tm=!S.tm;cls($("swTM"),"on",S.tm);lockTM();onChange();};
+ $("swTM").onclick=function(){if(!S.open)return;S.tm=!S.tm;cls($("swTM"),"on",S.tm);lockTM();onChange();};
  $("ds").onclick=function(e){var t=e.target;while(t&&t!==this&&!t.getAttribute("data-ma"))t=t.parentNode;if(t&&t!==this){openDA(t.getAttribute("data-ma"));}};
  $("btnRf").onclick=function(){reload(S.ma);};
 }
@@ -284,7 +291,7 @@ function rowDA(ma){var t=T("tbl_DuAn");for(var i=0;i<t.v.length;i++)if(String(t.
 function newMa(){var t=T("tbl_DuAn"),mx=0,i,s,n;for(i=0;i<t.v.length;i++){s=String(t.v[i][0]);n=parseInt(s.substr(2),10);if(s.substr(0,2)==="DA"&&!isNaN(n)&&n>mx)mx=n;}return "DA"+p2(mx+1);}
 function val(id){var f=fd(id);if(f.k==="dd")return S.dd[id].get();var e=$(id);return e?String(e.value).replace(/^\s+|\s+$/g,""):"";}
 function setv(id,v){var f=fd(id);if(f.k==="dd"){S.dd[id].set(v,true);return;}$(id).value=f.k==="d"?d2s(v):(v==null?"":String(v));}
-function newForm(){S.ma="";for(var i=0;i<F.length;i++)setv(F[i].id,"");S.dd.tt.set(S.HD,true);S.tm=false;cls($("swTM"),"on",false);buildPB();tab(1);onChange();}
+function newForm(){S.ma="";for(var i=0;i<F.length;i++)setv(F[i].id,"");S.tm=false;cls($("swTM"),"on",false);buildPB();tab(1);onChange();}
 function openDA(ma,quiet){var t=T("tbl_DuAn"),r=rowDA(ma),i;if(r<0){if(!quiet)toast("Không tìm thấy "+ma,"err");return;}S.ma=ma;
  for(i=0;i<F.length;i++)setv(F[i].id,t.g(r,F[i].col));S.tm=false;cls($("swTM"),"on",false);buildPB();onChange();if(!quiet)tab(1);}
 
@@ -309,7 +316,11 @@ function loadTM(){var t=T("tbl_TMDT"),pb=S.dd.pb.get(),i,k,cM=t.c("Mã DA"),cP=t
  $("tmqd").value=qd;$("tmng").value=d2s(ng);
  var real=pbReal();$("pbInfo").innerHTML=!real?"&#9888; Đã hết danh mục phiên bản":(pb===NEWPB?"Sẽ tạo phiên bản mới: <b>"+esc(real)+"</b>":"Đang xem / sửa phiên bản <b>"+esc(real)+"</b>");
  lockTM();calcTM();}
-function lockTM(){var on=S.tm,k;S.dd.pb.disable(!on);$("tmqd").disabled=!on;$("tmng").disabled=!on;for(k=0;k<S.km.length;k++){$("km"+k).disabled=!on;S.dd["vat"+k].disable(!on);}}
+function gate(){var o=!!S.ma||(val("ten")!==""&&val("cdt")!==""),i,id;if(o===S.open)return;S.open=o;
+ for(i=0;i<LK.length;i++){id=LK[i];if(fd(id).k==="dd")S.dd[id].disable(!o);else $(id).disabled=!o;}
+ if(!o&&S.tm){S.tm=false;cls($("swTM"),"on",false);}
+ cls($("swTM"),"dis",!o);cls(document.body,"lk",!o);lockTM();}
+function lockTM(){var on=S.tm&&S.open!==false,k;S.dd.pb.disable(!on);$("tmqd").disabled=!on;$("tmng").disabled=!on;for(k=0;k<S.km.length;k++){$("km"+k).disabled=!on;S.dd["vat"+k].disable(!on);}}
 function calcTM(){var a=0,b=0,k,g,s;for(k=0;k<S.km.length;k++){g=num($("km"+k).value);s=Math.round(g*(1+vatNum(S.dd["vat"+k].get())));$("st"+k).innerHTML=g?fmt(s):"";a+=g;b+=g?s:0;}
  $("tTr").innerHTML=fmt(a);$("tSt").innerHTML=fmt(b);S.tong=a;}
 
@@ -319,6 +330,7 @@ function trungTen(){var t=T("tbl_DuAn"),n=val("ten").toLowerCase(),i,cT=t.c("Tê
 function validate(){var E=[],ok=[],i,f,v,d1,d2,tr;
  function bad(id,m,tb){E.push({id:id,m:m,tab:tb});}
  for(i=0;i<F.length;i++){f=F[i];v=val(f.id);
+  if(f.req&&!v&&S.open===false&&LK.indexOf(f.id)>=0)continue;
   if(f.req&&!v)bad(f.id,"Bắt buộc nhập "+f.lb.toLowerCase(),f.tab);
   else if(f.k==="d"&&v&&s2d(v)===null)bad(f.id,"Ngày không hợp lệ (dd/mm/yyyy)",f.tab);
   else if(f.req)ok.push(f.lb);}
@@ -372,7 +384,7 @@ function renderList(){var t=T("tbl_DuAn");if(!t)return;var q=String($("tim").val
  for(i=0;i<t.v.length;i++){ma=String(t.v[i][0]);ten=String(t.v[i][cT]);if(!ma||!ten)continue;if(q&&(ma+" "+ten).toLowerCase().indexOf(q)<0)continue;n++;
   h+='<div class="tr'+(ma===S.ma?" sel":"")+'" data-ma="'+esc(ma)+'"><div class="c1">'+esc(ma)+'</div><div class="c2" title="'+esc(ten)+'">'+esc(ten)+'</div><div class="c3">'+pill(t.v[i][cS])+"</div></div>";}
  $("ds").innerHTML=h||'<div class="empty">Không có dự án phù hợp.</div>';$("cnt").innerHTML=n+" dự án";}
-function onChange(){if(!S.ready)return;var E=validate(),b=document.querySelectorAll("[data-a]"),i;
+function onChange(){if(!S.ready)return;gate();var E=validate(),b=document.querySelectorAll("[data-a]"),i;
  $("ma").value=S.ma||newMa();
  $("mode").innerHTML=S.ma?"&#9998; Đang sửa "+esc(S.ma)+" · "+esc(val("ten")):"&#10133; Tạo mới – mã dự kiến "+newMa();
  for(i=0;i<b.length;i++){var a=b[i].getAttribute("data-a");if(a==="luu")b[i].disabled=E.length>0;if(a==="huy")b[i].disabled=!S.ma;}
