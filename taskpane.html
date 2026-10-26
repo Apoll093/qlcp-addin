@@ -114,11 +114,37 @@ body.lk .lkmsg{display:block}
 #modal.on{display:block}
 .mbox{position:absolute;left:16px;right:16px;top:30%;background:#fff;border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.3);padding:16px}
 .mbox h4{margin:0 0 6px;font-size:14px}.mbox p{margin:0 0 14px;color:#4b5563;font-size:12.5px}
+.mods{display:flex;margin-top:9px;background:rgba(255,255,255,.16);border-radius:9px;padding:3px;width:-webkit-max-content;width:max-content}
+.mods a{padding:5px 14px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;color:#e3f2fd;white-space:nowrap;transition:background .15s}
+.mods a:hover{background:rgba(255,255,255,.14)}
+.mods a.on{background:#fff;color:#0d47a1}
+#tabsH{display:none}
+body.mH #tabs{display:none}
+body.mH #tabsH{display:flex}
+body.mH .pg.on{display:none}
+.ph{display:none}
+body.mH .ph.on{display:block}
+body.mH .lkmsg{display:none!important}
+.lkh{display:none;background:#fff8e1;border-left:4px solid #f9a825;border-radius:6px;padding:8px 10px;color:#8d6e00;font-size:12px;margin-bottom:12px}
+body.mH.lkH .lkh{display:block}
+.hide{display:none!important}
+.wn{color:#e65100;font-size:11px;margin-top:3px}.wn:empty{display:none}
+.pct{position:relative}.pct .t{padding-right:24px}.pct:after{content:"%";position:absolute;right:10px;top:8px;color:#9ca3af;font-size:12px}
+.mem{border:1px solid #e2e8f0;border-radius:10px;padding:10px 10px 0;margin-bottom:10px;background:#fbfcfe}
+.memh{display:flex;align-items:center;margin-bottom:9px;font-weight:700;font-size:12.5px;color:#0d47a1}
+.memh span.nm{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:6px}
+.memh a{color:#c62828;cursor:pointer;font-size:11px;margin-left:8px;font-weight:600}
+.msub{font-size:10.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.3px;margin:2px 0 7px;border-top:1px dashed #e2e8f0;padding-top:7px}
+.sumr{display:flex;justify-content:space-between;font-size:12px;padding:7px 9px;background:#fff8e1;border-radius:8px;margin-bottom:10px}
+.sumr.bad{background:#ffebee;color:#b71c1c}.sumr.good{background:#e8f5e9;color:#1b5e20}
+.addm{border:1px dashed #b6c3d3;border-radius:10px;padding:10px 10px 4px;margin-bottom:6px}
+#hds .c1{width:46px}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="ttl">&#128203; Quản lý dự án</div><div class="sub" id="mode">Đang tải dữ liệu…</div><button class="rf" id="btnRf" title="Tải lại dữ liệu">&#10227;</button></div>
+<div class="hdr"><div class="ttl" id="ttl">&#128203; Quản lý dự án</div><div class="sub" id="mode">Đang tải dữ liệu…</div><div class="mods" id="mods"><a data-m="1" class="on">&#128203; Dự án</a><a data-m="2">&#128209; Hợp đồng</a></div><button class="rf" id="btnRf" title="Tải lại dữ liệu">&#10227;</button></div>
 <div class="tabs" id="tabs"><a data-t="1" class="on">&#128221; Thông tin chung</a><a data-t="2">&#9878; Pháp lý &amp; tiến độ</a><a data-t="3">&#128176; Tổng mức đầu tư</a><a data-t="4">&#128202; Tổng quan</a></div>
+<div class="tabs" id="tabsH"><a data-h="1" class="on">&#128221; Thông tin HĐ</a><a data-h="2">&#128176; Giá trị &amp; thanh toán</a><a data-h="3">&#128737; Tạm ứng &amp; bảo lãnh</a><a data-h="4">&#129309; Liên danh</a></div>
 <div class="body">
  <div class="pg on" id="pg1">
   <div class="card">
@@ -159,6 +185,44 @@ body.lk .lkmsg{display:block}
   </div>
   <div class="card"><div class="chkh" id="chkH"></div><div class="chk" id="chkL"></div></div>
  </div>
+ <div class="ph on" id="ph1">
+  <div class="card">
+   <div class="info">&#128161; Các trường có dấu <b style="color:#d32f2f">*</b> là bắt buộc. Chọn gói thầu sẽ tự điền nhà thầu trúng thầu, loại HĐ, VAT và giá trúng thầu (nếu ô còn trống).</div>
+   <div id="h1"></div>
+   <div class="btns" data-hacts="1"></div>
+  </div>
+  <div class="card"><div class="chkh" id="hchkH"></div><div class="chk" id="hchkL"></div></div>
+  <div class="card">
+   <div class="lh"><b>&#128209; Danh sách hợp đồng</b><span class="badge" id="hcnt">0 HĐ</span><input class="t search" id="htim" placeholder="&#128269; Tìm mã, số HĐ, nhà thầu…"></div>
+   <div class="tbl"><div class="tr th"><div class="c1">Mã</div><div class="c2">Số HĐ · Nhà thầu</div><div class="c3">Trạng thái</div></div><div class="tbody" id="hds"></div></div>
+   <div class="note" id="hdsN">Bấm vào một dòng để mở hợp đồng và sửa.</div>
+  </div>
+ </div>
+ <div class="ph" id="ph2">
+  <div class="card">
+   <div class="lkh">&#128274; Đang khóa – chọn Dự án, Gói thầu và nhập Số hợp đồng ở tab Thông tin HĐ để mở.</div>
+   <div id="h2"></div>
+   <div class="btns" data-hacts="1"></div>
+  </div>
+ </div>
+ <div class="ph" id="ph3">
+  <div class="card">
+   <div class="lkh">&#128274; Đang khóa – chọn Dự án, Gói thầu và nhập Số hợp đồng ở tab Thông tin HĐ để mở.</div>
+   <div id="h3"></div>
+   <div class="btns" data-hacts="1"></div>
+  </div>
+ </div>
+ <div class="ph" id="ph4">
+  <div class="card">
+   <div class="lkh">&#128274; Đang khóa – chọn Dự án, Gói thầu và nhập Số hợp đồng ở tab Thông tin HĐ để mở.</div>
+   <div class="info" id="h4msg"></div>
+   <div id="h4"></div>
+   <div id="hmemW"><div class="sec" style="margin-top:6px">Phân chia cho thành viên</div><div class="sumr" id="hsum"></div><div id="hmem"></div>
+    <div class="addm" id="hadd"><div class="row"><div class="col"><div class="f"><label>Thêm thành viên</label><div id="hAddNT"></div></div></div><div class="col" style="flex:none;width:42%"><div class="f"><label>Vai trò</label><div id="hAddVT"></div></div></div></div><button class="btn sec2" data-a="haddm" style="width:100%;margin:0 0 8px">&#10133; THÊM THÀNH VIÊN</button></div>
+    <div class="note">Thành viên được lưu vào bảng tbl_ThanhVienLD theo mã liên danh. Tỷ lệ giá trị = Giá trị TV / Giá trị HĐ trước thuế.</div></div>
+   <div class="btns" data-hacts="1" style="margin-top:12px"></div>
+  </div>
+ </div>
 </div>
 <div id="toast"></div>
 <div id="busy"><i></i></div>
@@ -166,8 +230,8 @@ body.lk .lkmsg{display:block}
 <script>
 (function(){
 "use strict";
-var TBLS=["tbl_DuAn","tbl_TMDT","tbl_KhoanMuc","tbl_GoiThau","tbl_HopDong","tbl_PhuLuc","tbl_NghiemThu","tbl_ThanhToan","tbl_DieuKhoanTU","tbl_BaoLanh"];
-var LSTS=["lst_NhomDA","lst_NguonVon","lst_GiaiDoan","lst_TrangThaiDong","lst_ThueVAT","lst_PhienBanTMDT"];
+var TBLS=["tbl_DuAn","tbl_TMDT","tbl_KhoanMuc","tbl_GoiThau","tbl_HopDong","tbl_PhuLuc","tbl_NghiemThu","tbl_ThanhToan","tbl_DieuKhoanTU","tbl_BaoLanh","tbl_NhaThau","tbl_LienDanh","tbl_ThanhVienLD"];
+var LSTS=["lst_NhomDA","lst_NguonVon","lst_GiaiDoan","lst_TrangThaiDong","lst_ThueVAT","lst_PhienBanTMDT","lst_HinhThucNT","lst_LoaiHD","lst_TrangThaiHD","lst_DangBH","lst_CanCuTU","lst_CanCuBLTH","lst_CanCuBLTU2","lst_CanCuBH","lst_PTThanhToanLD","lst_VaiTroLD"];
 var NEWPB="(+ Thêm phiên bản mới)";
 var S={T:{},L:{},km:[],ma:"",tm:false,HD:"Hoạt động",HUY:"Đã hủy",dd:{},ready:false,open:null};
 var LK=["nhom","nv","dd","gd","tt","soqd","ngqd","kc","ht"];
@@ -282,7 +346,7 @@ function loadAll(){
    for(n in R)S.T[n]=new Tb(R[n].h.values[0],R[n].b.values);
    for(n in L){a=[];for(i=0;i<L[n].values.length;i++)for(j=0;j<L[n].values[i].length;j++)if(L[n].values[i][j]!==""&&L[n].values[i][j]!=null)a.push(L[n].values[i][j]);S.L[n]=a;}
    S.HD=String(st.values[0][0]||S.HD);S.HUY=String(st.values[1][0]||S.HUY);});});}
-function reload(ma){busy(true);return loadAll().then(function(){S.ready=true;fillLists();buildKM();if(ma)openDA(ma,true);else newForm();toast("Đã tải dữ liệu mới nhất","ok");})["catch"](fail).then(function(){busy(false);});}
+function reload(ma){busy(true);return loadAll().then(function(){S.ready=true;fillLists();buildKM();if(ma)openDA(ma,true);else newForm();hRefresh();toast("Đã tải dữ liệu mới nhất","ok");})["catch"](fail).then(function(){busy(false);});}
 function fail(e){busy(false);var m=(e&&e.message)||String(e);if(e&&e.debugInfo&&e.debugInfo.message)m=e.debugInfo.message;toast("Lỗi: "+m,"err");if(window.console)console.log(e);}
 function fillLists(){for(var i=0;i<F.length;i++)if(F[i].k==="dd")S.dd[F[i].id].setItems(S.L[F[i].ls]||[]);}
 
@@ -386,14 +450,14 @@ function renderList(){var t=T("tbl_DuAn");if(!t)return;var q=String($("tim").val
  $("ds").innerHTML=h||'<div class="empty">Không có dự án phù hợp.</div>';$("cnt").innerHTML=n+" dự án";}
 function onChange(){if(!S.ready)return;gate();var E=validate(),b=document.querySelectorAll("[data-a]"),i;
  $("ma").value=S.ma||newMa();
- $("mode").innerHTML=S.ma?"&#9998; Đang sửa "+esc(S.ma)+" · "+esc(val("ten")):"&#10133; Tạo mới – mã dự kiến "+newMa();
+ if(S.mod!==2)$("mode").innerHTML=S.ma?"&#9998; Đang sửa "+esc(S.ma)+" · "+esc(val("ten")):"&#10133; Tạo mới – mã dự kiến "+newMa();
  for(i=0;i<b.length;i++){var a=b[i].getAttribute("data-a");if(a==="luu")b[i].disabled=E.length>0;if(a==="huy")b[i].disabled=!S.ma;}
  progress();summary();renderList();}
 
 /* ---------- ghi du lieu ---------- */
-function writeRow(ctx,tn,find,data,isNew){var tb=ctx.workbook.tables.getItem(tn),ws=tb.worksheet,hdr=tb.getHeaderRowRange().load("values"),body=tb.getDataBodyRange().load("formulas"),H,r,wasP,rowR;
+function writeRow(ctx,tn,find,data,isNew){var tb=ctx.workbook.tables.getItem(tn),ws=tb.worksheet,hdr=tb.getHeaderRowRange().load("values"),body=tb.getDataBodyRange().load("formulas,values"),H,r,wasP,rowR;
  ws.protection.load("protected");
- return ctx.sync().then(function(){var Fm=body.formulas,i;wasP=ws.protection.protected;if(wasP)ws.protection.unprotect();H=hdr.values[0];r=find(Fm,H);
+ return ctx.sync().then(function(){var Fm=body.formulas,i;wasP=ws.protection.protected;if(wasP)ws.protection.unprotect();H=hdr.values[0];r=find(Fm,H,body.values);
   if(r<0&&!isNew)throw new Error("Không tìm thấy bản ghi cần sửa trong "+tn);
   if(r<0)for(i=0;i<Fm.length;i++)if(String(Fm[i][0])===""){r=i;break;}
   if(r<0){tb.rows.add();r=Fm.length;}return ctx.sync();
@@ -416,16 +480,364 @@ function save(){var E=validate(),isNew=!S.ma,ma=isNew?newMa():S.ma,data={},i,f,v
    rows.forEach(function(x){ch=ch.then(function(){return writeRow(ctx,"tbl_TMDT",function(Fm,H){var a=H.indexOf("Mã DA"),b=H.indexOf("Phiên bản"),c=H.indexOf("Mã KM");for(var j=0;j<Fm.length;j++)if(String(Fm[j][a])===ma&&String(Fm[j][b])===pb&&String(Fm[j][c])===x.km)return j;return -1;},
     {"Mã DA":ma,"Phiên bản":pb,"Số QĐ":qd,"Ngày QĐ":ng?s2d(ng):"","Mã KM":x.km,"TMĐT trước thuế (VNĐ)":x.g,"Thuế suất VAT":x.vat,"Trạng thái dòng":S.HD},true);});});
    return ch;});
- }).then(function(){return loadAll();}).then(function(){fillLists();openDA(ma,true);toast((isNew?"Đã thêm dự án ":"Đã cập nhật ")+ma+(rows.length?" · TMĐT "+pb:""),"ok");})["catch"](fail).then(function(){busy(false);});}
+ }).then(function(){return loadAll();}).then(function(){fillLists();openDA(ma,true);hRefresh();toast((isNew?"Đã thêm dự án ":"Đã cập nhật ")+ma+(rows.length?" · TMĐT "+pb:""),"ok");})["catch"](fail).then(function(){busy(false);});}
 function cancelDA(){if(!S.ma)return;var ma=S.ma;
  ask("Hủy dự án "+ma+"?","Dự án sẽ được đánh dấu '"+S.HUY+"' trong bảng dữ liệu (không xóa hẳn).",function(){busy(true);
   Excel.run(function(ctx){return writeRow(ctx,"tbl_DuAn",function(Fm){for(var j=0;j<Fm.length;j++)if(String(Fm[j][0])===ma)return j;return -1;},{"Trạng thái dòng":S.HUY},false);})
-  .then(function(){return loadAll();}).then(function(){newForm();toast("Đã đánh dấu hủy "+ma,"ok");})["catch"](fail).then(function(){busy(false);});});}
+  .then(function(){return loadAll();}).then(function(){newForm();hRefresh();toast("Đã đánh dấu hủy "+ma,"ok");})["catch"](fail).then(function(){busy(false);});});}
+
+
+/* ---------- hop dong ---------- */
+var CO=["Có","Không"],FX="Giá trị cố định",RIENG="Riêng từng thành viên",LEAD="Đứng đầu liên danh";
+var OTU=["Cho đứng đầu LD","Cho từng thành viên"],OTL=["Chung cho cả LD",RIENG],OBL=["Chung",RIENG];
+S.mod=1;S.hma="";S.mem=[];S.hgt=null;S.hld=null;S.hopen=null;S.hload=false;
+var HF=[
+ {id:"hDA",col:"Tên dự án",lb:"Dự án",k:"dd",tab:1,req:1},
+ {id:"hGT",col:"Tên gói thầu",lb:"Gói thầu",k:"dd",tab:1,req:1},
+ {id:"hSo",col:"Số hợp đồng",lb:"Số hợp đồng",k:"t",tab:1,req:1},
+ {id:"hMa",lb:"Mã HĐ (tự sinh)",k:"ro",tab:1},
+ {id:"hHT",col:"Hình thức nhà thầu",lb:"Hình thức nhà thầu",k:"dd",ls:"lst_HinhThucNT",tab:1,req:1},
+ {id:"hLoai",col:"Loại hợp đồng",lb:"Loại hợp đồng",k:"dd",ls:"lst_LoaiHD",tab:1},
+ {id:"hNT",col:"Tên nhà thầu",lb:"Nhà thầu / liên danh",k:"dd",tab:1,req:1},
+ {id:"hNK",col:"Ngày ký",lb:"Ngày ký",k:"d",tab:1,req:1},
+ {id:"hBD",col:"Ngày bắt đầu HĐ",lb:"Ngày bắt đầu HĐ",k:"d",tab:1},
+ {id:"hTG",lb:"Thời gian thực hiện (ngày)",k:"ro",num:1,tab:1},
+ {id:"hHan",lb:"Hạn HĐ ban đầu",k:"ro",tab:1},
+ {id:"hTT",col:"Trạng thái HĐ",lb:"Trạng thái HĐ",k:"dd",ls:"lst_TrangThaiHD",tab:1,req:1},
+ {id:"hTD",col:"Trạng thái dòng",lb:"Trạng thái dòng",k:"dd",ls:"lst_TrangThaiDong",tab:1,req:1},
+ {id:"hGG",lb:"Giá gói thầu sau thuế (VNĐ)",k:"ro",num:1,tab:2},
+ {id:"hGTr",col:"Giá trị HĐ ban đầu trước thuế (VNĐ)",lb:"Giá trị HĐ trước thuế (VNĐ)",k:"n",tab:2,req:1},
+ {id:"hVAT",col:"Thuế suất VAT",lb:"Thuế suất VAT",k:"vat",tab:2,req:1},
+ {id:"hTV",lb:"Tiền VAT (VNĐ)",k:"ro",num:1,tab:2},
+ {id:"hGS",lb:"Giá trị HĐ sau thuế (VNĐ)",k:"ro",num:1,tab:2},
+ {id:"hCL",lb:"So với giá gói thầu",k:"ro",tab:2},
+ {id:"hApT",col:"Áp dụng giá trị HĐ thực",lb:"Áp dụng giá trị HĐ thực",k:"dd",opt:CO,tab:2},
+ {id:"hGThuc",col:"Giá trị HĐ thực trước thuế (VNĐ)",lb:"Giá trị HĐ thực trước thuế (VNĐ)",k:"n",tab:2,cr:1},
+ {id:"hPhi",col:"Tỷ lệ phí",lb:"Tỷ lệ phí",k:"p",tab:2},
+ {id:"hApTT",col:"Áp dụng thanh toán",lb:"Áp dụng thanh toán theo đợt",k:"dd",opt:CO,tab:2},
+ {id:"hTLD",col:"Tỷ lệ thanh toán theo đợt",lb:"Tỷ lệ thanh toán theo đợt",k:"p",tab:2,cr:1},
+ {id:"hApVT",col:"Áp dụng thanh toán vật tư",lb:"Áp dụng thanh toán vật tư",k:"dd",opt:CO,tab:2},
+ {id:"hTLVT",col:"Tỷ lệ thanh toán vật tư",lb:"Tỷ lệ thanh toán vật tư",k:"p",tab:2,cr:1},
+ {id:"hYBH",col:"Yêu cầu bảo hành",lb:"Yêu cầu bảo hành",k:"dd",opt:CO,tab:2},
+ {id:"hDBH",col:"Dạng bảo hành",lb:"Dạng bảo hành",k:"dd",ls:"lst_DangBH",tab:2,cr:1},
+ {id:"hCXBH",col:"Cách xác định BL bảo hành",lb:"Cách xác định bảo hành",k:"dd",ls:"lst_CanCuBH",tab:2,cr:1},
+ {id:"hSTBH",col:"Số tháng bảo hành",lb:"Số tháng bảo hành",k:"n",tab:2,cr:1},
+ {id:"hTLBH",col:"Tỷ lệ bảo hành",lb:"Tỷ lệ bảo hành",k:"p",tab:2,cr:1},
+ {id:"hTLQT",lb:"Tỷ lệ quyết toán",k:"ro",tab:2},
+ {id:"hApTU",col:"Áp dụng tạm ứng",lb:"Áp dụng tạm ứng",k:"dd",opt:CO,tab:3},
+ {id:"hCCTU",col:"Căn cứ tính tạm ứng",lb:"Căn cứ tính tạm ứng",k:"dd",ls:"lst_CanCuTU",tab:3,cr:1},
+ {id:"hTLTU",col:"Tỷ lệ tạm ứng",lb:"Tỷ lệ tạm ứng",k:"p",tab:3,cr:1},
+ {id:"hGCTU",col:"Giá trị cố định tạm ứng (VNĐ)",lb:"Giá trị tạm ứng cố định (VNĐ)",k:"n",tab:3,cr:1},
+ {id:"hGTU",lb:"Giá trị tạm ứng (VNĐ)",k:"ro",num:1,tab:3},
+ {id:"hYHDTU",col:"Yêu cầu hóa đơn tạm ứng",lb:"Yêu cầu hóa đơn tạm ứng",k:"dd",opt:CO,tab:3},
+ {id:"hTLHDTU",col:"Tỷ lệ giá trị hóa đơn tạm ứng",lb:"Tỷ lệ giá trị hóa đơn TU",k:"p",tab:3,cr:1},
+ {id:"hYBLTH",col:"Yêu cầu BL thực hiện HĐ",lb:"Yêu cầu BL thực hiện HĐ",k:"dd",opt:CO,tab:3},
+ {id:"hCCBLTH",col:"Căn cứ tính BL thực hiện HĐ",lb:"Căn cứ tính BL",k:"dd",ls:"lst_CanCuBLTH",tab:3,cr:1},
+ {id:"hTLBLTH",col:"Tỷ lệ BL thực hiện HĐ",lb:"Tỷ lệ BL",k:"p",tab:3,cr:1},
+ {id:"hGCBLTH",col:"Giá trị cố định BL thực hiện HĐ (VNĐ)",lb:"Giá trị BL cố định (VNĐ)",k:"n",tab:3,cr:1},
+ {id:"hGBLTH",lb:"Giá trị BL thực hiện HĐ (VNĐ)",k:"ro",num:1,tab:3},
+ {id:"hNgBLTH",col:"Số ngày hiệu lực BL thực hiện HĐ (ngày)",lb:"Số ngày hiệu lực",k:"n",tab:3,cr:1},
+ {id:"hYBLTU",col:"Yêu cầu BL tạm ứng",lb:"Yêu cầu BL tạm ứng",k:"dd",opt:CO,tab:3},
+ {id:"hCCBLTU",col:"Căn cứ tính BL tạm ứng",lb:"Căn cứ tính BL",k:"dd",ls:"lst_CanCuBLTU2",tab:3,cr:1},
+ {id:"hTLBLTU",col:"Tỷ lệ BL tạm ứng",lb:"Tỷ lệ BL",k:"p",tab:3,cr:1},
+ {id:"hGCBLTU",col:"Giá trị cố định BL tạm ứng (VNĐ)",lb:"Giá trị BL cố định (VNĐ)",k:"n",tab:3,cr:1},
+ {id:"hGBLTU",lb:"Giá trị BL tạm ứng (VNĐ)",k:"ro",num:1,tab:3},
+ {id:"hNgBLTU",col:"Số ngày hiệu lực BL tạm ứng (ngày)",lb:"Số ngày hiệu lực",k:"n",tab:3,cr:1},
+ {id:"hYBLBH",col:"Yêu cầu BL bảo hành",lb:"Yêu cầu BL bảo hành",k:"dd",opt:CO,tab:3},
+ {id:"hGCBLBH",col:"Giá trị cố định BL bảo hành (VNĐ)",lb:"Giá trị BL cố định (VNĐ)",k:"n",tab:3,cr:1},
+ {id:"hGBLBH",lb:"Giá trị BL bảo hành (VNĐ)",k:"ro",num:1,tab:3},
+ {id:"hTGBLBH",lb:"Hiệu lực BL bảo hành (tháng)",k:"ro",tab:3},
+ {id:"hLD",lb:"Mã liên danh",k:"ro",tab:4},
+ {id:"hPC",col:"Phân chia LD",lb:"Phân chia cho thành viên",k:"dd",opt:CO,tab:4,cr:1},
+ {id:"hCcTT",col:"Cơ chế thanh toán LD",lb:"Cơ chế thanh toán",k:"dd",ls:"lst_PTThanhToanLD",tab:4,cr:1},
+ {id:"hCcTU",col:"Cơ chế tạm ứng LD",lb:"Cơ chế tạm ứng",k:"dd",opt:OTU,tab:4,cr:1},
+ {id:"hCcTLTU",col:"Cơ chế tỷ lệ tạm ứng LD",lb:"Tỷ lệ tạm ứng",k:"dd",opt:OTL,tab:4,cr:1},
+ {id:"hCcTLD",col:"Cơ chế tỷ lệ TT đợt LD",lb:"Tỷ lệ TT theo đợt",k:"dd",opt:OTL,tab:4,cr:1},
+ {id:"hCcVT",col:"Cơ chế tỷ lệ TT vật tư LD",lb:"Tỷ lệ TT vật tư",k:"dd",opt:OTL,tab:4,cr:1},
+ {id:"hCcBHQT",col:"Cơ chế tỷ lệ BH-QT LD",lb:"Tỷ lệ bảo hành – QT",k:"dd",opt:OTL,tab:4,cr:1},
+ {id:"hCcBLTH",col:"Cơ chế BL thực hiện HĐ LD",lb:"BL thực hiện HĐ",k:"dd",opt:OBL,tab:4,cr:1},
+ {id:"hCcBLTU",col:"Cơ chế BL tạm ứng LD",lb:"BL tạm ứng",k:"dd",opt:OBL,tab:4,cr:1},
+ {id:"hCcBLBH",col:"Cơ chế BL bảo hành LD",lb:"BL bảo hành",k:"dd",opt:OBL,tab:4,cr:1}
+];
+var HL={1:[["#","Hợp đồng"],["hDA"],["hGT"],["hSo","hMa"],["hHT","hLoai"],["hNT"],["#","Thời gian"],["hNK","hBD"],["hTG","hHan"],["#","Trạng thái"],["hTT","hTD"]],
+ 2:[["#","Giá trị hợp đồng"],["hGG","hGTr"],["hVAT","hTV"],["hGS","hCL"],["#","Giá trị thực"],["hApT","hGThuc"],["hPhi",""],["#","Thanh toán"],["hApTT","hTLD"],["hApVT","hTLVT"],["#","Bảo hành"],["hYBH","hDBH"],["hCXBH","hSTBH"],["hTLBH","hTLQT"]],
+ 3:[["#","Tạm ứng"],["hApTU","hCCTU"],["hTLTU","hGCTU"],["hGTU",""],["hYHDTU","hTLHDTU"],["#","Bảo lãnh thực hiện hợp đồng"],["hYBLTH","hCCBLTH"],["hTLBLTH","hGCBLTH"],["hGBLTH","hNgBLTH"],["#","Bảo lãnh tạm ứng"],["hYBLTU","hCCBLTU"],["hTLBLTU","hGCBLTU"],["hGBLTU","hNgBLTU"],["#","Bảo lãnh bảo hành"],["hYBLBH","hGCBLBH"],["hGBLBH","hTGBLBH"]],
+ 4:[["#","Cơ chế liên danh"],["hLD","hPC"],["hCcTT","hCcTU"],["hCcTLTU","hCcTLD"],["hCcVT","hCcBHQT"],["hCcBLTH","hCcBLTU"],["hCcBLBH",""]]};
+var MF=[
+ {k:"gt",col:"GT TV trước thuế (VNĐ)",lb:"Giá trị TV trước thuế (VNĐ)",t:"n",g:"v",rq:1},
+ {k:"vat",col:"Thuế suất VAT TV",lb:"Thuế suất VAT",t:"vat",g:"v"},
+ {k:"tl",col:"Tỷ lệ giá trị",lb:"Tỷ lệ giá trị",t:"ro",g:"v"},
+ {k:"gth",col:"GT TV thực trước thuế (VNĐ)",lb:"GT thực trước thuế (VNĐ)",t:"n",g:"thuc",s:"Giá trị thực"},
+ {k:"phi",col:"Tỷ lệ phí TV",lb:"Tỷ lệ phí",t:"p",g:"thuc"},
+ {k:"tld",col:"Tỷ lệ TT theo đợt TV",lb:"Tỷ lệ TT theo đợt",t:"p",g:"tt",m:"hCcTLD",src:"hTLD",s:"Thanh toán"},
+ {k:"tlvt",col:"Tỷ lệ TT vật tư TV",lb:"Tỷ lệ TT vật tư",t:"p",g:"vt",m:"hCcVT",src:"hTLVT"},
+ {k:"cctu",col:"Căn cứ tạm ứng TV",lb:"Căn cứ tạm ứng",t:"dd",ls:"lst_CanCuTU",g:"tu",rq:1,s:"Tạm ứng"},
+ {k:"tltu",col:"Tỷ lệ tạm ứng TV",lb:"Tỷ lệ tạm ứng",t:"p",g:"tu",m:"hCcTLTU",src:"hTLTU",nf:"cctu",rq:1},
+ {k:"gtu",col:"Giá trị tạm ứng TV (VNĐ)",lb:"Giá trị tạm ứng (VNĐ)",t:"n",g:"tu",calc:"cctu",rt:"tltu",rq:1},
+ {k:"yhd",col:"Yêu cầu HĐ tạm ứng TV",lb:"Yêu cầu hóa đơn TU",t:"dd",opt:CO,g:"tu"},
+ {k:"tlhd",col:"Tỷ lệ HĐ tạm ứng TV",lb:"Tỷ lệ hóa đơn TU",t:"p",g:"tu",yes:"yhd"},
+ {k:"ccth",col:"Căn cứ BL thực hiện HĐ TV",lb:"Căn cứ BL thực hiện",t:"dd",ls:"lst_CanCuBLTH",g:"blth",rq:1,s:"Bảo lãnh thực hiện HĐ"},
+ {k:"tlth",col:"Tỷ lệ BL thực hiện HĐ TV",lb:"Tỷ lệ BL",t:"p",g:"blth",nf:"ccth",rq:1},
+ {k:"gbth",col:"Giá trị BL thực hiện HĐ TV (VNĐ)",lb:"Giá trị BL (VNĐ)",t:"n",g:"blth",calc:"ccth",rt:"tlth",rq:1},
+ {k:"ngth",col:"Số ngày BL thực hiện HĐ TV",lb:"Số ngày hiệu lực",t:"n",g:"blth"},
+ {k:"cctu2",col:"Căn cứ BL tạm ứng TV",lb:"Căn cứ BL tạm ứng",t:"dd",ls:"lst_CanCuBLTU2",g:"bltu",rq:1,s:"Bảo lãnh tạm ứng"},
+ {k:"tltu2",col:"Tỷ lệ BL tạm ứng TV",lb:"Tỷ lệ BL",t:"p",g:"bltu",nf:"cctu2",rq:1},
+ {k:"gbtu",col:"Giá trị BL tạm ứng TV (VNĐ)",lb:"Giá trị BL (VNĐ)",t:"n",g:"bltu",calc:"cctu2",rt:"tltu2",rq:1},
+ {k:"ngtu",col:"Số ngày BL tạm ứng TV",lb:"Số ngày hiệu lực",t:"n",g:"bltu"},
+ {k:"ccbh",col:"Căn cứ bảo hành TV",lb:"Căn cứ bảo hành",t:"dd",ls:"lst_CanCuBH",g:"bh",rq:1,s:"Bảo hành"},
+ {k:"dbh",col:"Dạng bảo hành TV",lb:"Dạng bảo hành",t:"dd",ls:"lst_DangBH",g:"bh"},
+ {k:"tlbh",col:"Tỷ lệ bảo hành",lb:"Tỷ lệ bảo hành",t:"p",g:"bh",m:"hCcBHQT",src:"hTLBH",nf:"ccbh",rq:1},
+ {k:"gcbh",col:"Giá trị cố định BH TV (VNĐ)",lb:"Giá trị BH cố định (VNĐ)",t:"n",g:"bh",fx:"ccbh",rq:1},
+ {k:"stbh",col:"Số tháng bảo hành",lb:"Số tháng bảo hành",t:"n",g:"bh"},
+ {k:"yblbh",col:"Yêu cầu BL bảo hành",lb:"Yêu cầu BL bảo hành",t:"dd",opt:CO,g:"bh"},
+ {k:"gblbh",col:"Giá trị BL bảo hành TV (VNĐ)",lb:"Giá trị BL bảo hành (VNĐ)",t:"n",g:"blbh",rq:1},
+ {k:"tgblbh",col:"Thời gian BL bảo hành TV (tháng)",lb:"Hiệu lực BL BH (tháng)",t:"n",g:"blbh"}
+];
+function hf(id){for(var i=0;i<HF.length;i++)if(HF[i].id===id)return HF[i];return null;}
+function trim(s){return String(s==null?"":s).replace(/^\s+|\s+$/g,"");}
+function pnum(s){s=String(s==null?"":s).replace(/[\s%]/g,"").replace(",",".");if(s==="")return null;var x=Number(s);return isNaN(x)?null:x;}
+function p2s(v){return typeof v==="number"?String(Math.round(v*1e6)/1e4):"";}
+function pct(v){return typeof v==="number"?(Math.round(v*1e4)/100)+"%":"";}
+function hfld(f){var h='<div class="f" id="f_'+f.id+'"><label>'+esc(f.lb)+((f.req||f.cr)?'<span class="req">*</span>':"")+"</label>";
+ if(f.k==="dd"||f.k==="vat")h+='<div id="'+f.id+'"></div>';
+ else if(f.k==="ro")h+='<input class="t'+(f.num?" num":"")+'" id="'+f.id+'" readonly tabindex="-1">';
+ else if(f.k==="p")h+='<div class="pct"><input class="t num" id="'+f.id+'" data-h="p"></div>';
+ else h+='<input class="t'+(f.k==="n"?" num":"")+'" id="'+f.id+'" data-h="'+f.k+'"'+(f.k==="d"?' placeholder="dd/mm/yyyy" maxlength="10"':"")+">";
+ return h+'<div class="msg" id="m_'+f.id+'"></div><div class="wn" id="w_'+f.id+'"></div></div>';}
+function hlay(L){var h="",i,r;for(i=0;i<L.length;i++){r=L[i];if(r[0]==="#")h+='<div class="sec"'+(i?' style="margin-top:6px"':"")+">"+esc(r[1])+"</div>";
+ else if(r.length===1)h+=hfld(hf(r[0]));else h+='<div class="row"><div class="col">'+(r[0]?hfld(hf(r[0])):"")+'</div><div class="col">'+(r[1]?hfld(hf(r[1])):"")+"</div></div>";}return h;}
+function hv(id){var f=hf(id);if(f&&(f.k==="dd"||f.k==="vat"))return S.dd[id].get();var e=$(id);return e?trim(e.value):"";}
+function hset(id,v){var f=hf(id),e;if(!f)return;if(f.k==="dd"){S.dd[id].set(v==null?"":String(v),true);return;}if(f.k==="vat"){S.dd[id].set(vatTxt(v),true);return;}
+ e=$(id);if(!e)return;if(f.k==="d")e.value=d2s(v);else if(f.k==="n")e.value=typeof v==="number"?fmt(v):(v==null?"":String(v));else if(f.k==="p")e.value=p2s(v);else e.value=v==null?"":String(v);}
+function hro(id,t){var e=$(id);if(e)e.value=t==null?"":String(t);}
+function yes(id){return hv(id)==="Có";}
+function isLD(){return hv("hHT")==="Liên danh";}
+function pcOn(){return isLD()&&yes("hPC");}
+function hSh(id){var fx=FX;
+ switch(id){
+ case "hGThuc":case "hPhi":return yes("hApT");
+ case "hTLD":return yes("hApTT");
+ case "hTLVT":return yes("hApVT");
+ case "hDBH":case "hCXBH":case "hSTBH":case "hYBLBH":return yes("hYBH");
+ case "hTLBH":return yes("hYBH")&&hv("hCXBH")!==fx;
+ case "hCCTU":case "hYHDTU":case "hGTU":return yes("hApTU");
+ case "hTLTU":return yes("hApTU")&&hv("hCCTU")!==fx;
+ case "hGCTU":return yes("hApTU")&&hv("hCCTU")===fx;
+ case "hTLHDTU":return yes("hApTU")&&yes("hYHDTU");
+ case "hCCBLTH":case "hGBLTH":case "hNgBLTH":return yes("hYBLTH");
+ case "hTLBLTH":return yes("hYBLTH")&&hv("hCCBLTH")!==fx;
+ case "hGCBLTH":return yes("hYBLTH")&&hv("hCCBLTH")===fx&&!pcOn();
+ case "hCCBLTU":case "hGBLTU":case "hNgBLTU":return yes("hYBLTU");
+ case "hTLBLTU":return yes("hYBLTU")&&hv("hCCBLTU")!==fx;
+ case "hGCBLTU":return yes("hYBLTU")&&hv("hCCBLTU")===fx&&!pcOn();
+ case "hGCBLBH":return yes("hYBH")&&yes("hYBLBH")&&hv("hCXBH")===fx&&!pcOn();
+ case "hGBLBH":case "hTGBLBH":return yes("hYBH")&&yes("hYBLBH");
+ case "hLD":case "hPC":return isLD();
+ case "hCcTT":return pcOn();
+ case "hCcTU":case "hCcTLTU":return pcOn()&&yes("hApTU");
+ case "hCcTLD":return pcOn()&&yes("hApTT");
+ case "hCcVT":return pcOn()&&yes("hApVT");
+ case "hCcBHQT":return pcOn()&&yes("hYBH");
+ case "hCcBLTH":return pcOn()&&yes("hYBLTH");
+ case "hCcBLTU":return pcOn()&&yes("hYBLTU");
+ case "hCcBLBH":return pcOn()&&yes("hYBH")&&yes("hYBLBH");}
+ return true;}
+
+function hBuild(){var i,f,acts;
+ for(i=1;i<=4;i++)$("h"+i).innerHTML=hlay(HL[i]);
+ acts='<button class="btn pri" data-a="hluu">&#128190; LƯU HĐ</button><button class="btn sec2" data-a="hmoi">&#10227; LÀM MỚI</button><button class="btn dan" data-a="hhuy">&#128465; HỦY HĐ</button>';
+ var bs=document.querySelectorAll("[data-hacts]");for(i=0;i<bs.length;i++)bs[i].innerHTML=acts;
+ for(i=0;i<HF.length;i++){f=HF[i];if(f.k==="dd"||f.k==="vat")new DD(f.id,"Chọn "+f.lb.toLowerCase()+"…",hOnChange);}
+ new DD("hAddNT","Chọn nhà thầu…",null);new DD("hAddVT","Vai trò…",null);
+ $("mods").onclick=function(e){var t=e.target;while(t&&t.tagName!=="A")t=t.parentNode;if(t)setMod(+t.getAttribute("data-m"));};
+ $("tabsH").onclick=function(e){var t=e.target;while(t&&t.tagName!=="A")t=t.parentNode;if(t)htab(+t.getAttribute("data-h"));};
+ $("hds").onclick=function(e){var t=e.target;while(t&&t!==this&&!t.getAttribute("data-hd"))t=t.parentNode;if(t&&t!==this)hOpen(t.getAttribute("data-hd"));};
+ document.body.addEventListener("click",function(e){var t=e.target;while(t&&t!==document.body&&!t.getAttribute("data-a"))t=t.parentNode;if(!t||t===document.body||t.disabled)return;var a=t.getAttribute("data-a");
+  if(a==="hluu")hSave();else if(a==="hmoi")hNew();else if(a==="hhuy")hCancel();else if(a==="haddm")memAdd();else if(a==="hdelm")memDel(+t.getAttribute("data-i"));});
+ document.body.addEventListener("input",function(e){var t=e.target,k=t.getAttribute("data-h");if(t.id==="htim"){hRenderList();return;}if(k===null)return;if(k==="n")fmtNum(t);hOnChange();});}
+function setMod(n){S.mod=n;cls(document.body,"mH",n===2);var a=$("mods").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-m")===n);
+ $("ttl").innerHTML=n===2?"&#128209; Quản lý hợp đồng":"&#128203; Quản lý dự án";if(OPEN)OPEN.close();if(n===2)hOnChange();else onChange();}
+function htab(n){var a=$("tabsH").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-h")===n);for(i=1;i<=4;i++)cls($("ph"+i),"on",i===n);if(OPEN)OPEN.close();}
+/* tra cuu */
+function act(t,r){var c=t.h.indexOf("Trạng thái dòng");return c<0||t.v[r][c]!==S.HUY;}
+function colOf(tn,key,kv,out){var t=T(tn),a=t.c(key),b=t.c(out),i;for(i=0;i<t.v.length;i++)if(String(t.v[i][a])===kv&&kv!=="")return t.v[i][b];return "";}
+function maDA(){return String(colOf("tbl_DuAn","Tên dự án",hv("hDA"),"Mã DA (tự sinh)"));}
+function gtRow(){var t=T("tbl_GoiThau"),n=hv("hGT"),m=maDA(),cN=t.c("Tên gói thầu"),cD=t.c("Mã DA"),i;if(!n)return -1;for(i=0;i<t.v.length;i++)if(String(t.v[i][cN])===n&&String(t.v[i][cD])===m&&act(t,i))return i;return -1;}
+function gtv(r,col){var t=T("tbl_GoiThau"),c=t.h.indexOf(col);return r<0||c<0?"":t.v[r][c];}
+function maLD(){return isLD()?String(colOf("tbl_LienDanh","Tên liên danh",hv("hNT"),"Mã LD (tự sinh)")):"";}
+function hRow(ma){var t=T("tbl_HopDong"),i;for(i=0;i<t.v.length;i++)if(String(t.v[i][0])===ma&&ma)return i;return -1;}
+function hNewMa(){var t=T("tbl_HopDong"),mx=0,i,s,n;for(i=0;i<t.v.length;i++){s=String(t.v[i][0]);n=parseInt(s.substr(2),10);if(s.substr(0,2)==="HĐ"&&!isNaN(n)&&n>mx)mx=n;}return "HĐ"+p2(mx+1);}
+function newTV(k){var t=T("tbl_ThanhVienLD"),mx=0,i,s,n;for(i=0;i<t.v.length;i++){s=String(t.v[i][0]);n=parseInt(s.substr(2),10);if(s.substr(0,2)==="TV"&&!isNaN(n)&&n>mx)mx=n;}return "TV"+p2(mx+1+k);}
+function hLists(){var t,i,a=[],c,d,m;
+ t=T("tbl_DuAn");c=t.c("Tên dự án");for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&t.v[i][c]!==""&&act(t,i))a.push(String(t.v[i][c]));S.dd.hDA.setItems(a);
+ t=T("tbl_GoiThau");a=[];m=maDA();c=t.c("Tên gói thầu");d=t.c("Mã DA");if(m)for(i=0;i<t.v.length;i++)if(String(t.v[i][d])===m&&t.v[i][c]!==""&&act(t,i))a.push(String(t.v[i][c]));S.dd.hGT.setItems(a);
+ a=[];if(isLD()){t=T("tbl_LienDanh");c=t.c("Tên liên danh");d=t.c("Mã GT");m=String(gtv(gtRow(),"Mã GT (tự sinh)"));
+  for(i=0;i<t.v.length;i++)if(t.v[i][c]!==""&&act(t,i)&&(!m||String(t.v[i][d])===m||String(t.v[i][d])===""))a.push(String(t.v[i][c]));
+  if(!a.length)for(i=0;i<t.v.length;i++)if(t.v[i][c]!==""&&act(t,i))a.push(String(t.v[i][c]));}
+ else{t=T("tbl_NhaThau");c=t.c("Tên nhà thầu");for(i=0;i<t.v.length;i++)if(t.v[i][c]!==""&&act(t,i))a.push(String(t.v[i][c]));}
+ S.dd.hNT.setItems(a);}
+function hFill(){var i,f;for(i=0;i<HF.length;i++){f=HF[i];if(f.k==="vat")S.dd[f.id].setItems((S.L.lst_ThueVAT||[]).map(vatTxt));else if(f.k==="dd"&&f.ls)S.dd[f.id].setItems(S.L[f.ls]||[]);else if(f.k==="dd"&&f.opt)S.dd[f.id].setItems(f.opt);}
+ S.dd.hAddVT.setItems(S.L.lst_VaiTroLD||[]);hLists();}
+function hRefresh(){if(!S.dd.hDA)return;hFill();if(!S.hinit){S.hinit=true;hNew();return;}if(S.hma&&hRow(S.hma)>=0)hOpen(S.hma,true);else if(S.hma)hNew();else hOnChange();}
+function hNew(){var i,L;S.hma="";S.hload=true;for(i=0;i<HF.length;i++)if(HF[i].k!=="ro")hset(HF[i].id,"");
+ L=S.L.lst_TrangThaiHD||[];hset("hTT",L[0]||"");hset("hTD",S.HD);
+ hset("hApT","Không");hset("hApTT","Có");hset("hApVT","Không");hset("hYBH","Không");hset("hApTU","Không");hset("hYHDTU","Không");hset("hYBLTH","Không");hset("hYBLTU","Không");hset("hYBLBH","Không");
+ if(S.ma){var r=rowDA(S.ma);if(r>=0&&act(T("tbl_DuAn"),r))hset("hDA",T("tbl_DuAn").g(r,"Tên dự án"));}
+ hLists();S.hgt=hv("hGT");S.hld="";S.mem=[];memRender();S.hload=false;htab(1);hOnChange();}
+function hOpen(ma,quiet){var t=T("tbl_HopDong"),r=hRow(ma),i,f;if(r<0){if(!quiet)toast("Không tìm thấy "+ma,"err");return;}
+ S.hma=ma;S.hload=true;for(i=0;i<HF.length;i++){f=HF[i];if(f.col)hset(f.id,t.g(r,f.col));}
+ hLists();S.hgt=hv("hGT");S.hld=maLD();memLoad(S.hld);memRender();S.hload=false;hOnChange();if(!quiet)htab(1);}
+/* thanh vien LD */
+function memLoad(ld){var t=T("tbl_ThanhVienLD"),i,j,o,cL=t.c("Mã LD"),cN=t.c("Mã NT"),cT=t.c("Tên nhà thầu"),cV=t.c("Vai trò");S.mem=[];if(!ld)return;
+ for(i=0;i<t.v.length;i++)if(String(t.v[i][cL])===ld&&act(t,i)&&String(t.v[i][0])){o={ma:String(t.v[i][0]),nt:String(t.v[i][cN]),ten:String(t.v[i][cT]),vt:String(t.v[i][cV]),r:{}};for(j=0;j<MF.length;j++)o.r[MF[j].k]=t.g(i,MF[j].col);S.mem.push(o);}}
+function mid(i,k){return "m"+i+"_"+k;}
+function mv(i,k){var f=mfd(k),id=mid(i,k);if(f.t==="dd"||f.t==="vat")return S.dd[id]?S.dd[id].get():"";var e=$(id);return e?trim(e.value):"";}
+function mfd(k){for(var j=0;j<MF.length;j++)if(MF[j].k===k)return MF[j];return null;}
+function memRender(){var h="",i,j,f,m,lb,ld=S.hld;
+ for(i=0;i<S.mem.length;i++){m=S.mem[i];h+='<div class="mem"><div class="memh"><span class="nm" title="'+esc(m.ten)+'">'+esc((m.ma||"Mới")+" · "+m.ten)+'</span><span class="chip">'+esc(m.vt==="Đứng đầu liên danh"?"Đứng đầu":(m.vt||"-"))+"</span>"+(m.isNew?'<a data-a="hdelm" data-i="'+i+'">&#10005; Bỏ</a>':"")+"</div>";
+  for(j=0;j<MF.length;j+=0){f=MF[j];
+   if(f.s)h+='<div class="msub" id="ms'+i+"_"+f.g+'">'+esc(f.s)+"</div>";
+   var a=MF[j],b=MF[j+1]&&!MF[j+1].s?MF[j+1]:null;
+   h+='<div class="row"><div class="col">'+mfld(i,a)+'</div><div class="col">'+(b?mfld(i,b):"")+"</div></div>";j+=b?2:1;}
+  h+="</div>";}
+ $("hmem").innerHTML=h||'<div class="empty">Liên danh chưa có thành viên – thêm ở dưới.</div>';
+ for(i=0;i<S.mem.length;i++)for(j=0;j<MF.length;j++){f=MF[j];var id=mid(i,f.k),v=S.mem[i].r[f.k];
+  if(f.t==="dd"){new DD(id,"Chọn…",hOnChange);S.dd[id].setItems(f.opt||S.L[f.ls]||[]);S.dd[id].set(v==null?"":String(v),true);}
+  else if(f.t==="vat"){new DD(id,"VAT…",hOnChange);S.dd[id].setItems((S.L.lst_ThueVAT||[]).map(vatTxt));S.dd[id].set(vatTxt(v),true);}
+  else if(f.t==="n")$(id).value=typeof v==="number"?fmt(v):(v==null?"":String(v));
+  else if(f.t==="p"||f.t==="ro")$(id).value=p2s(v);}
+ var a=[],t=T("tbl_NhaThau"),c=t.c("Tên nhà thầu"),have={};for(i=0;i<S.mem.length;i++)have[S.mem[i].ten]=1;
+ for(i=0;i<t.v.length;i++)if(t.v[i][c]!==""&&act(t,i)&&!have[t.v[i][c]])a.push(String(t.v[i][c]));S.dd.hAddNT.setItems(a);S.dd.hAddNT.set("",true);S.dd.hAddVT.set(S.mem.length?"Thành viên":LEAD,true);}
+function mfld(i,f){var k=f.t==="ro"?"p":f.t;return hfld({id:mid(i,f.k),lb:f.lb,k:k});}
+function memAdd(){var n=S.dd.hAddNT.get(),vt=S.dd.hAddVT.get(),ma;if(!S.hld){toast("Chưa xác định được mã liên danh","err");return;}if(!n){toast("Chọn nhà thầu cần thêm","err");return;}
+ ma=String(colOf("tbl_NhaThau","Tên nhà thầu",n,"Mã NT (tự sinh)"));memKeep();S.mem.push({ma:"",nt:ma,ten:n,vt:vt||"Thành viên",isNew:true,r:{vat:hv("hVAT")?vatSave(hv("hVAT")):""}});memRender();hOnChange();}
+function memDel(i){memKeep();S.mem.splice(i,1);memRender();hOnChange();}
+function memKeep(){var i,j,f,v;for(i=0;i<S.mem.length;i++)for(j=0;j<MF.length;j++){f=MF[j];v=mv(i,f.k);
+ if(f.t==="n")S.mem[i].r[f.k]=v===""?"":num(v);else if(f.t==="p"||f.t==="ro")S.mem[i].r[f.k]=v===""?"":(pnum(v)===null?"":pnum(v)/100);else if(f.t==="vat")S.mem[i].r[f.k]=vatSave(v);else S.mem[i].r[f.k]=v;}}
+function isLead(i){return S.mem[i].vt===LEAD;}
+function gOn(i,g){var y=yes,L=isLead(i);switch(g){
+ case "thuc":return y("hApT");case "tt":return y("hApTT");case "vt":return y("hApVT");
+ case "tu":return y("hApTU")&&(hv("hCcTU")!==OTU[0]||L);
+ case "blth":return y("hYBLTH")&&(hv("hCcBLTH")!==OBL[0]||L);
+ case "bltu":return y("hYBLTU")&&(hv("hCcBLTU")!==OBL[0]||L);
+ case "bh":return y("hYBH");
+ case "blbh":return y("hYBH")&&y("hYBLBH")&&mv(i,"yblbh")==="Có"&&(hv("hCcBLBH")!==OBL[0]||L);}return true;}
+function mOn(i,f){if(!gOn(i,f.g))return false;if(f.nf&&mv(i,f.nf)===FX)return false;if(f.fx&&mv(i,f.fx)!==FX)return false;if(f.yes&&mv(i,f.yes)!=="Có")return false;return true;}
+
+function memCalc(g,gs){var o={gtu:0,bth:0,btu:0,bbh:0,tbh:0,sum:0},i,j,f,e,gt,gts,cc,auto,sh,mg,
+ shT={tu:hv("hCcTU")===OTU[0],blth:hv("hCcBLTH")===OBL[0],bltu:hv("hCcBLTU")===OBL[0]};
+ for(i=0;i<S.mem.length;i++){gt=num(mv(i,"gt"));gts=Math.round(gt*(1+vatNum(mv(i,"vat"))));o.sum+=gt;
+  e=$(mid(i,"tl"));if(e){e.readOnly=true;e.value=g?p2s(gt/g):"";}
+  for(j=0;j<MF.length;j++){f=MF[j];e=$(mid(i,f.k));if(!e)continue;
+   if(f.m){sh=hv(f.m)!==RIENG;e.readOnly=sh;if(sh)e.value=hv(f.src);}
+   if(f.calc){cc=mv(i,f.calc);auto=cc!==""&&cc!==FX;e.readOnly=auto;
+    if(auto&&mOn(i,f)){mg=num(mv(i,"gtu"));var sb=shT[f.g]&&isLead(i);
+     var b=cc==="Giá trị HĐ trước thuế"?(sb?g:gt):cc==="Giá trị HĐ sau thuế"?(sb?gs:gts):cc==="Giá trị tạm ứng"?mg:0;
+     e.value=fmt(Math.round((pnum(mv(i,f.rt))||0)/100*b));}}}
+  if(mOn(i,mfd("gtu")))o.gtu+=num(mv(i,"gtu"));
+  if(mOn(i,mfd("gbth")))o.bth+=num(mv(i,"gbth"));
+  if(mOn(i,mfd("gbtu")))o.btu+=num(mv(i,"gbtu"));
+  if(mOn(i,mfd("gblbh"))){o.bbh+=num(mv(i,"gblbh"));o.tbh=Math.max(o.tbh,num(mv(i,"tgblbh")));}}
+ S.msum=o.sum;return o;}
+function hCalc(){var g=num(hv("hGTr")),tv=Math.round(g*vatNum(hv("hVAT"))),gs=g+tv,r=gtRow(),gg=gtv(r,"Giá gói thầu sau thuế (VNĐ)"),tg=gtv(r,"Thời gian thực hiện HĐ (ngày)"),bd=s2d(hv("hBD")),pc=pcOn(),M,gtu=0,bt,bu,tl;
+ S.hg=g;S.hgs=gs;S.hgg=gg;
+ hro("hMa",S.hma||hNewMa());hro("hLD",S.hld||(isLD()?"(chưa có)":""));
+ hro("hGG",typeof gg==="number"?fmt(gg):"");hro("hTG",tg===""?"":String(tg));
+ hro("hHan",(bd!==null&&typeof tg==="number")?d2s(bd+tg):"");
+ hro("hTV",g?fmt(tv):"");hro("hGS",g?fmt(gs):"");
+ hro("hCL",(g&&typeof gg==="number"&&gg)?(Math.round(gs/gg*1000)/10)+"% giá gói thầu":"");
+ tl=pnum(hv("hTLBH"));hro("hTLQT",pct(yes("hYBH")&&hv("hCXBH")==="Giá trị quyết toán sau thuế"?1-(tl||0)/100:1));
+ M=memCalc(g,gs);
+ function base(cc,x){return cc==="Giá trị HĐ trước thuế"?g:cc==="Giá trị HĐ sau thuế"?gs:cc==="Giá trị tạm ứng"?x:0;}
+ if(yes("hApTU"))gtu=pc?M.gtu:(hv("hCCTU")===FX?num(hv("hGCTU")):Math.round((pnum(hv("hTLTU"))||0)/100*base(hv("hCCTU"))));
+ hro("hGTU",fmt0(gtu));
+ bt=pc?M.bth:(hv("hCCBLTH")===FX?num(hv("hGCBLTH")):Math.round((pnum(hv("hTLBLTH"))||0)/100*base(hv("hCCBLTH"),gtu)));hro("hGBLTH",fmt0(bt));
+ bu=pc?M.btu:(hv("hCCBLTU")===FX?num(hv("hGCBLTU")):Math.round((pnum(hv("hTLBLTU"))||0)/100*base(hv("hCCBLTU"),gtu)));hro("hGBLTU",fmt0(bu));
+ hro("hGBLBH",pc?fmt0(M.bbh):(hv("hCXBH")===FX?fmt0(num(hv("hGCBLBH"))):"Theo giá trị quyết toán"));
+ hro("hTGBLBH",pc?(M.tbh?String(M.tbh):""):hv("hSTBH"));
+ var s=$("hsum"),d=M.sum-g;s.innerHTML="<span>Tổng giá trị TV: <b>"+fmt0(M.sum)+"</b></span><span>"+(g?(d?"Lệch "+fmt(d):"&#10004; Khớp giá trị HĐ"):"Chưa nhập giá trị HĐ")+"</span>";s.className="sumr"+(g&&S.mem.length?(d?" bad":" good"):"");}
+function memVis(){var i,j,f,hd,on,show=pcOn()&&S.hopen;cls($("hmemW"),"hide",!show);cls($("hadd"),"hide",!S.hld);if(!show)return;
+ for(i=0;i<S.mem.length;i++){hd=null;on=false;for(j=0;j<MF.length;j++){f=MF[j];if(f.s){if(hd)cls(hd,"hide",!on);hd=$("ms"+i+"_"+f.g);on=false;}
+  var x=mOn(i,f);cls($("f_"+mid(i,f.k)),"hide",!x);if(x)on=true;}if(hd)cls(hd,"hide",!on);}}
+function hVis(){for(var i=0;i<HF.length;i++){var e=$("f_"+HF[i].id);if(e)cls(e,"hide",!hSh(HF[i].id));}}
+function hGate(){var o=!!S.hma||(hv("hDA")!==""&&hv("hGT")!==""&&hv("hSo")!==""),i,f;S.hopen=o;cls(document.body,"lkH",!o);
+ for(i=0;i<HF.length;i++){f=HF[i];if(f.tab<2||f.k==="ro")continue;if(f.k==="dd"||f.k==="vat")S.dd[f.id].disable(!o);else $(f.id).disabled=!o;}}
+function hPrefill(){var r=gtRow(),x;if(r<0)return;
+ x=gtv(r,"Loại hợp đồng");if(!hv("hLoai")&&x)hset("hLoai",x);
+ x=gtv(r,"Hình thức nhà thầu trúng thầu");if(!hv("hHT")&&x)hset("hHT",x);
+ x=gtv(r,"Nhà thầu trúng thầu");if(!hv("hNT")&&x)hset("hNT",x);
+ x=gtv(r,"Thuế suất VAT");if(!hv("hVAT")&&x!=="")hset("hVAT",x);
+ x=gtv(r,"Giá trúng thầu trước thuế (VNĐ)");if(!hv("hGTr")&&typeof x==="number"&&x)hset("hGTr",x);}
+function hValidate(){var E=[],W=[],ok=[],i,j,f,v,x,t,c,els,n,e;
+ function bad(id,m,tb){E.push({id:id,m:m,tab:tb});}function warn(id,m){W.push({id:id,m:m});}
+ for(i=0;i<HF.length;i++){f=HF[i];if(f.k==="ro"||!hSh(f.id))continue;v=hv(f.id);
+  if(!v){if((f.req||f.cr)&&(S.hopen||f.tab===1))bad(f.id,"Bắt buộc nhập "+f.lb.toLowerCase(),f.tab);continue;}
+  if(f.k==="d"&&s2d(v)===null)bad(f.id,"Ngày không hợp lệ (dd/mm/yyyy)",f.tab);
+  else if(f.k==="p"){x=pnum(v);if(x===null||x<0||x>100)bad(f.id,"Tỷ lệ phải từ 0 đến 100%",f.tab);}
+  else if(f.req)ok.push(f.lb);}
+ if(hv("hGT")&&gtRow()<0)bad("hGT","Gói thầu không thuộc dự án đã chọn",1);
+ v=hv("hSo").toLowerCase();t=T("tbl_HopDong");c=t.c("Số hợp đồng");
+ if(v)for(i=0;i<t.v.length;i++)if(trim(t.v[i][c]).toLowerCase()===v&&String(t.v[i][0])!==S.hma&&act(t,i)){bad("hSo","Số hợp đồng đã có ("+t.v[i][0]+")",1);break;}
+ if(isLD()&&hv("hNT")&&!S.hld)bad("hNT","Không tìm thấy liên danh trong bảng tbl_LienDanh",1);
+ if(!isLD()&&hv("hNT")){x=String(colOf("tbl_NhaThau","Tên nhà thầu",hv("hNT"),"Trạng thái"));if(x&&x!=="Đang hoạt động")warn("hNT","Trạng thái nhà thầu: "+x);}
+ if(S.hld){x=String(colOf("tbl_LienDanh","Mã LD (tự sinh)",S.hld,"Mã GT"));v=String(gtv(gtRow(),"Mã GT (tự sinh)"));if(x&&v&&x!==v)warn("hNT","Liên danh đăng ký cho gói "+x+", khác gói "+v);}
+ x=s2d(hv("hNK"));v=s2d(hv("hBD"));if(x!==null&&v!==null&&v<x)warn("hBD","Ngày bắt đầu trước ngày ký");
+ if(typeof S.hgg==="number"&&S.hgg>0&&S.hgs>S.hgg)warn("hGTr","Giá trị HĐ sau thuế vượt giá gói thầu ("+fmt(S.hgg)+")");
+ if(hSh("hGThuc")&&num(hv("hGThuc"))>S.hg&&S.hg)warn("hGThuc","Giá trị thực lớn hơn giá trị HĐ");
+ if(pcOn()&&S.hopen){if(!S.mem.length)bad("hPC","Liên danh chưa có thành viên",4);
+  else{n=0;for(i=0;i<S.mem.length;i++){if(isLead(i))n++;for(j=0;j<MF.length;j++){f=MF[j];if(!mOn(i,f))continue;e=$(mid(i,f.k));v=mv(i,f.k);
+    if(f.t==="p"&&v!==""&&!(e&&e.readOnly)){x=pnum(v);if(x===null||x<0||x>100)bad(mid(i,f.k),"Tỷ lệ 0–100%",4);}
+    if(f.rq&&v===""&&!(e&&e.readOnly))bad(mid(i,f.k),"Bắt buộc nhập",4);}}
+   if(n!==1)warn("hPC",n?"Có "+n+" thành viên đứng đầu":"Chưa có thành viên đứng đầu liên danh");
+   if(S.hg&&S.msum!==S.hg)bad("hsumE","Tổng giá trị thành viên lệch "+fmt(S.msum-S.hg)+" so với giá trị HĐ",4);else if(S.hg)ok.push("Phân chia thành viên khớp giá trị HĐ");}}
+ els=document.querySelectorAll(".ph .f");for(i=0;i<els.length;i++){cls(els[i],"err",false);x=els[i].querySelector(".msg");if(x)x.innerHTML="";x=els[i].querySelector(".wn");if(x)x.innerHTML="";}
+ for(i=0;i<E.length;i++){e=$("f_"+E[i].id);if(e&&!$("m_"+E[i].id).innerHTML){cls(e,"err",true);$("m_"+E[i].id).innerHTML=esc(E[i].m);}}
+ for(i=0;i<W.length;i++){e=$("w_"+W[i].id);if(e&&!e.innerHTML)e.innerHTML="&#9888; "+esc(W[i].m);}
+ var h="";for(i=0;i<E.length;i++)h+='<div class="er">&#9888; '+esc(E[i].m)+"</div>";for(i=0;i<W.length;i++)h+='<div class="nt" style="color:#e65100">&#9888; '+esc(W[i].m)+"</div>";for(i=0;i<ok.length;i++)h+='<div class="ok">&#10004; '+esc(ok[i])+"</div>";
+ $("hchkL").innerHTML=h;$("hchkH").innerHTML=E.length?'<span style="color:#c62828">&#9888; Còn '+E.length+" lỗi – chưa lưu được</span>":'<span style="color:#2e7d32">&#10004; Đủ điều kiện lưu</span>'+(W.length?' <span style="color:#e65100;font-weight:600">· '+W.length+" cảnh báo</span>":"");
+ return E;}
+function hOnChange(){if(!S.ready||!S.dd.hDA||S.hload)return;var E,b,i,a,m;
+ if(hv("hGT")!==S.hgt){S.hgt=hv("hGT");hPrefill();}
+ hLists();a=maLD();if(a!==S.hld){S.hld=a;memLoad(a);memRender();}
+ hGate();hVis();hCalc();memVis();E=hValidate();b=document.querySelectorAll("[data-a]");
+ for(i=0;i<b.length;i++){a=b[i].getAttribute("data-a");if(a==="hluu")b[i].disabled=E.length>0;if(a==="hhuy")b[i].disabled=!S.hma;}
+ m=!isLD()?"Hợp đồng với nhà thầu độc lập – tab Liên danh không áp dụng.":!S.hld?"&#9888; Chưa tìm thấy liên danh đã chọn trong sheet LienDanh – khai báo liên danh và thành viên trước.":!yes("hPC")?"Liên danh <b>"+esc(S.hld)+"</b> · chọn <b>Phân chia cho thành viên = Có</b> để nhập giá trị, tạm ứng, bảo lãnh từng thành viên.":"Liên danh <b>"+esc(S.hld)+"</b> · "+S.mem.length+" thành viên. Giá trị tạm ứng và bảo lãnh của HĐ = tổng các thành viên.";
+ $("h4msg").innerHTML="&#128161; "+m;
+ if(S.mod===2)$("mode").innerHTML=S.hma?"&#9998; Đang sửa "+esc(S.hma)+" · "+esc(hv("hSo")):"&#10133; Tạo mới hợp đồng – mã dự kiến "+hNewMa();
+ hRenderList();}
+function hRenderList(){var t=T("tbl_HopDong");if(!t||!$("hds"))return;var q=trim($("htim").value).toLowerCase(),m=maDA(),h="",n=0,i,ma,so,nt,st,td,pl,cS=t.c("Số hợp đồng"),cN=t.c("Tên nhà thầu"),cT=t.c("Trạng thái HĐ"),cD=t.c("Trạng thái dòng"),cM=t.c("Mã DA");
+ for(i=0;i<t.v.length;i++){ma=String(t.v[i][0]);so=String(t.v[i][cS]);if(!ma||!so)continue;if(m&&String(t.v[i][cM])!==m)continue;nt=String(t.v[i][cN]);if(q&&(ma+" "+so+" "+nt).toLowerCase().indexOf(q)<0)continue;n++;
+  td=t.v[i][cD];st=String(t.v[i][cT]);pl=td===S.HUY?'<span class="pill p-no">'+esc(S.HUY)+"</span>":'<span class="pill '+(st==="Đang thực hiện"?"p-ok":"p-wa")+'">'+esc(st||"-")+"</span>";
+  h+='<div class="tr'+(ma===S.hma?" sel":"")+'" data-hd="'+esc(ma)+'"><div class="c1">'+esc(ma)+'</div><div class="c2" title="'+esc(so+" · "+nt)+'">'+esc(so)+'<div class="note" style="margin:0;overflow:hidden;text-overflow:ellipsis">'+esc(nt)+'</div></div><div class="c3">'+pl+"</div></div>";}
+ $("hds").innerHTML=h||'<div class="empty">Không có hợp đồng phù hợp.</div>';$("hcnt").innerHTML=n+" HĐ";
+ $("hdsN").innerHTML=m?"Đang lọc theo dự án "+esc(m)+" · bấm một dòng để mở.":"Bấm vào một dòng để mở hợp đồng và sửa.";}
+function hSave(){var E=hValidate(),isNew=!S.hma,ma=isNew?hNewMa():S.hma,data={},i,j,f,v,on,pc=pcOn(),ld=S.hld,so=hv("hSo"),ms=[],k=0,m,d;
+ if(E.length){toast("Còn "+E.length+" lỗi – xem các ô viền đỏ","err");htab(E[0].tab);return;}
+ for(i=0;i<HF.length;i++){f=HF[i];if(!f.col)continue;on=hSh(f.id);v=on?hv(f.id):(f.id==="hYBLBH"?"Không":"");
+  data[f.col]=f.k==="d"?(v?s2d(v):""):f.k==="n"?(v===""?"":num(v)):f.k==="p"?(v===""?"":pnum(v)/100):f.k==="vat"?vatSave(v):v;}
+ if(isNew)data["Mã HĐ (tự sinh)"]=ma;
+ if(pc){memKeep();for(i=0;i<S.mem.length;i++){m=S.mem[i];d={"Mã LD":ld,"Mã NT":m.nt,"Vai trò":m.vt,"Tỷ lệ giá trị":S.hg?num(mv(i,"gt"))/S.hg:"","Trạng thái dòng":S.HD};
+  for(j=0;j<MF.length;j++){f=MF[j];if(f.k==="tl")continue;d[f.col]=mOn(i,f)?m.r[f.k]:"";}
+  if(!m.ma)d["Mã TV (tự sinh)"]=newTV(k++);ms.push({ma:m.ma,d:d});}}
+ busy(true);
+ Excel.run(function(ctx){
+  return writeRow(ctx,"tbl_HopDong",function(Fm,H,V){var j,a=H.indexOf("Số hợp đồng"),b=H.indexOf("Tên dự án");if(!isNew){for(j=0;j<V.length;j++)if(String(V[j][0])===ma)return j;return -1;}
+    for(j=0;j<V.length;j++)if(String(V[j][a])===""&&String(V[j][b])==="")return j;return -1;},data,isNew).then(function(){
+   var ch=P().resolve();ms.forEach(function(x){ch=ch.then(function(){var nw=!x.ma;return writeRow(ctx,"tbl_ThanhVienLD",function(Fm,H,V){if(nw)return -1;for(var j=0;j<V.length;j++)if(String(V[j][0])===x.ma)return j;return -1;},x.d,nw);});});return ch;});
+ }).then(function(){return loadAll();}).then(function(){var t=T("tbl_HopDong"),c=t.c("Số hợp đồng"),j,fd="";fillLists();
+   for(j=0;j<t.v.length;j++)if(String(t.v[j][c])===so&&act(t,j))fd=String(t.v[j][0]);
+   hFill();if(fd)hOpen(fd,true);else hNew();onChange();
+   toast((isNew?"Đã thêm hợp đồng ":"Đã cập nhật ")+(fd||ma)+(ms.length?" · "+ms.length+" thành viên":""),"ok");})["catch"](fail).then(function(){busy(false);});}
+function hCancel(){if(!S.hma)return;var ma=S.hma;
+ ask("Hủy hợp đồng "+ma+"?","Hợp đồng sẽ được đánh dấu '"+S.HUY+"' trong bảng dữ liệu (không xóa hẳn).",function(){busy(true);
+  Excel.run(function(ctx){return writeRow(ctx,"tbl_HopDong",function(Fm,H,V){for(var j=0;j<V.length;j++)if(String(V[j][0])===ma)return j;return -1;},{"Trạng thái dòng":S.HUY},false);})
+  .then(function(){return loadAll();}).then(function(){fillLists();hFill();hNew();onChange();toast("Đã đánh dấu hủy "+ma,"ok");})["catch"](fail).then(function(){busy(false);});});}
 
 /* ---------- khoi dong ---------- */
-Office.onReady(function(){build();busy(true);
- loadAll().then(function(){S.ready=true;fillLists();buildKM();newForm();})["catch"](function(e){fail(e);$("mode").innerHTML="Không đọc được dữ liệu – kiểm tra file đang mở có đúng bảng tbl_DuAn…";}).then(function(){busy(false);});});
+Office.onReady(function(){build();hBuild();busy(true);
+ loadAll().then(function(){S.ready=true;fillLists();buildKM();newForm();hRefresh();})["catch"](function(e){fail(e);$("mode").innerHTML="Không đọc được dữ liệu – kiểm tra file đang mở có đúng bảng tbl_DuAn…";}).then(function(){busy(false);});});
 })();
 </script>
 </body>
 </html>
+
