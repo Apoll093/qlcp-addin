@@ -53,7 +53,7 @@ textarea.t{resize:vertical;min-height:52px}
 .dd-it:hover,.dd-it.hl{background:#a0cafa}
 .dd-it.sel{background:#e3f2fd;color:#1565c0;font-weight:600}
 .dd-it.sel:hover{background:#a0cafa}
-.dd-it .ck{margin-left:auto;padding-left:10px;color:#2e7d32;font-weight:700}
+.dd-q{position:sticky;top:-4px;display:block;width:100%;box-sizing:border-box;border:1px solid #cfd8e3;border-radius:6px;padding:6px 8px;margin-bottom:4px;font:inherit;background:#fff;outline:none;z-index:1}.dd-q:focus{border-color:#1976d2;box-shadow:0 0 0 2px rgba(25,118,210,.15)}.dd-emp{padding:8px 9px;color:#9ca3af;font-style:italic}.dd-it .ck{margin-left:auto;padding-left:10px;color:#2e7d32;font-weight:700}
 .btns{display:flex;margin:6px -4px 0}
 .btn{flex:1;margin:0 4px;border:0;border-radius:9px;padding:9px 6px;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:.3px;cursor:pointer;transition:filter .15s,box-shadow .15s}
 .btn.pri{background:#1565c0;background:linear-gradient(135deg,#1e88e5,#0d47a1);color:#fff;box-shadow:0 3px 8px rgba(13,71,161,.32)}
@@ -340,7 +340,7 @@ function ask(title,msg,cb){$("mT").innerHTML=esc(title);$("mM").innerHTML=esc(ms
 
 /* ---------- dropdown hien dai ---------- */
 var OPEN=null;
-function DD(id,ph,onch){var el=$(id),me=this;this.el=el;this.v="";this.items=[];this.ph=ph;this.onch=onch;this.dis=false;this.hl=-1;
+function ddN(s){s=String(s==null?"":s).toLowerCase().replace(/đ/g,"d");return s.normalize?s.normalize("NFD").replace(/[\u0300-\u036f]/g,""):s;} function DD(id,ph,onch,srch){var el=$(id),me=this;this.el=el;this.srch=!!srch;this.vis=[];this.qi=null;this.q0="";this.v="";this.items=[];this.ph=ph;this.onch=onch;this.dis=false;this.hl=-1;
  cls(el,"dd",true);
  el.innerHTML='<div class="dd-box" tabindex="0"><span class="dd-txt ph"></span><span class="dd-arr">&#9660;</span></div><div class="dd-pop"></div>';
  this.box=el.firstChild;this.txt=this.box.firstChild;this.pop=el.lastChild;
@@ -353,18 +353,18 @@ DD.prototype.set=function(v,silent){this.v=(v==null?"":String(v));this.render();
 DD.prototype.get=function(){return this.v;};
 DD.prototype.disable=function(b){this.dis=!!b;if(b)this.close();cls(this.el,"dis",this.dis);this.box.tabIndex=b?-1:0;};
 DD.prototype.render=function(){var has=this.v!=="";this.txt.innerHTML=esc(has?this.v:this.ph);this.txt.className="dd-txt"+(has?"":" ph");};
-DD.prototype.open=function(){if(this.dis||!this.items.length)return;if(OPEN&&OPEN!==this)OPEN.close();var h="",i,s;
- for(i=0;i<this.items.length;i++){s=String(this.items[i])===this.v;h+='<div class="dd-it'+(s?" sel":"")+'" data-i="'+i+'"><span>'+esc(this.items[i])+"</span>"+(s?'<span class="ck">&#10003;</span>':"")+"</div>";}
- this.pop.innerHTML=h;var r=this.el.getBoundingClientRect(),vh=window.innerHeight||document.documentElement.clientHeight;
- cls(this.el,"up",r.bottom+240>vh&&r.top>240);cls(this.el,"open",true);OPEN=this;this.hl=-1;
- var sl=this.pop.querySelector(".sel");if(sl)this.pop.scrollTop=Math.max(0,sl.offsetTop-80);};
+DD.prototype.canQ=function(){return this.srch||this.items.length>8;}; DD.prototype.fill=function(){var q=this.qi?ddN(trim(this.qi.value)):"",h="",i,s,its,j;this.vis=[];  for(i=0;i<this.items.length;i++){if(q&&ddN(this.items[i]).indexOf(q)<0)continue;this.vis.push(i);s=String(this.items[i])===this.v;h+='<div class="dd-it'+(s?" sel":"")+'" data-i="'+i+'"><span>'+esc(this.items[i])+"</span>"+(s?'<span class="ck">&#10003;</span>':"")+"</div>";}  this.lst.innerHTML=h||'<div class="dd-emp">'+(this.items.length?"Không có kết quả phù hợp":"Không còn mục để chọn")+"</div>";this.hl=q&&this.vis.length?0:-1;its=this.lst.querySelectorAll(".dd-it");for(j=0;j<its.length;j++)cls(its[j],"hl",j===this.hl);}; DD.prototype.open=function(){if(this.dis||(!this.items.length&&!this.srch))return;if(OPEN&&OPEN!==this)OPEN.close();var me=this,q=this.canQ();  if(q){this.pop.innerHTML='<input class="dd-q" placeholder="Gõ để tìm…" autocomplete="off"><div class="dd-lst"></div>';this.qi=this.pop.firstChild;this.lst=this.pop.lastChild;this.qi.value=this.q0||"";this.q0="";   this.qi.oninput=function(e){(e||window.event).stopPropagation();me.fill();};this.qi.onkeydown=function(e){me.key(e||window.event);};this.qi.onclick=function(e){stop(e);};}else{this.qi=null;this.lst=this.pop;}  this.fill();
+ /* items rendered by fill() */
+ var r=this.el.getBoundingClientRect(),vh=window.innerHeight||document.documentElement.clientHeight;
+ cls(this.el,"up",r.bottom+240>vh&&r.top>240);cls(this.el,"open",true);OPEN=this;if(this.qi)setTimeout(function(){if(OPEN===me&&me.qi){me.qi.focus();var L=me.qi.value.length;try{me.qi.setSelectionRange(L,L);}catch(x){}}},0);
+ var sl=this.lst.querySelector(".sel");if(sl&&!(this.qi&&this.qi.value))this.pop.scrollTop=Math.max(0,sl.offsetTop-80);};
 DD.prototype.close=function(){cls(this.el,"open",false);if(OPEN===this)OPEN=null;};
 DD.prototype.toggle=function(){if(OPEN===this)this.close();else this.open();};
 DD.prototype.pick=function(i){this.close();this.set(String(this.items[i]));this.box.focus();};
-DD.prototype.key=function(e){var k=e.keyCode,n=this.items.length,j,its;
- if(k===13||k===32){if(OPEN===this&&this.hl>=0)this.pick(this.hl);else this.toggle();e.preventDefault();}
- else if(k===27||k===9)this.close();
- else if((k===40||k===38)&&n){if(OPEN!==this)this.open();this.hl=(this.hl+(k===40?1:-1)+n)%n;its=this.pop.children;for(j=0;j<its.length;j++)cls(its[j],"hl",j===this.hl);if(its[this.hl])its[this.hl].scrollIntoView(false);e.preventDefault();}};
+DD.prototype.key=function(e){var k=e.keyCode,op=OPEN===this,inQ=!!(this.qi&&e.target===this.qi),n,j,its;
+ if(k===13||(k===32&&!inQ)){if(op&&this.hl>=0&&this.vis[this.hl]!=null)this.pick(this.vis[this.hl]);else if(!inQ)this.toggle();e.preventDefault();}
+ else if(k===27||k===9){this.close();if(inQ&&k===27)this.box.focus();}
+ else if(k===40||k===38){if(!op)this.open();n=this.vis.length;if(n){this.hl=(this.hl+(k===40?1:-1)+n)%n;its=this.lst.querySelectorAll(".dd-it");for(j=0;j<its.length;j++)cls(its[j],"hl",j===this.hl);if(its[this.hl])its[this.hl].scrollIntoView(false);}e.preventDefault();}  else if(!op&&!inQ&&!this.dis&&this.canQ()&&e.key&&e.key.length===1&&!e.ctrlKey&&!e.altKey&&!e.metaKey){this.q0=e.key;this.open();e.preventDefault();}};
 document.onclick=function(){if(OPEN)OPEN.close();};
 
 /* ---------- dung giao dien ---------- */
@@ -383,7 +383,7 @@ function build(){
  $("g3").innerHTML=row2({id:"pb",lb:"Phiên bản",req:1,k:"dd"},{id:"tmng",lb:"Ngày QĐ TMĐT",k:"d"})+fld({id:"tmqd",lb:"Số QĐ phê duyệt TMĐT",k:"t"});
  var acts='<button class="btn pri" data-a="luu">&#128190; LƯU</button><button class="btn sec2" data-a="moi">&#10227; LÀM MỚI</button><button class="btn dan" data-a="huy">&#128465; HỦY DỰ ÁN</button>';
  var bs=document.querySelectorAll("[data-acts]");for(var i=0;i<bs.length;i++)bs[i].innerHTML=acts;
- for(i=0;i<F.length;i++)if(F[i].k==="dd")new DD(F[i].id,"Chọn "+F[i].lb.toLowerCase()+"…",onChange);
+ for(i=0;i<F.length;i++)if(F[i].k==="dd")new DD(F[i].id,"Chọn "+F[i].lb.toLowerCase()+"…",onChange,F[i].id==="cdt");
  new DD("pb","Chọn phiên bản…",function(){loadTM();onChange();});
  document.body.addEventListener("click",function(e){var t=e.target;while(t&&t!==document.body&&!t.getAttribute("data-a"))t=t.parentNode;if(!t||t===document.body)return;var a=t.getAttribute("data-a");if(t.disabled)return;if(a==="luu")save();else if(a==="moi")newForm();else if(a==="huy")cancelDA();});
  document.body.addEventListener("input",function(e){var t=e.target;if(t.id==="tim"){renderList();return;}if(t.getAttribute("data-km")!==null){fmtNum(t);calcTM();}onChange();});
@@ -720,7 +720,7 @@ function hBuild(){var i,f,acts;
  acts='<button class="btn pri" data-a="hluu">&#128190; LƯU HĐ</button><button class="btn sec2" data-a="hmoi">&#10227; LÀM MỚI</button><button class="btn dan" data-a="hhuy">&#128465; HỦY HĐ</button>';
  var bs=document.querySelectorAll("[data-hacts]");for(i=0;i<bs.length;i++)bs[i].innerHTML=acts;
  for(i=0;i<HF.length;i++){f=HF[i];if(f.k==="dd"||f.k==="vat")new DD(f.id,"Chọn "+f.lb.toLowerCase()+"…",hOnChange);}
- new DD("hAddNT","Chọn nhà thầu…",null);new DD("hAddVT","Vai trò…",null);
+ new DD("hAddNT","Gõ hoặc chọn nhà thầu…",null,1);new DD("hAddVT","Vai trò…",null);
  $("mods").onclick=function(e){var t=e.target;while(t&&t.tagName!=="A")t=t.parentNode;if(t)setMod(+t.getAttribute("data-m"));};
  $("tabsH").onclick=function(e){var t=e.target;while(t&&t.tagName!=="A")t=t.parentNode;if(t)htab(+t.getAttribute("data-h"));};
  $("hds").onclick=function(e){var t=e.target;while(t&&t!==this&&!t.getAttribute("data-hd"))t=t.parentNode;if(t&&t!==this)hOpen(t.getAttribute("data-hd"));};
@@ -1035,7 +1035,7 @@ function mstOk(m){return /^\d{10}(\d{3})?$/.test(m);}
 function uLock(){if(!S.dd.uVT||!$("uMST"))return;var m=mstNorm(xv(UF,"uMST")),on=!!m&&!S.ulk,i,f;
  for(i=0;i<UF.length;i++){f=UF[i];if(f.k==="mst")continue;if(f.k==="dd")S.dd[f.id].disable(!on||(f.id==="uTT"&&!S.ufree));else $(f.id).disabled=!on;}
  xbtn("umst",S.ulk||!mstOk(m));}
-function uMstInput(){var m=mstNorm(xv(UF,"uMST")),i;clearTimeout(S.umt);
+function uMstInput(){var m=mstNorm(xv(UF,"uMST")),i,old=S.u0?S.u0.mst:"";clearTimeout(S.umt);  if(S.uma&&S.u0&&m!==old&&(!m||mstOk(m))){for(i=0;i<UF.length;i++)if(UF[i].k!=="mst"&&UF[i].id!=="uVT")xset(UF,UF[i].id,"");toast("MST khác đơn vị đang sửa ("+S.uma+") – chuyển sang thêm đơn vị mới, đơn vị cũ giữ nguyên","ok");S.uma="";S.u0=null;S.uq="";S.ufree=false;}
  if(!m){for(i=0;i<UF.length;i++)if(UF[i].k!=="mst"&&UF[i].id!=="uVT")xset(UF,UF[i].id,"");S.uq="";S.ufree=false;uMstMsg("","");}
  else if(mstOk(m)&&m!==S.uq)S.umt=setTimeout(mstLookup,600);
  else if(!mstOk(m))uMstMsg("Nhập đủ 10 hoặc 13 chữ số để tự tra cứu","");
@@ -1054,7 +1054,7 @@ function mstLookup(){var m=mstNorm(xv(UF,"uMST")),q,TT=S.L.lst_TrangThaiNT||[];i
 function uOpen(ma,quiet){var t=T("tbl_NhaThau"),r=uRow(ma),i,f;if(r<0){if(!quiet)toast("Không tìm thấy "+ma,"err");return;}S.uma=ma;
  for(i=0;i<UF.length;i++){f=UF[i];if(f.col)xset(UF,f.id,t.g(r,f.col));}
  xset(UF,"uVT",vtOf(t,r));xset(UF,"uMST",String(t.g(r,"Mã số thuế")));
- S.u0={vt:vtOf(t,r),ten:String(t.g(r,"Tên nhà thầu"))};S.uq=mstNorm(xv(UF,"uMST"));S.ufree=false;S.ulk=false;clearTimeout(S.umt);uMstMsg("","");uOnChange();if(!quiet)window.scrollTo(0,0);}
+ S.u0={vt:vtOf(t,r),ten:String(t.g(r,"Tên nhà thầu")),mst:mstNorm(t.g(r,"Mã số thuế"))};S.uq=mstNorm(xv(UF,"uMST"));S.ufree=false;S.ulk=false;clearTimeout(S.umt);uMstMsg("","");uOnChange();if(!quiet)window.scrollTo(0,0);}
 function uValidate(){var E=[],W=[],ok=[],i,f,n,a,t=T("tbl_NhaThau"),cT=t.c("Tên nhà thầu"),cM=t.c("Mã số thuế"),vt=xv(UF,"uVT"),ten=lowT(xv(UF,"uTen")),mst=mstNorm(xv(UF,"uMST")),o=S.u0;
  function bad(id,m){E.push({id:id,m:m});}
   for(i=0;i<UF.length;i++){f=UF[i];if(f.req&&f.id!=="uTT"&&!xv(UF,f.id))bad(f.id,"Bắt buộc nhập "+f.lb.toLowerCase());}
@@ -1086,7 +1086,7 @@ function uSave(){var R=uValidate(),isNew=!S.uma,ma=isNew?nextMa("tbl_NhaThau","N
  busy(true);
  Excel.run(function(ctx){return writeRow(ctx,"tbl_NhaThau",isNew?noRow:byMa(ma),data,isNew).then(function(){var ch=P().resolve();
    ren.forEach(function(d){ch=ch.then(function(){return writeRow(ctx,"tbl_DuAn",byMa(d),{"Chủ đầu tư":ten},false);});});return ch;});})
- .then(function(){return loadAll();}).then(function(){fillLists();hRefresh();uOpen(ma,true);if(S.ma)openDA(S.ma,true);toast((isNew?"Đã thêm đơn vị ":"Đã cập nhật đơn vị ")+ten+(ren.length?" · cập nhật "+ren.length+" dự án":""),"ok");})["catch"](fail).then(function(){busy(false);});}
+ .then(function(){return loadAll();}).then(function(){fillLists();hRefresh();if(isNew)uNew();else uOpen(ma,true);if(S.ma)openDA(S.ma,true);toast((isNew?"Đã thêm đơn vị ":"Đã cập nhật đơn vị ")+ten+(isNew&&data["Vai trò đơn vị"]===VTDV[1]?" (chủ đầu tư – chọn được khi tạo dự án mới)":"")+(ren.length?" · cập nhật "+ren.length+" dự án":""),"ok");})["catch"](fail).then(function(){busy(false);});}
 function uCancel(){if(!S.uma)return;var ma=S.uma,ten=xv(UF,"uTen"),n=hdUses(ma),l=tvLDs(ma),d=S.u0&&S.u0.vt===VTDV[1]?daRows(S.u0.ten,LCDT[0]).length:0,u=[];
  if(n)u.push(n+" hợp đồng");if(l.length)u.push("liên danh "+l.join(", "));if(d)u.push(d+" dự án");
  if(u.length){toast("Không hủy được – đơn vị đang dùng ở "+u.join(", "),"err");return;}
@@ -1117,7 +1117,7 @@ function lRenderMem(){var t=T("tbl_NhaThau");if(!t||!$("lmem"))return;var lo=xv(
   S.lmap={};for(i=0;i<t.v.length;i++){m=String(t.v[i][0]);nm=String(t.g(i,"Tên nhà thầu"));if(m&&nm&&act(t,i)&&vtOf(t,i)===lo){all.push(nm);S.lmap[nm]=m;}}
   for(i=0;i<S.lm.length;i++)(function(k){var used={},j,a=[],d;for(j=0;j<S.lm.length;j++)if(j!==k&&S.lm[j].nt)used[S.lm[j].nt]=1;
    for(j=0;j<all.length;j++)if(!used[S.lmap[all[j]]])a.push(all[j]);
-   d=new DD("lmn"+k,"Chọn thành viên "+(k+1)+"…",function(v){S.lm[k].nt=v?(S.lmap[v]||""):"";lRenderMem();lOnChange();});d.setItems(a);d.set(S.lm[k].nt?ntName(S.lm[k].nt):"",true);
+   d=new DD("lmn"+k,"Gõ tên hoặc chọn thành viên "+(k+1)+"…",function(v){S.lm[k].nt=v?(S.lmap[v]||""):"";lRenderMem();lOnChange();},1);d.setItems(a);d.set(S.lm[k].nt?ntName(S.lm[k].nt):"",true);
    d=new DD("lmv"+k,"Vai trò…",function(v){S.lm[k].vt=v;lOnChange();});d.setItems(S.L.lst_VaiTroLD||[]);d.set(S.lm[k].vt,true);})(i);
   $("lmN").innerHTML="Chỉ hiện các đơn vị có vai trò <b>"+esc(lo)+"</b> (khai báo ở tab Đơn vị). Đổi <b>Số thành viên</b> để thêm/bớt ô."+(lo===VTDV[0]?" Giá trị, tạm ứng, bảo lãnh của từng thành viên nhập ở form Hợp đồng.":"");}
 function lValidate(){var E=[],W=[],ok=[],i,f,v,n,c=0,k=0,lo=xv(LF,"lLoai"),ten=lowT(xv(LF,"lTen")),t=T("tbl_LienDanh"),cT=t.c("Tên liên danh"),N=T("tbl_NhaThau"),r,m,seen={},o=S.l0;
