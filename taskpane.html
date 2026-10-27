@@ -534,11 +534,11 @@ function loadTM(){var t=T("tbl_TMDT"),pb=S.dd.pb.get(),i,k,cM=t.c("Mã DA"),cP=t
  $("tmqd").value=qd;$("tmng").value=d2s(ng);
  var real=pbReal();$("pbInfo").innerHTML=!real?"&#9888; Đã hết danh mục phiên bản":(pb===NEWPB?"Sẽ tạo phiên bản mới: <b>"+esc(real)+"</b>":"Đang xem / sửa phiên bản <b>"+esc(real)+"</b>");
  lockTM();calcTM();}
-"function onLCDT(){if(val(""lcdt"")!==S.lc0)S.dd.cdt.set("""",true);onChange();}
-function gate(){var nw=!S.ma,ten=val(""ten"")!=="""",i,id,o;
-  if(nw&&!ten){if(val(""lcdt""))S.dd.lcdt.set("""",true);if(val(""cdt""))S.dd.cdt.set("""",true);for(i=0;i<LK.length;i++){id=LK[i];if(val(id)!=="""")setv(id,"""");}}
-  S.dd.lcdt.disable(nw&&!ten);S.dd.cdt.disable(nw&&(!ten||!val(""lcdt"")));S.lc0=val(""lcdt"");
-  o=!nw||(ten&&val(""cdt"")!=="""");if(o===S.open)return;S.open=o;"
+function onLCDT(){if(val("lcdt")!==S.lc0)S.dd.cdt.set("",true);onChange();}
+function gate(){var nw=!S.ma,ten=val("ten")!=="",i,id,o;
+  if(nw&&!ten){if(val("lcdt"))S.dd.lcdt.set("",true);if(val("cdt"))S.dd.cdt.set("",true);for(i=0;i<LK.length;i++){id=LK[i];if(val(id)!=="")setv(id,"");}}
+  S.dd.lcdt.disable(nw&&!ten);S.dd.cdt.disable(nw&&(!ten||!val("lcdt")));S.lc0=val("lcdt");
+  o=!nw||(ten&&val("cdt")!=="");if(o===S.open)return;S.open=o;
  for(i=0;i<LK.length;i++){id=LK[i];if(fd(id).k==="dd")S.dd[id].disable(!o);else $(id).disabled=!o;}
  if(!o&&S.tm){S.tm=false;cls($("swTM"),"on",false);}
  cls($("swTM"),"dis",!o);cls(document.body,"lk",!o);lockTM();}
@@ -552,8 +552,8 @@ function trungTen(){var t=T("tbl_DuAn"),n=val("ten").toLowerCase(),i,cT=t.c("Tê
 function validate(){var E=[],ok=[],i,f,v,d1,d2,tr;
  function bad(id,m,tb){E.push({id:id,m:m,tab:tb});}
  for(i=0;i<F.length;i++){f=F[i];v=val(f.id);
-"  if(f.req&&!v&&S.open===false&&LK.indexOf(f.id)>=0)continue;
-   if(f.req&&!v&&(f.id===""lcdt""||f.id===""cdt"")&&S.dd[f.id].dis)continue;"
+  if(f.req&&!v&&S.open===false&&LK.indexOf(f.id)>=0)continue;
+   if(f.req&&!v&&(f.id==="lcdt"||f.id==="cdt")&&S.dd[f.id].dis)continue;
   if(f.req&&!v)bad(f.id,"Bắt buộc nhập "+f.lb.toLowerCase(),f.tab);
   else if(f.k==="d"&&v&&s2d(v)===null)bad(f.id,"Ngày không hợp lệ (dd/mm/yyyy)",f.tab);
   else if(f.req)ok.push(f.lb);}
@@ -1427,8 +1427,8 @@ function bTrack(){if(!S.binit||!BL())return;var fd=S.dd.bfDA.get(),ft=S.dd.bfTT.
    dc+='<div class="sumr"><span>'+esc(bShort(ty[r]))+": <b>"+fmt(cur.v)+"</b> / "+(R.gt?fmt(R.gt):"–")+" đ ("+cur.n+" thư)</span>"+st+"</div>";}}
  $("bdc").innerHTML=dc||'<div class="empty">Không có hợp đồng yêu cầu bảo lãnh</div>';}
 function bClear(){var i,f;for(i=0;i<BF.length;i++){f=BF[i];if(f.id==="bDA")continue;bset(f.id,"");}}
-"function bNew(keep){S.bma="""";S.b0=null;if(!keep)bClear();bset(""bHT"",HT_MOI);bset(""bTT"",TT_CON);if(!bv(""bNPH""))bset(""bNPH"",today());bOnChange();}
-function bReset(){var i,f;S.bma="""";S.b0=null;for(i=0;i<BF.length;i++){f=BF[i];if(f.id===""bDA""||f.id===""bHD""||f.id===""bNT"")continue;bset(f.id,"""");}bset(""bHT"",HT_MOI);bset(""bTT"",TT_CON);bset(""bNPH"",today());bOnHD();}"
+function bNew(keep){S.bma="";S.b0=null;if(!keep)bClear();bset("bHT",HT_MOI);bset("bTT",TT_CON);if(!bv("bNPH"))bset("bNPH",today());bOnChange();}
+function bReset(){var i,f;S.bma="";S.b0=null;for(i=0;i<BF.length;i++){f=BF[i];if(f.id==="bDA"||f.id==="bHD"||f.id==="bNT")continue;bset(f.id,"");}bset("bHT",HT_MOI);bset("bTT",TT_CON);bset("bNPH",today());bOnHD();}
 function bOpen(ma,silent){var i=tRow("tbl_BaoLanh",ma),hr,j,f,v;if(i<0){toast("Không tìm thấy thư "+ma,"err");return;}
  if(S.mod!==4)setMod(4);if(S.btab!==1)btab(1);S.bma=ma;
  bset("bDA",blg(i,"Tên dự án"));bItems();bset("bHD",blg(i,"Số hợp đồng"));bItems();hr=bHDr();bset("bLoai",blg(i,"Loại bảo lãnh"));bItems();
