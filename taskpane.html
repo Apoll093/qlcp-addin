@@ -188,15 +188,26 @@ body.mP .pp.on{display:block}
 .sbh{font-size:11.5px;font-weight:700;color:#374151;margin:4px 0 8px;padding-left:6px;border-left:3px solid #90caf9}.grid>.f.sbh2{font-size:11px;font-weight:700;color:#0d47a1;margin:2px 0 6px;padding-top:4px;border-top:1px dashed #cfd8dc}
 .wn2{font-size:11px;color:#e65100;background:#fff8e1;border:1px solid #ffe0b2;border-radius:4px;padding:4px 6px;margin:0 0 8px}.wn2:empty{display:none}
 .ckg{display:flex;flex-wrap:wrap;gap:4px 14px;padding:4px 0}.ckg label{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:400;cursor:pointer;margin:0;text-transform:none;color:#1f2937}.ckg input{width:auto;margin:0;cursor:pointer}.ckg input:disabled+span{opacity:.5}
+#tabsT{display:none}
+body.mY #tabs,body.mY #tabsH,body.mY #tabsU,body.mY #tabsB,body.mY #tabsP{display:none}
+body.mY #tabsT{display:flex}
+body.mY .pg.on,body.mY .ph.on,body.mY .pu.on,body.mY .pb.on,body.mY .pp.on{display:none}
+body.mY .lkmsg,body.mY .lkh{display:none!important}
+.pyp{display:none}
+body.mY .pyp.on{display:block}
+#pyds .c1,#pyhist .c1{width:46px}#pyds .c3,#pyhist .c3{width:108px}#pySum .bkp{margin-bottom:10px}
+.pvr{display:flex;justify-content:space-between;align-items:flex-start;font-size:12px;padding:5px 0;border-bottom:1px dashed #e8edf3}.pvr span{color:#6b7280;padding-right:10px}.pvr b{color:#111827;text-align:right;max-width:64%;word-break:break-word;font-weight:600}
+.pvr.pvt b{color:#0d47a1;font-size:13px;font-weight:700}.pvh{font-size:10.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.3px;margin:10px 0 2px}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="ttl" id="ttl">&#128203; Quản lý dự án</div><div class="sub" id="mode">Đang tải dữ liệu…</div><div class="mods" id="mods"><a data-m="1" class="on">&#128203; Dự án</a><a data-m="2">&#128209; Hợp đồng</a><a data-m="3">&#127970; Đơn vị &amp; LD</a><a data-m="4">&#128737; Bảo lãnh</a><a data-m="5">&#128206; Phụ lục</a></div><button class="rf" id="btnRf" title="Tải lại dữ liệu">&#10227;</button></div>
+<div class="hdr"><div class="ttl" id="ttl">&#128203; Quản lý dự án</div><div class="sub" id="mode">Đang tải dữ liệu…</div><div class="mods" id="mods"><a data-m="1" class="on">&#128203; Dự án</a><a data-m="2">&#128209; Hợp đồng</a><a data-m="3">&#127970; Đơn vị &amp; LD</a><a data-m="4">&#128737; Bảo lãnh</a><a data-m="5">&#128206; Phụ lục</a><a data-m="6">&#128179; Thanh toán</a></div><button class="rf" id="btnRf" title="Tải lại dữ liệu">&#10227;</button></div>
 <div class="tabs" id="tabs"><a data-t="1" class="on">&#128221; Thông tin chung</a><a data-t="2">&#9878; Pháp lý &amp; tiến độ</a><a data-t="3">&#128176; Tổng mức đầu tư</a><a data-t="4">&#128202; Tổng quan</a></div>
 <div class="tabs" id="tabsH"><a data-h="1" class="on">&#128221; Thông tin</a><a data-h="2">&#128176; Giá trị và bảo hành</a><a data-h="3">&#128179; Tạm ứng &amp; Thanh toán</a><a data-h="4">&#128737; Bảo lãnh</a><a data-h="5">&#129309; Liên danh</a></div>
 <div class="tabs" id="tabsU"><a data-u="1" class="on">&#127970; Đơn vị</a><a data-u="2">&#129309; Liên danh</a></div>
 <div class="tabs" id="tabsB"><a data-bt="1" class="on">&#9997; Nhập thư bảo lãnh</a><a data-bt="2">&#9200; Theo dõi &amp; cảnh báo<span class="badge hide" id="bAl"></span></a></div>
 <div class="tabs" id="tabsP"><a data-pt="1" class="on">&#9997; Nhập phụ lục</a><a data-pt="2">&#128338; Lịch sử theo HĐ</a></div>
+<div class="tabs" id="tabsT"><a data-yt="1" class="on">&#9997; Nhập chứng từ</a><a data-yt="2">&#128338; Lịch sử theo HĐ</a></div>
 <div class="body">
  <div class="pg on" id="pg1">
   <div class="card">
@@ -376,6 +387,34 @@ body.mP .pp.on{display:block}
     <div class="note">Lũy kế bỏ qua phụ lục "Không duyệt" và phụ lục đã hủy. Bấm một dòng để mở phụ lục.</div>
    </div>
   </div>
+   <div class="pyp on" id="pyp1">
+    <div class="card">
+     <div class="info">&#128161; Chọn <b>Dự án</b> → <b>Hợp đồng</b> → <b>Loại thanh toán</b> → <b>Đợt</b>. Chỉ hiện các ô áp dụng cho loại thanh toán / hợp đồng đã chọn. Phần xem trước là <b>ước tính</b>; kết quả chính thức do công thức trên sheet ThanhToan tính sau khi lưu.</div>
+     <div class="sec">Hợp đồng &amp; đợt thanh toán</div><div id="py1"></div>
+     <div id="pySum"></div>
+     <div class="lkb" id="pyLk">&#128274; Chọn Dự án và Hợp đồng để mở phần nhập chứng từ.</div>
+     <div id="pyS2"><div class="sec" style="margin-top:6px">&#9989; Phê duyệt &amp; giải ngân</div><div id="py2"></div></div>
+     <div id="pyS3"><div class="sec" style="margin-top:6px">&#129534; Hóa đơn</div><div id="py3"></div></div>
+     <div id="pyS4"><div class="sec" style="margin-top:6px">&#128176; Giá trị &amp; khấu trừ</div><div class="sbh">Pháp lý</div><div id="py4"></div>
+      <div id="pyS5"><div class="sbh">Giá trị thực</div><div id="py5"></div></div></div>
+     <div class="btns" data-pyacts="1" style="margin-top:12px"></div>
+    </div>
+    <div class="card"><div class="lh"><b>&#128202; Xem trước giá trị</b><span class="chip" style="margin-left:auto">ước tính</span></div><div id="pyPv"></div></div>
+    <div class="card"><div class="chkh" id="pychkH"></div><div class="chk" id="pychkL"></div></div>
+    <div class="card">
+     <div class="lh"><b>&#128179; Chứng từ thanh toán</b><span class="badge" id="pycnt">0</span><input class="t search" id="pytim" placeholder="&#128269; Tìm số CT, loại, đợt…"></div>
+     <div class="tbl"><div class="tr th"><div class="c1">Số CT</div><div class="c2">Loại · Đợt · Hợp đồng</div><div class="c3">Phê duyệt</div></div><div class="tbody" id="pyds"></div></div>
+     <div class="note" id="pydsN"></div>
+    </div>
+   </div>
+   <div class="pyp" id="pyp2">
+    <div class="card"><div class="lh"><b>&#128202; Tổng hợp hợp đồng</b></div><div id="pykpi"></div></div>
+    <div class="card">
+     <div class="lh"><b>&#128338; Lịch sử thanh toán</b></div>
+     <div class="tbl"><div class="tr th"><div class="c1">#</div><div class="c2">Chứng từ · giá trị · lũy kế giải ngân</div><div class="c3">Trạng thái</div></div><div class="tbody" id="pyhist"></div></div>
+     <div class="note">Sắp xếp theo ngày thanh toán (hoặc ngày phê duyệt). Lũy kế bỏ qua chứng từ đã hủy. Bấm một dòng để mở chứng từ.</div>
+    </div>
+   </div>
 </div>
 <div id="toast"></div>
 <div id="busy"><i></i></div>
@@ -383,8 +422,8 @@ body.mP .pp.on{display:block}
 <script>
 (function(){
 "use strict";
-var TBLS=["tbl_DuAn","tbl_TMDT","tbl_KhoanMuc","tbl_GoiThau","tbl_HopDong","tbl_PhuLuc","tbl_NghiemThu","tbl_ThanhToan","tbl_DieuKhoanTU","tbl_BaoLanh","tbl_NhaThau","tbl_LienDanh","tbl_ThanhVienLD","tbl_PhuLucTV"];
-var LSTS=["lst_NhomDA","lst_NguonVon","lst_GiaiDoan","lst_TrangThaiDong","lst_ThueVAT","lst_PhienBanTMDT","lst_HinhThucNT","lst_LoaiHD","lst_TrangThaiHD","lst_DangBH","lst_CanCuTU","lst_CanCuBLTH","lst_CanCuBLTU2","lst_CanCuBH","lst_PTThanhToanLD","lst_VaiTroLD","lst_TrangThaiNT","lst_NghiemThuLD","lst_LoaiBL","lst_HinhThucBL","lst_TrangThaiBL","lst_LoaiPL","lst_TrangThaiPL"];
+var TBLS=["tbl_DuAn","tbl_TMDT","tbl_KhoanMuc","tbl_GoiThau","tbl_HopDong","tbl_PhuLuc","tbl_NghiemThu","tbl_ThanhToan","tbl_DieuKhoanTU","tbl_BaoLanh","tbl_NhaThau","tbl_LienDanh","tbl_ThanhVienLD","tbl_PhuLucTV","tbl_KHV"];
+var LSTS=["lst_NhomDA","lst_NguonVon","lst_GiaiDoan","lst_TrangThaiDong","lst_ThueVAT","lst_PhienBanTMDT","lst_HinhThucNT","lst_LoaiHD","lst_TrangThaiHD","lst_DangBH","lst_CanCuTU","lst_CanCuBLTH","lst_CanCuBLTU2","lst_CanCuBH","lst_PTThanhToanLD","lst_VaiTroLD","lst_TrangThaiNT","lst_NghiemThuLD","lst_LoaiBL","lst_HinhThucBL","lst_TrangThaiBL","lst_LoaiPL","lst_TrangThaiPL","lst_LoaiTT","lst_DotNT"];
 var NEWPB="(+ Thêm phiên bản mới)";
 var S={T:{},L:{},km:[],ma:"",tm:false,HD:"Hoạt động",HUY:"Đã hủy",dd:{},ready:false,open:null};
 var LK=["nhom","nv","dd","gd","tt","soqd","ngqd","kc","ht"];
@@ -826,8 +865,8 @@ function hBuild(){var i,f,acts;
  document.body.addEventListener("click",function(e){var t=e.target;while(t&&t!==document.body&&!t.getAttribute("data-a"))t=t.parentNode;if(!t||t===document.body||t.disabled)return;var a=t.getAttribute("data-a");
   if(a==="hluu")hSave();else if(a==="hmoi")hNew();else if(a==="hhuy")hCancel();else if(a==="haddm")memAdd();else if(a==="hdelm")memDel(+t.getAttribute("data-i"));});
  document.body.addEventListener("input",function(e){var t=e.target,k=t.getAttribute("data-h");if(t.id==="htim"){hRenderList();return;}if(k===null)return;if(k==="n")fmtNum(t);hOnChange();});}
-function setMod(n){S.mod=n;cls(document.body,"mH",n===2);cls(document.body,"mU",n===3);cls(document.body,"mB",n===4);cls(document.body,"mP",n===5);var a=$("mods").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-m")===n);
- $("ttl").innerHTML=n===5?"&#128206; Phụ lục hợp đồng":n===4?"&#128737; Theo dõi bảo lãnh":n===3?"&#127970; Đơn vị &amp; liên danh":n===2?"&#128209; Quản lý hợp đồng":"&#128203; Quản lý dự án";if(OPEN)OPEN.close();if(n===5)plMode();else if(n===4)bMode();else if(n===3)uMode();else if(n===2)hOnChange();else onChange();}
+function setMod(n){S.mod=n;cls(document.body,"mH",n===2);cls(document.body,"mU",n===3);cls(document.body,"mB",n===4);cls(document.body,"mP",n===5);cls(document.body,"mY",n===6);var a=$("mods").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-m")===n);
+ $("ttl").innerHTML=n===6?"&#128179; Thanh toán hợp đồng":n===5?"&#128206; Phụ lục hợp đồng":n===4?"&#128737; Theo dõi bảo lãnh":n===3?"&#127970; Đơn vị &amp; liên danh":n===2?"&#128209; Quản lý hợp đồng":"&#128203; Quản lý dự án";if(OPEN)OPEN.close();if(n===6)pyMode();else if(n===5)plMode();else if(n===4)bMode();else if(n===3)uMode();else if(n===2)hOnChange();else onChange();}
 function htab(n){S.htab=n;var a=$("tabsH").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-h")===n);for(i=1;i<=5;i++)cls($("ph"+i),"on",i===n);if(OPEN)OPEN.close();}
 /* tra cuu */
 function act(t,r){var c=t.h.indexOf("Trạng thái dòng");return c<0||t.v[r][c]!==S.HUY;}
@@ -849,7 +888,7 @@ function hLists(){var t,i,a=[],c,d,m;
  S.dd.hNT.setItems(a);}
 function hFill(){var i,f;for(i=0;i<HF.length;i++){f=HF[i];if(f.k==="vat")S.dd[f.id].setItems((S.L.lst_ThueVAT||[]).map(vatTxt));else if(f.k==="dd"&&f.ls)S.dd[f.id].setItems(S.L[f.ls]||[]);else if(f.k==="dd"&&f.opt)S.dd[f.id].setItems(f.opt);}
  S.dd.hAddVT.setItems(S.L.lst_VaiTroLD||[]);hLists();}
-function hRefresh(){uRefresh();bRefresh();plRefresh();if(!S.dd.hDA)return;hFill();if(!S.hinit){S.hinit=true;hNew();return;}if(S.hma&&hRow(S.hma)>=0)hOpen(S.hma,true);else if(S.hma)hNew();else hOnChange();}
+function hRefresh(){uRefresh();bRefresh();plRefresh();pyRefresh();if(!S.dd.hDA)return;hFill();if(!S.hinit){S.hinit=true;hNew();return;}if(S.hma&&hRow(S.hma)>=0)hOpen(S.hma,true);else if(S.hma)hNew();else hOnChange();}
 function hNew(){var i;S.hma="";S.hload=true;S.dro={};S.tt0="";S.td0="";S.hdef=false;for(i=0;i<HF.length;i++){if(HF[i].k!=="ro")hset(HF[i].id,"");else hro(HF[i].id,"");}
   if(S.ma){var r=rowDA(S.ma);if(r>=0&&act(T("tbl_DuAn"),r))hset("hDA",T("tbl_DuAn").g(r,"Tên dự án"));}
   hLists();S.hgt=hv("hGT");S.hld="";S.mem=[];memRender();S.hload=false;htab(1);hOnChange();}
@@ -1673,8 +1712,234 @@ function plRefresh(){if(!S.dd.plDA||!S.ready||!plT())return;
  PF.forEach(function(f){if(f.k==="dd"&&(f.opt||f.ls))S.dd[f.id].setItems([PL_KEEP].concat(f.opt||S.L[f.ls]||[]));});S.dd.plTT.setItems(S.L.lst_TrangThaiPL&&S.L.lst_TrangThaiPL.length?S.L.lst_TrangThaiPL:[PL_DT,PL_DK2,PL_KD]);
  S.dd.plDCT.setItems(["Không","Có"]);S.dd.plVAT.setItems((S.L.lst_ThueVAT||[]).map(vatTxt));S.pmK="";
  if(!S.pinit){S.pinit=true;plNew();}else if(S.pma&&tRow("tbl_PhuLuc",S.pma)>=0)plOpen(S.pma,true,true);else{S.pma="";plOnChange();}}
+/* ---------- module 6: thanh toan ---------- */
+var PY_TU="Tạm ứng",PY_VT="Thanh toán vật tư",PY_DOT="Thanh toán đợt",PY_QT="Quyết toán",PY_BH="Thanh toán bảo hành";
+var YF=[
+ {id:"pyDA",lb:"Dự án",col:"Tên dự án",k:"dd",g:1,req:1,w:1},
+ {id:"pyHD",lb:"Số hợp đồng",col:"Số hợp đồng",k:"dd",g:1,req:1,w:1},
+ {id:"pyLoai",lb:"Loại thanh toán",col:"Loại thanh toán",k:"dd",g:1,req:1},
+ {id:"pyDot",lb:"Đợt",col:"Đợt",k:"dd",g:1,req:1},
+ {id:"pyTV",lb:"Thành viên nhận tiền (LD trả trực tiếp)",col:"Thành viên nhận tiền (LD trả trực tiếp)",k:"dd",g:1,req:1,w:1},
+ {id:"pyNgPD",lb:"Ngày phê duyệt",col:"Ngày phê duyệt",k:"d",g:2},
+ {id:"pyTLGN",lb:"Tỷ lệ giải ngân",col:"Tỷ lệ giải ngân",k:"p",g:2},
+ {id:"pyNgTT",lb:"Ngày thanh toán",col:"Ngày thanh toán",k:"d",g:2},
+ {id:"pyThuVe",lb:"Giá trị thu về thực tế (VNĐ)",col:"Giá trị thu về thực tế (VNĐ)",k:"n",g:2},
+ {id:"pyGTHD",lb:"Giá trị hóa đơn (VNĐ)",col:"Giá trị hóa đơn (VNĐ)",k:"n",g:3},
+ {id:"pyNgHD",lb:"Ngày phát hành hóa đơn",col:"Ngày phát hành hóa đơn",k:"d",g:3},
+ {id:"pyDN",lb:"Số tiền đề nghị (VNĐ)",col:"Số tiền đề nghị (VNĐ)",k:"n",g:4,req:1},
+ {id:"pyTLTH",lb:"Tỷ lệ thực hiện (để trống = theo HĐ)",col:"Tỷ lệ thực hiện",k:"p",g:4},
+ {id:"pyTHTU",lb:"Thu hồi tạm ứng (VNĐ)",col:"Thu hồi tạm ứng (VNĐ)",k:"n",g:4},
+ {id:"pyKT",lb:"Khấu trừ khác (VNĐ)",col:"Khấu trừ khác (VNĐ)",k:"n",g:4},
+ {id:"pyGL",lb:"Giữ lại bảo hành (VNĐ)",col:"Giữ lại bảo hành (VNĐ)",k:"n",g:4},
+ {id:"pyDNt",lb:"Số tiền đề nghị thực (VNĐ)",col:"Số tiền đề nghị thực (VNĐ)",k:"n",g:5},
+ {id:"pyTLTHt",lb:"Tỷ lệ thực hiện thực",col:"Tỷ lệ thực hiện thực",k:"p",g:5},
+ {id:"pyTHTUt",lb:"Thu hồi tạm ứng thực (VNĐ)",col:"Thu hồi tạm ứng thực (VNĐ)",k:"n",g:5},
+ {id:"pyKTt",lb:"Khấu trừ khác thực (VNĐ)",col:"Khấu trừ khác thực (VNĐ)",k:"n",g:5},
+ {id:"pyGLt",lb:"Giữ lại bảo hành thực (VNĐ)",col:"Giữ lại bảo hành thực (VNĐ)",k:"n",g:5}
+];
+var PY_RES=["Kiểm tra đợt","Kiểm tra thanh toán bảo hành","Trạng thái phê duyệt","Trạng thái hóa đơn","Kiểm tra giá trị hóa đơn","Kiểm tra điều kiện tạm ứng","Giá trị được thanh toán (VNĐ)","Thu hồi TU theo điều khoản (VNĐ)","Chênh lệch thu hồi (VNĐ)","Giá trị đề nghị (VNĐ)","Giá trị giải ngân (VNĐ)","Giá trị được thanh toán thực (VNĐ)","Giá trị phí (VNĐ)","Giá trị đề nghị thực (VNĐ)","Giá trị thu về tính toán (VNĐ)","Nhà thầu nhận tiền","Kiểm tra nhận tiền"];
+function pyfld(f){var h='<div class="f'+(f.w?" w":"")+'" id="f_'+f.id+'"><label>'+esc(f.lb)+(f.req?'<span class="req">*</span>':"")+"</label>";
+ if(f.k==="dd")h+='<div id="'+f.id+'"></div>';
+ else if(f.k==="p")h+='<div class="pct"><input class="t num" id="'+f.id+'" data-py="p" autocomplete="off"></div>';
+ else h+='<input class="t'+(f.k==="n"?" num":"")+'" id="'+f.id+'" data-py="'+f.k+'"'+(f.k==="d"?' placeholder="dd/mm/yyyy" maxlength="10"':"")+' autocomplete="off">';
+ return h+'<div class="msg" id="m_'+f.id+'"></div><div class="wn" id="w_'+f.id+'"></div></div>';}
+function pyv(id){var f=xf(YF,id),e;if(f&&f.k==="dd")return S.dd[id]?S.dd[id].get():"";e=$(id);return e?trim(e.value):"";}
+function pyset(id,v){var f=xf(YF,id);if(!f)return;if(v==null)v="";if(f.k==="dd"){S.dd[id].set(String(v),true);return;}
+ $(id).value=f.k==="d"?d2s(v):f.k==="n"?(typeof v==="number"?fmt(v):String(v)):f.k==="p"?(typeof v==="number"?String(Math.round(v*1e4)/100):String(v)):String(v);}
+function pyMaDA(){var d=pyv("pyDA");return d?String(bFind("tbl_DuAn","Tên dự án",d,"Mã DA (tự sinh)")):"";}
+function pyHDs(){var t=T("tbl_HopDong"),m=pyMaDA(),cD=t.c("Mã DA"),cS=t.c("Số hợp đồng"),a=[],i;if(!m)return a;
+ for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&String(t.v[i][cD])===m&&t.v[i][cS]!==""&&act(t,i))a.push(String(t.v[i][cS]));return a;}
+function pyCtx(){var t=T("tbl_HopDong"),C={r:-1,hd:"",lt:pyv("pyLoai"),dot:pyv("pyDot")},so=pyv("pyHD"),i,cD,cS;C.mda=pyMaDA();
+ if(C.mda&&so){cD=t.c("Mã DA");cS=t.c("Số hợp đồng");for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&String(t.v[i][cD])===C.mda&&String(t.v[i][cS])===so&&act(t,i)){C.r=i;break;}}
+ if(C.r>=0)C.hd=String(t.v[C.r][0]);
+ C.th=C.r>=0&&Number(hdg(C.r,"Giá trị HĐ thực trước thuế (VNĐ)"))>0;
+ C.ntld=C.r>=0?String(hdg(C.r,"Mã NT / LD")):"";C.isLD=C.ntld.substr(0,2)==="LD";
+ C.ldTT=C.isLD&&String(bFind("tbl_LienDanh","Mã LD (tự sinh)",C.ntld,"Phương thức thanh toán"))!=="Qua thành viên đứng đầu";
+ C.hdon=C.lt===PY_VT||C.lt===PY_DOT||C.lt===PY_QT||(C.lt===PY_TU&&C.r>=0&&String(hdg(C.r,"Yêu cầu hóa đơn tạm ứng"))==="Có");
+ C.tubh=C.lt===PY_TU||C.lt===PY_BH;return C;}
+function pyTVs(C){var t=T("tbl_ThanhVienLD"),a=[],i,cL,cN;if(!C.ldTT||!t)return a;cL=t.c("Mã LD");cN=t.c("Tên nhà thầu");
+ for(i=0;i<t.v.length;i++)if(String(t.v[i][cL])===C.ntld&&t.v[i][cN]!==""&&act(t,i))a.push(String(t.v[i][cN]));return a;}
+function pyDots(C){var L=S.L.lst_DotNT||[],t=T("tbl_ThanhToan"),n=T("tbl_NghiemThu"),used={},nt={},i,cH,cL,cD,cT,tv=pyv("pyTV"),base;
+ if(!C.hd||!C.lt||!t)return [];
+ cH=t.c("Mã HĐ");cL=t.c("Loại thanh toán");cD=t.c("Đợt");cT=t.c("Thành viên nhận tiền (LD trả trực tiếp)");
+ for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&String(t.v[i][0])!==S.pyma&&String(t.v[i][cH])===C.hd&&String(t.v[i][cL])===C.lt&&String(t.v[i][cT])===tv)used[String(t.v[i][cD])]=1;
+ if(C.lt===PY_VT||C.lt===PY_DOT){if(n){cH=n.c("Mã HĐ");cD=n.c("Đợt");for(i=0;i<n.v.length;i++)if(String(n.v[i][cH])===C.hd)nt[String(n.v[i][cD])]=1;}
+  base=L.filter(function(x){return nt[String(x)]&&String(x)!==PY_QT;});}
+ else if(C.lt===PY_QT)base=[PY_QT];else base=L.filter(function(x){return String(x)!==PY_QT;});
+ return base.map(String).filter(function(x){return !used[x];});}
+function pyShow(id,C){var f=xf(YF,id),b;if(!f)return false;if(f.g===1)return id!=="pyTV"||C.ldTT;if(C.r<0||!C.lt)return false;
+ if(f.g===3)return C.hdon;if(f.g===5&&!C.th)return false;if(id==="pyThuVe")return C.th;
+ b=id.replace(/t$/,"");if(b==="pyDN")return C.tubh;if(b==="pyTHTU"||b==="pyKT")return C.lt!==PY_TU;if(b==="pyGL")return C.lt===PY_QT;return true;}
+function pyN(id,C){return pyShow(id,C)?num(pyv(id)):0;}
+function pySum(hd,dot,col){var n=T("tbl_NghiemThu"),o={s:0,n:0,bb:""},cH,cD,c,cB,i;if(!n)return o;cH=n.c("Mã HĐ");cD=n.c("Đợt");c=n.h.indexOf(col);cB=n.h.indexOf("Số biên bản (tự sinh)");if(c<0)return o;
+ for(i=0;i<n.v.length;i++){if(String(n.v[i][cH])!==hd)continue;if(dot!=null&&String(n.v[i][cD])!==dot)continue;o.s+=Number(n.v[i][c])||0;o.n++;if(!o.bb&&cB>=0)o.bb=String(n.v[i][cB]);}return o;}
+function pyRate(C){var m={},pl=T("tbl_PhuLuc"),i,best=null,bd=-1e15,v,d,cr,cH,cS,cN;if(C.tubh)return 1;
+ m[PY_VT]=["Tỷ lệ thanh toán vật tư mới","Tỷ lệ thanh toán vật tư"];m[PY_DOT]=["Tỷ lệ thanh toán theo đợt mới","Tỷ lệ thanh toán theo đợt"];m[PY_QT]=["Tỷ lệ quyết toán mới","Tỷ lệ quyết toán"];
+ if(!m[C.lt])return "";
+ if(pl){cr=pl.h.indexOf(m[C.lt][0]);cH=pl.h.indexOf("Mã HĐ");cS=pl.h.indexOf("Trạng thái");cN=pl.h.indexOf("Ngày ký");
+  if(cr>=0)for(i=0;i<pl.v.length;i++){if(String(pl.v[i][cH])!==C.hd)continue;v=pl.v[i][cr];if(v===""||v==null||String(pl.v[i][cS])==="Không duyệt")continue;d=Number(pl.v[i][cN])||0;if(d>=bd){bd=d;best=v;}}}
+ if(best!==null)return best;v=hdg(C.r,m[C.lt][1]);return v===""||v==null?"":v;}
+function pyDK(hd,col){var v=bFind("tbl_DieuKhoanTU","Mã HĐ",hd,col);return v===""||v==null?"":v;}
+function pyPaid(hd,kind,incl){var t=T("tbl_ThanhToan"),s=0,i,cH,cL,cG,cN;if(!t||!hd)return 0;cH=t.c("Mã HĐ");cL=t.c("Loại thanh toán");cG=t.c("Giá trị được thanh toán (VNĐ)");cN=t.c("Giá trị giải ngân (VNĐ)");
+ for(i=0;i<t.v.length;i++){if(!String(t.v[i][0])||String(t.v[i][cH])!==hd||!act(t,i))continue;if(!incl&&String(t.v[i][0])===S.pyma)continue;
+  if(kind==="gn")s+=Number(t.v[i][cN])||0;else if(kind==="tu"){if(String(t.v[i][cL])===PY_TU)s+=Number(t.v[i][cG])||0;}else if(String(t.v[i][cL])!==PY_TU)s+=Number(t.v[i][cG])||0;}return s;}
+function pyThuDK(C,gt){var t=T("tbl_ThanhToan"),G,s,k,TU,d,lkS=0,lkE,i,cH,cL,cN,cG,x;if(!C.hd||C.lt===PY_TU||!t)return 0;
+ G=Number(hdg(C.r,"Giá trị HĐ ban đầu sau thuế (VNĐ)"))||0;s=Number(pyDK(C.hd,"Bắt đầu thu hồi (% GTHĐ)"))||0;k=Number(pyDK(C.hd,"Tỷ lệ thu hồi mỗi lần TT"))||0;TU=Number(pyDK(C.hd,"Đã tạm ứng (VNĐ)"))||0;
+ d=s2d(pyv("pyNgTT"))||today();cH=t.c("Mã HĐ");cL=t.c("Loại thanh toán");cN=t.c("Ngày thanh toán");cG=t.c("Giá trị được thanh toán (VNĐ)");
+ for(i=0;i<t.v.length;i++){if(!String(t.v[i][0])||String(t.v[i][0])===S.pyma||String(t.v[i][cH])!==C.hd||String(t.v[i][cL])===PY_TU)continue;x=t.v[i][cN];if(typeof x==="number"&&x<d)lkS+=Number(t.v[i][cG])||0;}
+ lkE=lkS+gt;return Math.round(Math.min(TU,Math.max(0,lkE-s*G)*k)-Math.min(TU,Math.max(0,lkS-s*G)*k));}
+function pyCalc(C){var R={nt:"",ntt:"",bb:"",rate:"",gt:0,gtt:0,dn:0,dnt:0,thuDK:0,gn:0,st:"",hdst:"",dup:[]},a,tl,tlt,pre,t=T("tbl_ThanhToan"),i,cH,cL,cD,cT,tv,pd,gn,gh,nh;
+ if(!C.hd||!C.lt)return R;
+ if(C.dot&&!C.tubh){a=pySum(C.hd,C.dot,"Giá trị nghiệm thu sau thuế (VNĐ)");
+  if(C.lt===PY_VT||C.lt===PY_DOT||a.n){R.nt=a.s;R.bb=a.n?a.bb:"⚠ Chưa có NT đợt này";if(C.th)R.ntt=pySum(C.hd,C.dot,"Giá trị nghiệm thu thực sau thuế (VNĐ)").s;}
+  else{R.nt=pySum(C.hd,null,"Giá trị nghiệm thu sau thuế (VNĐ)").s;R.bb="Tổng NT của HĐ";if(C.th)R.ntt=pySum(C.hd,null,"Giá trị nghiệm thu thực sau thuế (VNĐ)").s;}}
+ R.rate=pyRate(C);
+ tl=pyv("pyTLTH")!==""&&pnum(pyv("pyTLTH"))!==null?pnum(pyv("pyTLTH"))/100:(Number(R.rate)||0);
+ R.gt=Math.round(tl*(C.tubh?num(pyv("pyDN")):(Number(R.nt)||0)));
+ R.dn=R.gt-pyN("pyTHTU",C)-pyN("pyKT",C)-pyN("pyGL",C);
+ if(C.th){tlt=pyv("pyTLTHt")!==""&&pnum(pyv("pyTLTHt"))!==null?pnum(pyv("pyTLTHt"))/100:(Number(R.rate)||0);
+  R.gtt=Math.round(tlt*(C.tubh?num(pyv("pyDNt")):(Number(R.ntt)||0)));R.dnt=R.gtt-pyN("pyTHTUt",C)-pyN("pyKTt",C)-pyN("pyGLt",C);}
+ R.thuDK=pyThuDK(C,R.gt);
+ if(C.dot&&t){cH=t.c("Mã HĐ");cL=t.c("Loại thanh toán");cD=t.c("Đợt");cT=t.c("Thành viên nhận tiền (LD trả trực tiếp)");tv=pyv("pyTV");
+  for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&String(t.v[i][0])!==S.pyma&&String(t.v[i][cH])===C.hd&&String(t.v[i][cL])===C.lt&&String(t.v[i][cD])===C.dot&&String(t.v[i][cT])===tv)R.dup.push(String(t.v[i][0]));}
+ pre=C.dot&&!R.dup.length&&(!C.ldTT||pyv("pyTV"))&&String(R.bb).charAt(0)!=="⚠"&&R.gt>0;
+ pd=s2d(pyv("pyNgPD"));gn=pyv("pyTLGN");gh=num(pyv("pyGTHD"))>0&&!!s2d(pyv("pyNgHD"));
+ if(pre){R.st=pd&&gn!==""?((!C.hdon||gh)?"✔ Đã phê duyệt":"⟳ Đang trình – chờ hóa đơn"):"⟳ Đang trình";if(C.hdon)R.hdst=gh?"✔ Đã phát hành":"⟳ Chờ phát hành";}
+ nh=s2d(pyv("pyNgTT"));if(nh&&R.st.charAt(0)==="✔")R.gn=Math.round((pnum(gn)||0)/100*R.dn);
+ return R;}
+function pyValidate(C,R){var E=[],W=[],ok=[],em={},wm={},i,f,v,d,x,pd,tt,k,yr,cl,mx,da,t=T("tbl_ThanhToan");
+ function bad(id,m){E.push(m);if(id&&!em[id])em[id]=m;}
+ function warn(id,m){W.push(m);if(id&&!wm[id])wm[id]=m;}
+ if(S.pyma){i=tRow("tbl_ThanhToan",S.pyma);if(i>=0&&!act(t,i))bad("pyDA","Chứng từ "+S.pyma+" đã hủy – chỉ xem, không sửa được");}
+ if(!pyv("pyDA"))bad("pyDA","Chọn dự án");
+ if(!pyv("pyHD"))bad("pyHD","Chọn hợp đồng");else if(C.r<0)bad("pyHD","Không tìm thấy hợp đồng này trong dự án đã chọn");
+ if(C.r<0)return {E:E,W:W,ok:ok,em:em,wm:wm};
+ ok.push("Hợp đồng "+C.hd+(C.isLD?" · liên danh "+C.ntld+(C.ldTT?" (trả trực tiếp thành viên)":" (qua thành viên đứng đầu)"):"")+(C.th?" · có giá trị thực":""));
+ if(!C.lt)bad("pyLoai","Chọn loại thanh toán");
+ if(C.ldTT&&!pyv("pyTV"))bad("pyTV","Liên danh trả trực tiếp – chọn thành viên nhận tiền");
+ if(C.lt&&!C.dot)bad("pyDot",pyDots(C).length?"Chọn đợt":"Không còn đợt hợp lệ (đã dùng hết hoặc chưa có nghiệm thu)");
+ if(R.dup.length)bad("pyDot",C.dot+" đã có ở "+R.dup.join(", ")+" (kể cả chứng từ đã hủy) – chọn đợt khác");else if(C.dot)ok.push(C.dot+" chưa trùng");
+ if(C.dot&&String(R.bb).charAt(0)==="⚠")bad("pyDot","Chưa có biên bản nghiệm thu cho "+C.dot);else if(R.bb)ok.push("Căn cứ nghiệm thu: "+R.bb+" ("+fmt0(R.nt)+" đ sau thuế)");
+ for(i=0;i<YF.length;i++){f=YF[i];if(!pyShow(f.id,C))continue;v=pyv(f.id);if(v==="")continue;
+  if(f.k==="d"){d=s2d(v);if(d===null)bad(f.id,"Ngày không hợp lệ (dd/mm/yyyy)");else if(d<=36526)bad(f.id,"Ngày phải sau 01/01/2000");}
+  else if(f.k==="p"){x=pnum(v);if(x===null||x<0||x>100)bad(f.id,"Nhập tỷ lệ từ 0 đến 100");}
+  else if(f.k==="n"&&num(v)<0)bad(f.id,"Giá trị không được âm");}
+ pd=s2d(pyv("pyNgPD"));tt=s2d(pyv("pyNgTT"));
+ if(pyv("pyTLGN")!==""&&!pyv("pyNgPD"))bad("pyTLGN","Nhập Ngày phê duyệt trước");
+ if(pyv("pyNgTT")&&pyv("pyTLGN")==="")bad("pyNgTT","Nhập Tỷ lệ giải ngân trước");
+ if(pd&&tt&&tt<pd)warn("pyNgTT","Ngày thanh toán trước ngày phê duyệt");
+ if(C.tubh&&!num(pyv("pyDN")))bad("pyDN","Nhập số tiền đề nghị ("+C.lt.toLowerCase()+")");
+ if(C.th&&C.tubh&&!num(pyv("pyDNt")))warn("pyDNt","Chưa nhập số tiền đề nghị thực");
+ if(C.hdon){if(pyv("pyGTHD")!==""&&!num(pyv("pyGTHD")))bad("pyGTHD","Giá trị hóa đơn phải > 0");
+  if(pyv("pyNgHD")&&!num(pyv("pyGTHD")))bad("pyNgHD","Nhập giá trị hóa đơn trước");
+  if(pd&&!(num(pyv("pyGTHD"))&&s2d(pyv("pyNgHD"))))warn("pyGTHD","Chưa có hóa đơn – chứng từ sẽ ở trạng thái chờ hóa đơn, chưa giải ngân");
+  if(num(pyv("pyGTHD"))&&R.nt!==""&&C.lt!==PY_TU){x=num(pyv("pyGTHD"))-R.nt;if(Math.abs(x)>1)warn("pyGTHD","Hóa đơn "+(x>0?"vượt":"thấp hơn")+" nghiệm thu sau thuế "+fmt(Math.abs(x))+" đ");else ok.push("Hóa đơn khớp nghiệm thu sau thuế");}}
+ if(pyShow("pyThuVe",C)&&pyv("pyThuVe")!==""&&!R.gn)bad("pyThuVe","Chưa có giá trị giải ngân – chưa nhập được giá trị thu về");
+ if(C.lt&&C.dot&&!R.gt&&!em.pyDN&&!em.pyDot)warn(null,"Giá trị được thanh toán = 0 – chứng từ chưa đủ điều kiện phê duyệt");
+ if(R.dn<0)bad(C.lt===PY_QT?"pyGL":"pyTHTU","Giá trị đề nghị âm ("+fmt(R.dn)+" đ) – kiểm tra các khoản khấu trừ");
+ if(C.th&&R.dnt<0)bad("pyTHTUt","Giá trị đề nghị thực âm – kiểm tra khấu trừ thực");
+ if(pyShow("pyTHTU",C)){x=num(pyv("pyTHTU"));if(Math.abs(x-R.thuDK)>1)warn("pyTHTU","Theo điều khoản: "+fmt0(R.thuDK)+" đ (chênh "+fmt(x-R.thuDK)+" đ)");else if(R.thuDK)ok.push("Thu hồi tạm ứng đúng điều khoản ("+fmt(R.thuDK)+" đ)");}
+ if(C.lt===PY_TU){mx=pyDK(C.hd,"Mức tạm ứng tối đa (VNĐ)");da=pyPaid(C.hd,"tu");if(mx!==""&&da+R.gt>Number(mx)+1)warn("pyDN","Vượt mức tạm ứng tối đa "+fmt(mx)+" đ (đã tạm ứng "+fmt0(da)+" đ)");else if(mx!=="")ok.push("Trong mức tạm ứng tối đa ("+fmt(mx)+" đ)");}
+ if(R.gn&&tt&&!S.pyma){k=T("tbl_KHV");yr=new Date(E0+tt*864e5).getUTCFullYear();cl=null;
+  if(k){for(i=0;i<k.v.length;i++)if(Number(k.v[i][0])===yr&&String(k.v[i][1])===C.mda){cl=Number(k.g(i,"Kế hoạch vốn còn lại (VNĐ)"))||0;break;}
+   if(cl===null)warn("pyNgTT","Chưa có kế hoạch vốn năm "+yr+" cho dự án");else if(R.gn>cl+1)warn("pyNgTT","Giải ngân vượt KHV còn lại năm "+yr+" ("+fmt0(cl)+" đ)");else ok.push("Trong kế hoạch vốn năm "+yr+" (còn "+fmt(cl)+" đ)");}}
+ return {E:E,W:W,ok:ok,em:em,wm:wm};}
+function pyPill(s){s=String(s==null?"":s);var c=s===S.HUY?"p-no":s.charAt(0)==="✔"?"p-ok":s.charAt(0)==="⟳"?"p-wa":"p-gr",x=s===S.HUY?s:(s.replace(/^[✔⟳⚠✖]\s*/,"").replace(" – chờ hóa đơn"," (chờ HĐ)")||"Chưa đủ ĐK");return '<span class="pill '+c+'" title="'+esc(s)+'">'+esc(x)+"</span>";}
+function pySumHtml(C){var gt,pl,i,cH,cS,cG,kl,gn,du,p;if(C.r<0)return "";
+ gt=Number(hdg(C.r,"Giá trị HĐ ban đầu sau thuế (VNĐ)"))||0;pl=T("tbl_PhuLuc");
+ if(pl){cH=pl.h.indexOf("Mã HĐ");cS=pl.h.indexOf("Trạng thái");cG=pl.h.indexOf("Giá trị điều chỉnh sau thuế (VNĐ)");if(cG>=0)for(i=0;i<pl.v.length;i++)if(String(pl.v[i][0])&&String(pl.v[i][cH])===C.hd&&act(pl,i)&&String(pl.v[i][cS])!=="Không duyệt")gt+=Number(pl.v[i][cG])||0;}
+ kl=pyPaid(C.hd,"kl",1);gn=pyPaid(C.hd,"gn",1);du=Number(pyDK(C.hd,"Dư tạm ứng (VNĐ)"))||0;p=gt?gn/gt:0;
+ return '<div class="bkp"><div class="bk"><span>Giá trị HĐ (sau PL, sau thuế)</span><b>'+fmt0(gt)+'</b></div><div class="bk'+(gt&&kl>gt+1?" no":"")+'"><span>Lũy kế được TT khối lượng</span><b>'+fmt0(kl)+'</b></div><div class="bk'+(p>1?" no":"")+'"><span>Đã giải ngân ('+pct(p)+')</span><b>'+fmt0(gn)+'</b></div><div class="bk'+(du>0?" wa":"")+'"><span>Dư tạm ứng</span><b>'+fmt0(du)+"</b></div></div>";}
+function pyPrev(C,R){var h="",t,i,a="";
+ function r(l,v,c){h+='<div class="pvr'+(c?" "+c:"")+'"><span>'+esc(l)+"</span><b>"+v+"</b></div>";}
+ if(C.r<0||!C.lt){$("pyPv").innerHTML='<div class="empty">Chọn hợp đồng và loại thanh toán để xem trước</div>';return;}
+ if(!C.tubh){r("Số biên bản NT",esc(R.bb||"-"));r("Căn cứ NT pháp lý sau thuế",fmt0(R.nt)+" đ");}
+ r("Tỷ lệ theo HĐ",R.rate===""?"-":pct(Number(R.rate)));
+ r("Giá trị được thanh toán",fmt0(R.gt)+" đ","pvt");
+ if(C.lt!==PY_TU)r("Thu hồi TU theo điều khoản",fmt0(R.thuDK)+" đ");
+ r("Giá trị đề nghị",fmt0(R.dn)+" đ","pvt");
+ r("Trạng thái phê duyệt",esc(R.st||"Chưa đủ điều kiện"));
+ if(R.hdst)r("Hóa đơn",esc(R.hdst));
+ r("Giá trị giải ngân",fmt0(R.gn)+" đ");
+ if(C.th){h+='<div class="pvh">Giá trị thực</div>';if(!C.tubh)r("Căn cứ NT thực sau thuế",fmt0(R.ntt)+" đ");r("Giá trị được TT thực",fmt0(R.gtt)+" đ");r("Đề nghị thực (chưa gồm thuế/phí xử lý)",fmt0(R.dnt)+" đ");}
+ if(S.pyma&&(i=tRow("tbl_ThanhToan",S.pyma))>=0){t=T("tbl_ThanhToan");
+  PY_RES.forEach(function(c){var x=t.h.indexOf(c),v;if(x<0)return;v=t.v[i][x];if(v===""||v==null)return;
+   a+='<div class="pvr"><span>'+esc(c.replace(" (VNĐ)",""))+"</span><b>"+(typeof v==="number"?fmt0(v)+" đ":esc(String(v)).replace(/\n/g,"<br>"))+"</b></div>";});
+  if(a)h+='<div class="pvh">Kết quả trên sheet ThanhToan (lần lưu gần nhất)</div>'+a;}
+ $("pyPv").innerHTML=h;}
+function pyChk(V,C){var h="";if(C.r<0&&!V.E.length){$("pychkH").innerHTML="&#128274; Chưa chọn hợp đồng";$("pychkL").innerHTML="";return;}
+ $("pychkH").innerHTML=V.E.length?'<span style="color:#c62828">&#10006; '+V.E.length+" lỗi cần sửa</span>"+(V.W.length?" · "+V.W.length+" cảnh báo":""):(V.W.length?'<span style="color:#e65100">&#9888; Hợp lệ – '+V.W.length+" cảnh báo</span>":'<span style="color:#2e7d32">&#10004; Hợp lệ – có thể lưu</span>');
+ V.E.forEach(function(m){h+='<div class="er">&#10006; '+esc(m)+"</div>";});V.W.forEach(function(m){h+='<div class="er" style="color:#e65100">&#9888; '+esc(m)+"</div>";});V.ok.forEach(function(m){h+='<div class="ok">&#10004; '+esc(m)+"</div>";});
+ $("pychkL").innerHTML=h;}
+function pyRenderList(C){var t=T("tbl_ThanhToan"),q,h="",n=0,i,a=[],cH,cL,cD,cS,cP,cDN,cDA,da;if(!t||!$("pyds"))return;C=C||pyCtx();q=lowT($("pytim").value);da=pyv("pyDA");
+ cH=t.c("Mã HĐ");cL=t.c("Loại thanh toán");cD=t.c("Đợt");cS=t.c("Số hợp đồng");cP=t.c("Trạng thái phê duyệt");cDN=t.c("Giá trị đề nghị (VNĐ)");cDA=t.c("Tên dự án");
+ for(i=0;i<t.v.length;i++){if(!String(t.v[i][0]))continue;if(C.hd){if(String(t.v[i][cH])!==C.hd)continue;}else if(da&&String(t.v[i][cDA])!==da)continue;
+  if(q&&lowT([t.v[i][0],t.v[i][cL],t.v[i][cD],t.v[i][cS]].join(" ")).indexOf(q)<0)continue;a.push(i);}
+ a.reverse();a.forEach(function(i){var ma=String(t.v[i][0]);n++;h+='<div class="tr'+(ma===S.pyma?" sel":"")+'" data-py2="'+esc(ma)+'"><div class="c1">'+esc(ma)+'</div><div class="c2">'+esc(t.v[i][cL]+" · "+t.v[i][cD])+'<div class="note" style="margin:0;overflow:hidden;text-overflow:ellipsis">'+esc(t.v[i][cS])+" · đề nghị "+fmt0(t.v[i][cDN])+' đ</div></div><div class="c3">'+pyPill(act(t,i)?t.v[i][cP]:S.HUY)+"</div></div>";});
+ $("pyds").innerHTML=h||'<div class="empty">Chưa có chứng từ</div>';$("pycnt").innerHTML=n;
+ $("pydsN").innerHTML=(C.hd?"Đang lọc theo hợp đồng "+esc(pyv("pyHD"))+". ":da?"Đang lọc theo dự án đã chọn. ":"")+"Bấm một dòng để mở chứng từ.";}
+function pyHist(){var e=$("pyhist"),C=pyCtx(),t=T("tbl_ThanhToan"),a=[],h="",lk=0,n=0,i,cH,cNT,cNP,cGN,cGT,cDN,cL,cD,cP,by={},k,s="";
+ if(!e||!t)return;
+ if(C.r<0){e.innerHTML='<div class="empty">Chọn Dự án và Hợp đồng ở tab Nhập chứng từ</div>';$("pykpi").innerHTML='<div class="empty">Chưa chọn hợp đồng</div>';return;}
+ cH=t.c("Mã HĐ");cNT=t.c("Ngày thanh toán");cNP=t.c("Ngày phê duyệt");cGN=t.c("Giá trị giải ngân (VNĐ)");cGT=t.c("Giá trị được thanh toán (VNĐ)");cDN=t.c("Giá trị đề nghị (VNĐ)");cL=t.c("Loại thanh toán");cD=t.c("Đợt");cP=t.c("Trạng thái phê duyệt");
+ for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&String(t.v[i][cH])===C.hd)a.push(i);
+ function dt(i){return Number(t.v[i][cNT])||Number(t.v[i][cNP])||9e9;}
+ a.sort(function(x,y){return dt(x)-dt(y)||x-y;});
+ a.forEach(function(i){var on=act(t,i),gn=Number(t.v[i][cGN])||0,l=String(t.v[i][cL]);if(on){lk+=gn;if(!by[l])by[l]={n:0,gt:0,gn:0};by[l].n++;by[l].gt+=Number(t.v[i][cGT])||0;by[l].gn+=gn;}n++;
+  h+='<div class="tr" data-py2="'+esc(t.v[i][0])+'"><div class="c1">'+n+'</div><div class="c2"><b>'+esc(t.v[i][0])+"</b> · "+esc(l+" · "+t.v[i][cD])+'<div class="note" style="margin:0;white-space:normal">'+esc(d2s(t.v[i][cNT])||d2s(t.v[i][cNP])||"chưa có ngày")+" · được TT "+fmt0(t.v[i][cGT])+" · đề nghị "+fmt0(t.v[i][cDN])+" · giải ngân "+fmt0(gn)+(on?" · LK "+fmt0(lk):"")+'</div></div><div class="c3">'+pyPill(on?t.v[i][cP]:S.HUY)+"</div></div>";});
+ e.innerHTML=h||'<div class="empty">Hợp đồng chưa có chứng từ thanh toán</div>';
+ for(k in by)if(by.hasOwnProperty(k))s+='<div class="pvr"><span>'+esc(k)+" ("+by[k].n+" chứng từ)</span><b>được TT "+fmt0(by[k].gt)+" · GN "+fmt0(by[k].gn)+"</b></div>";
+ $("pykpi").innerHTML=pySumHtml(C)+(s?'<div class="pvh">Theo loại thanh toán</div>'+s:"");}
+function pyItems(C){S.dd.pyDA.setItems(bDAs());S.dd.pyHD.setItems(pyHDs());S.dd.pyLoai.setItems(S.L.lst_LoaiTT&&S.L.lst_LoaiTT.length?S.L.lst_LoaiTT:[PY_TU,PY_VT,PY_DOT,PY_QT,PY_BH]);S.dd.pyDot.setItems(pyDots(C));S.dd.pyTV.setItems(pyTVs(C));}
+function pyLock(on,C){var i,f,dis;for(i=0;i<YF.length;i++){f=YF[i];if(f.id==="pyDA"||f.id==="pyHD")continue;dis=!on||(f.id==="pyDot"&&!C.lt);if(f.k==="dd")S.dd[f.id].disable(dis);else $(f.id).disabled=dis;}}
+function pyOnChange(){if(!S.ready||!S.pyinit||!T("tbl_ThanhToan"))return null;var C=pyCtx(),R,V,i,f,e,on,b;
+ pyItems(C);R=pyCalc(C);on=C.r>=0;
+ cls($("pyLk"),"hide",on);cls($("pyS2"),"hide",!on||!C.lt);cls($("pyS3"),"hide",!on||!C.hdon);cls($("pyS4"),"hide",!on||!C.lt);cls($("pyS5"),"hide",!on||!C.lt||!C.th);
+ for(i=0;i<YF.length;i++){f=YF[i];cls($("f_"+f.id),"hide",!pyShow(f.id,C));}
+ pyLock(on,C);V=pyValidate(C,R);
+ for(i=0;i<YF.length;i++){f=YF[i];e=V.em[f.id];cls($("f_"+f.id),"err",!!e);$("m_"+f.id).innerHTML=e?esc(e):"";$("w_"+f.id).innerHTML=!e&&V.wm[f.id]?"&#9888; "+esc(V.wm[f.id]):"";}
+ $("pySum").innerHTML=pySumHtml(C);pyPrev(C,R);pyChk(V,C);pyRenderList(C);
+ b=document.querySelectorAll('[data-a="pyluu"]');for(i=0;i<b.length;i++)b[i].disabled=!on||V.E.length>0;
+ b=document.querySelectorAll('[data-a="pyhuy"]');for(i=0;i<b.length;i++)b[i].disabled=!S.pyma||(tRow("tbl_ThanhToan",S.pyma)>=0&&!act(T("tbl_ThanhToan"),tRow("tbl_ThanhToan",S.pyma)));
+ pyModeTxt();if(S.pytab===2)pyHist();return V;}
+function pyOnDA(){if(pyHDs().indexOf(pyv("pyHD"))<0)S.dd.pyHD.set("",true);pyOnHD();}
+function pyOnHD(){var C=pyCtx();if(pyTVs(C).indexOf(pyv("pyTV"))<0)S.dd.pyTV.set("",true);pyOnLoai();}
+function pyOnLoai(){var C=pyCtx();if(pyv("pyDot")&&pyDots(C).indexOf(pyv("pyDot"))<0)S.dd.pyDot.set("",true);pyOnChange();}
+function pyNew(keep){S.pyma="";YF.forEach(function(f){if(f.id==="pyDA"||(keep&&f.id==="pyHD"))return;pyset(f.id,"");});pyOnChange();}
+function pyOpen(ma,silent,stay){var t=T("tbl_ThanhToan"),i=tRow("tbl_ThanhToan",ma),j,f;if(i<0){toast("Không tìm thấy chứng từ "+ma,"err");return;}
+ if(!stay){if(S.mod!==6)setMod(6);if(S.pytab!==1)pytab(1);}S.pyma=ma;
+ for(j=0;j<YF.length;j++){f=YF[j];pyset(f.id,t.g(i,f.col));}
+ pyOnChange();if(!silent)window.scrollTo(0,0);}
+function pySave(){var C=pyCtx(),R=pyCalc(C),V=pyValidate(C,R),isNew=!S.pyma,ma=isNew?nextMa("tbl_ThanhToan","TT"):S.pyma,data={},i,f,v;
+ if(V.E.length){pyOnChange();toast("Còn "+V.E.length+" lỗi – xem các ô viền đỏ","err");return;}
+ for(i=0;i<YF.length;i++){f=YF[i];v=pyv(f.id);if(!pyShow(f.id,C))v="";
+  if(f.k==="d")v=v?s2d(v):"";else if(f.k==="n")v=v===""?"":num(v);else if(f.k==="p")v=v===""?"":pnum(v)/100;else if(f.id==="pyHD"&&v)v="'"+v;
+  data[f.col]=v;}
+ if(isNew){data["Số chứng từ (tự sinh)"]=ma;data["Trạng thái dòng"]=S.HD;}
+ busy(true);
+ Excel.run(function(ctx){return writeRow(ctx,"tbl_ThanhToan",isNew?noRow:byMa(ma),data,isNew);})
+ .then(function(){S.pyma=ma;return loadAll();}).then(function(){fillLists();hRefresh();pyOpen(ma,true,true);toast((isNew?"Đã thêm chứng từ ":"Đã cập nhật chứng từ ")+ma,"ok");})["catch"](fail).then(function(){busy(false);});}
+function pyCancel(){if(!S.pyma)return;var ma=S.pyma;
+ ask("Hủy chứng từ "+ma+"?","Chứng từ sẽ được đánh dấu '"+S.HUY+"' (không xóa hẳn). Lưu ý: đợt của chứng từ đã hủy vẫn được tính là đã dùng khi kiểm tra trùng đợt.",function(){busy(true);
+  Excel.run(function(ctx){return writeRow(ctx,"tbl_ThanhToan",byMa(ma),{"Trạng thái dòng":S.HUY},false);})
+  .then(function(){return loadAll();}).then(function(){fillLists();S.pyma="";hRefresh();pyNew(true);toast("Đã đánh dấu hủy chứng từ "+ma,"ok");})["catch"](fail).then(function(){busy(false);});});}
+function pyBuild(){var g,i,h,bs;
+ for(g=1;g<=5;g++){h='<div class="grid">';for(i=0;i<YF.length;i++)if(YF[i].g===g)h+=pyfld(YF[i]);$("py"+g).innerHTML=h+"</div>";}
+ new DD("pyDA","Chọn dự án…",pyOnDA,1);new DD("pyHD","Chọn hợp đồng…",pyOnHD,1);new DD("pyLoai","Chọn loại thanh toán…",pyOnLoai);new DD("pyDot","Chọn đợt…",pyOnChange);new DD("pyTV","Chọn thành viên nhận tiền…",pyOnLoai,1);
+ bs=document.querySelectorAll("[data-pyacts]");for(i=0;i<bs.length;i++)bs[i].innerHTML='<button class="btn pri" data-a="pyluu">&#128190; LƯU</button><button class="btn sec2" data-a="pymoi" title="Chứng từ mới (giữ dự án và hợp đồng đang chọn)">&#10227; MỚI</button><button class="btn dan" data-a="pyhuy">&#128465; HỦY</button>';
+ $("tabsT").onclick=function(e){var t=e.target;while(t&&t.tagName!=="A")t=t.parentNode;if(t)pytab(+t.getAttribute("data-yt"));};
+ $("pyds").onclick=$("pyhist").onclick=function(e){var t=e.target;while(t&&t!==this&&!t.getAttribute("data-py2"))t=t.parentNode;if(t&&t!==this)pyOpen(t.getAttribute("data-py2"));};
+ document.body.addEventListener("click",function(e){var t=e.target;while(t&&t!==document.body&&!t.getAttribute("data-a"))t=t.parentNode;if(!t||t===document.body||t.disabled)return;var a=t.getAttribute("data-a");
+  if(a==="pyluu")pySave();else if(a==="pymoi")pyNew(true);else if(a==="pyhuy")pyCancel();});
+ document.body.addEventListener("input",function(e){var t=e.target,k=t&&t.getAttribute?t.getAttribute("data-py"):null;if(t&&t.id==="pytim"){pyRenderList();return;}if(k===null)return;
+  if(k==="n")fmtNum(t);if(t.id==="pyNgPD"&&s2d(t.value)&&$("pyTLGN").value==="")$("pyTLGN").value="100";pyOnChange();});}
+function pytab(n){S.pytab=n;var a=$("tabsT").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-yt")===n);for(i=1;i<=2;i++)cls($("pyp"+i),"on",i===n);if(OPEN)OPEN.close();pyModeTxt();if(n===2&&S.pyinit)pyHist();}
+function pyModeTxt(){if(S.mod!==6)return;$("mode").innerHTML=S.pytab===2?"Lịch sử thanh toán theo hợp đồng":(S.pyma?"&#9998; Đang sửa chứng từ · "+esc(S.pyma):"&#10133; Nhập chứng từ thanh toán mới");}
+function pyMode(){pytab(S.pytab||1);if(S.pyinit)pyOnChange();}
+function pyRefresh(){if(!S.dd.pyDA||!S.ready||!T("tbl_ThanhToan"))return;
+ if(!S.pyinit){S.pyinit=true;S.pyma="";pyNew();}else if(S.pyma&&tRow("tbl_ThanhToan",S.pyma)>=0)pyOpen(S.pyma,true,true);else{S.pyma="";pyOnChange();}}
 /* ---------- khoi dong ---------- */
-Office.onReady(function(){build();hBuild();uBuild();bBuild();plBuild();busy(true);
+Office.onReady(function(){build();hBuild();uBuild();bBuild();plBuild();pyBuild();busy(true);
  loadAll().then(function(){S.ready=true;fillLists();buildKM();newForm();hRefresh();})["catch"](function(e){fail(e);$("mode").innerHTML="Không đọc được dữ liệu – kiểm tra file đang mở có đúng bảng tbl_DuAn…";}).then(function(){busy(false);});});
 })();
 </script>
