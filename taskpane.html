@@ -175,14 +175,25 @@ body.mB .pb.on{display:block}
 #bds .c1,#bds2 .c1{width:40px}#bds .c3,#bds2 .c3{width:96px}
 #bReq b{color:#0d47a1}
 .tabs a .badge{background:#e53935;color:#fff;margin-left:5px}
+#tabsP{display:none}
+body.mP #tabs,body.mP #tabsH,body.mP #tabsU,body.mP #tabsB{display:none}
+body.mP #tabsP{display:flex}
+body.mP .pg.on,body.mP .ph.on,body.mP .pu.on,body.mP .pb.on{display:none}
+body.mP .lkmsg,body.mP .lkh{display:none!important}
+.pp{display:none}
+body.mP .pp.on{display:block}
+#plSum{flex-wrap:wrap;gap:4px 10px}
+#plds .c1,#plhist .c1{width:40px}
+#plMW .lh{display:flex;justify-content:space-between;align-items:center}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="ttl" id="ttl">&#128203; Quản lý dự án</div><div class="sub" id="mode">Đang tải dữ liệu…</div><div class="mods" id="mods"><a data-m="1" class="on">&#128203; Dự án</a><a data-m="2">&#128209; Hợp đồng</a><a data-m="3">&#127970; Đơn vị &amp; LD</a><a data-m="4">&#128737; Bảo lãnh</a></div><button class="rf" id="btnRf" title="Tải lại dữ liệu">&#10227;</button></div>
+<div class="hdr"><div class="ttl" id="ttl">&#128203; Quản lý dự án</div><div class="sub" id="mode">Đang tải dữ liệu…</div><div class="mods" id="mods"><a data-m="1" class="on">&#128203; Dự án</a><a data-m="2">&#128209; Hợp đồng</a><a data-m="3">&#127970; Đơn vị &amp; LD</a><a data-m="4">&#128737; Bảo lãnh</a><a data-m="5">&#128206; Phụ lục</a></div><button class="rf" id="btnRf" title="Tải lại dữ liệu">&#10227;</button></div>
 <div class="tabs" id="tabs"><a data-t="1" class="on">&#128221; Thông tin chung</a><a data-t="2">&#9878; Pháp lý &amp; tiến độ</a><a data-t="3">&#128176; Tổng mức đầu tư</a><a data-t="4">&#128202; Tổng quan</a></div>
 <div class="tabs" id="tabsH"><a data-h="1" class="on">&#128221; Thông tin</a><a data-h="2">&#128176; Giá trị và bảo hành</a><a data-h="3">&#128179; Tạm ứng &amp; Thanh toán</a><a data-h="4">&#128737; Bảo lãnh</a><a data-h="5">&#129309; Liên danh</a></div>
 <div class="tabs" id="tabsU"><a data-u="1" class="on">&#127970; Đơn vị</a><a data-u="2">&#129309; Liên danh</a></div>
 <div class="tabs" id="tabsB"><a data-bt="1" class="on">&#9997; Nhập thư bảo lãnh</a><a data-bt="2">&#9200; Theo dõi &amp; cảnh báo<span class="badge hide" id="bAl"></span></a></div>
+<div class="tabs" id="tabsP"><a data-pt="1" class="on">&#9997; Nhập phụ lục</a><a data-pt="2">&#128338; Lịch sử theo HĐ</a></div>
 <div class="body">
  <div class="pg on" id="pg1">
   <div class="card">
@@ -334,6 +345,34 @@ body.mB .pb.on{display:block}
     <div class="note">Giá trị hiện hành = tổng giá trị thư hiện hành của từng chuỗi (thư gia hạn để trống giá trị thì lấy theo thư trước trong chuỗi).</div>
    </div>
   </div>
+  <div class="pp on" id="pp1">
+   <div class="card">
+    <div class="info">&#128161; Chọn <b>Dự án</b> → <b>Hợp đồng</b>, nhập <b>Số phụ lục</b> và chọn <b>Loại điều chỉnh</b> – mục Tiến độ / Giá trị / Điều khoản hiện theo loại đã chọn (<b>Kết hợp</b> = hiện tất cả). Ô điều khoản để trống = giữ nguyên giá trị hiện hành.</div>
+    <div class="sec">Hợp đồng</div><div id="pl1"></div>
+    <div class="sumr hide" id="plSum"></div>
+    <div class="lkb" id="plLk">&#128274; Chọn Dự án và Hợp đồng để mở phần nhập phụ lục.</div>
+    <div class="sec" style="margin-top:6px">Thông tin phụ lục</div><div id="pl2"></div>
+    <div id="plS3"><div class="sec" style="margin-top:6px">&#9200; Điều chỉnh tiến độ</div><div id="pl3"></div><div class="note">Nhập số ngày gia hạn hoặc hạn HĐ mới – ô còn lại tự tính.</div></div>
+    <div id="plS4"><div class="sec" style="margin-top:6px">&#128176; Điều chỉnh giá trị</div><div id="pl4"></div>
+     <div id="plMW"><div class="lh" style="margin-top:4px"><b style="font-size:12px">Phân chia cho thành viên liên danh</b><a class="lnk" data-a="plchia">&#8644; Chia theo tỷ lệ</a></div><div id="plmem"></div><div class="note">Tổng các thành viên phải bằng giá trị điều chỉnh. Lưu vào bảng tbl_PhuLucTV.</div></div></div>
+    <div id="plS5"><div class="sec" style="margin-top:6px">&#128179; Tạm ứng, thanh toán &amp; bảo hành mới</div><div id="pl5"></div><div class="sec" style="margin-top:6px">&#128737; Bảo lãnh mới</div><div id="pl6"></div><div class="note" id="plS5n"></div></div>
+    <div class="btns" data-placts="1" style="margin-top:12px"></div>
+   </div>
+   <div class="card"><div class="chkh" id="plchkH"></div><div class="chk" id="plchkL"></div></div>
+   <div class="card">
+    <div class="lh"><b>&#128206; Phụ lục hợp đồng</b><span class="badge" id="plcnt">0</span><input class="t search" id="pltim" placeholder="&#128269; Tìm số PL, nội dung…"></div>
+    <div class="tbl"><div class="tr th"><div class="c1">STT</div><div class="c2">Số PL · Loại · Ngày ký</div><div class="c3">Trạng thái</div></div><div class="tbody" id="plds"></div></div>
+    <div class="note" id="pldsN"></div>
+   </div>
+  </div>
+  <div class="pp" id="pp2">
+   <div class="card"><div class="lh"><b>&#128202; Tổng hợp hợp đồng</b></div><div id="plkpi"></div></div>
+   <div class="card">
+    <div class="lh"><b>&#128338; Lịch sử điều chỉnh</b></div>
+    <div class="tbl"><div class="tr th"><div class="c1">#</div><div class="c2">Phụ lục · giá trị · hạn</div><div class="c3">Trạng thái</div></div><div class="tbody" id="plhist"></div></div>
+    <div class="note">Lũy kế bỏ qua phụ lục "Không duyệt" và phụ lục đã hủy. Bấm một dòng để mở phụ lục.</div>
+   </div>
+  </div>
 </div>
 <div id="toast"></div>
 <div id="busy"><i></i></div>
@@ -341,8 +380,8 @@ body.mB .pb.on{display:block}
 <script>
 (function(){
 "use strict";
-var TBLS=["tbl_DuAn","tbl_TMDT","tbl_KhoanMuc","tbl_GoiThau","tbl_HopDong","tbl_PhuLuc","tbl_NghiemThu","tbl_ThanhToan","tbl_DieuKhoanTU","tbl_BaoLanh","tbl_NhaThau","tbl_LienDanh","tbl_ThanhVienLD"];
-var LSTS=["lst_NhomDA","lst_NguonVon","lst_GiaiDoan","lst_TrangThaiDong","lst_ThueVAT","lst_PhienBanTMDT","lst_HinhThucNT","lst_LoaiHD","lst_TrangThaiHD","lst_DangBH","lst_CanCuTU","lst_CanCuBLTH","lst_CanCuBLTU2","lst_CanCuBH","lst_PTThanhToanLD","lst_VaiTroLD","lst_TrangThaiNT","lst_NghiemThuLD","lst_LoaiBL","lst_HinhThucBL","lst_TrangThaiBL"];
+var TBLS=["tbl_DuAn","tbl_TMDT","tbl_KhoanMuc","tbl_GoiThau","tbl_HopDong","tbl_PhuLuc","tbl_NghiemThu","tbl_ThanhToan","tbl_DieuKhoanTU","tbl_BaoLanh","tbl_NhaThau","tbl_LienDanh","tbl_ThanhVienLD","tbl_PhuLucTV"];
+var LSTS=["lst_NhomDA","lst_NguonVon","lst_GiaiDoan","lst_TrangThaiDong","lst_ThueVAT","lst_PhienBanTMDT","lst_HinhThucNT","lst_LoaiHD","lst_TrangThaiHD","lst_DangBH","lst_CanCuTU","lst_CanCuBLTH","lst_CanCuBLTU2","lst_CanCuBH","lst_PTThanhToanLD","lst_VaiTroLD","lst_TrangThaiNT","lst_NghiemThuLD","lst_LoaiBL","lst_HinhThucBL","lst_TrangThaiBL","lst_LoaiPL","lst_TrangThaiPL"];
 var NEWPB="(+ Thêm phiên bản mới)";
 var S={T:{},L:{},km:[],ma:"",tm:false,HD:"Hoạt động",HUY:"Đã hủy",dd:{},ready:false,open:null};
 var LK=["nhom","nv","dd","gd","tt","soqd","ngqd","kc","ht"];
@@ -779,8 +818,8 @@ function hBuild(){var i,f,acts;
  document.body.addEventListener("click",function(e){var t=e.target;while(t&&t!==document.body&&!t.getAttribute("data-a"))t=t.parentNode;if(!t||t===document.body||t.disabled)return;var a=t.getAttribute("data-a");
   if(a==="hluu")hSave();else if(a==="hmoi")hNew();else if(a==="hhuy")hCancel();else if(a==="haddm")memAdd();else if(a==="hdelm")memDel(+t.getAttribute("data-i"));});
  document.body.addEventListener("input",function(e){var t=e.target,k=t.getAttribute("data-h");if(t.id==="htim"){hRenderList();return;}if(k===null)return;if(k==="n")fmtNum(t);hOnChange();});}
-function setMod(n){S.mod=n;cls(document.body,"mH",n===2);cls(document.body,"mU",n===3);cls(document.body,"mB",n===4);var a=$("mods").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-m")===n);
- $("ttl").innerHTML=n===4?"&#128737; Theo dõi bảo lãnh":n===3?"&#127970; Đơn vị &amp; liên danh":n===2?"&#128209; Quản lý hợp đồng":"&#128203; Quản lý dự án";if(OPEN)OPEN.close();if(n===4)bMode();else if(n===3)uMode();else if(n===2)hOnChange();else onChange();}
+function setMod(n){S.mod=n;cls(document.body,"mH",n===2);cls(document.body,"mU",n===3);cls(document.body,"mB",n===4);cls(document.body,"mP",n===5);var a=$("mods").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-m")===n);
+ $("ttl").innerHTML=n===5?"&#128206; Phụ lục hợp đồng":n===4?"&#128737; Theo dõi bảo lãnh":n===3?"&#127970; Đơn vị &amp; liên danh":n===2?"&#128209; Quản lý hợp đồng":"&#128203; Quản lý dự án";if(OPEN)OPEN.close();if(n===5)plMode();else if(n===4)bMode();else if(n===3)uMode();else if(n===2)hOnChange();else onChange();}
 function htab(n){S.htab=n;var a=$("tabsH").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-h")===n);for(i=1;i<=5;i++)cls($("ph"+i),"on",i===n);if(OPEN)OPEN.close();}
 /* tra cuu */
 function act(t,r){var c=t.h.indexOf("Trạng thái dòng");return c<0||t.v[r][c]!==S.HUY;}
@@ -802,7 +841,7 @@ function hLists(){var t,i,a=[],c,d,m;
  S.dd.hNT.setItems(a);}
 function hFill(){var i,f;for(i=0;i<HF.length;i++){f=HF[i];if(f.k==="vat")S.dd[f.id].setItems((S.L.lst_ThueVAT||[]).map(vatTxt));else if(f.k==="dd"&&f.ls)S.dd[f.id].setItems(S.L[f.ls]||[]);else if(f.k==="dd"&&f.opt)S.dd[f.id].setItems(f.opt);}
  S.dd.hAddVT.setItems(S.L.lst_VaiTroLD||[]);hLists();}
-function hRefresh(){uRefresh();bRefresh();if(!S.dd.hDA)return;hFill();if(!S.hinit){S.hinit=true;hNew();return;}if(S.hma&&hRow(S.hma)>=0)hOpen(S.hma,true);else if(S.hma)hNew();else hOnChange();}
+function hRefresh(){uRefresh();bRefresh();plRefresh();if(!S.dd.hDA)return;hFill();if(!S.hinit){S.hinit=true;hNew();return;}if(S.hma&&hRow(S.hma)>=0)hOpen(S.hma,true);else if(S.hma)hNew();else hOnChange();}
 function hNew(){var i;S.hma="";S.hload=true;S.dro={};S.tt0="";S.td0="";S.hdef=false;for(i=0;i<HF.length;i++){if(HF[i].k!=="ro")hset(HF[i].id,"");else hro(HF[i].id,"");}
   if(S.ma){var r=rowDA(S.ma);if(r>=0&&act(T("tbl_DuAn"),r))hset("hDA",T("tbl_DuAn").g(r,"Tên dự án"));}
   hLists();S.hgt=hv("hGT");S.hld="";S.mem=[];memRender();S.hload=false;htab(1);hOnChange();}
@@ -1409,8 +1448,193 @@ function bRefresh(){if(!S.dd.bDA||!S.ready||!BL())return;var bl=$("bNHl"),b=bBan
  S.dd.bfDA.setItems(["Tất cả dự án"].concat(bDAs()));S.dd.bfTT.setItems(["Tất cả"].concat(BTT));S.dd.bfDA.set(f||"Tất cả dự án",true);S.dd.bfTT.set(g||"Tất cả",true);
  for(i=0;i<b.length;i++)h+='<option value="'+esc(b[i])+'">';bl.innerHTML=h;
  if(!S.binit){S.binit=true;bNew();}else if(S.bma&&tRow("tbl_BaoLanh",S.bma)>=0)bOpen(S.bma,true);else{S.bma="";bOnChange();}bTrack();}
+/* ---------- phu luc hop dong ---------- */
+var PL_GT="Giá trị hợp đồng",PL_TD="Tiến độ",PL_DK="Điều khoản",PL_KH="Kết hợp",PL_KD="Không duyệt",PL_DK2="Đã ký",PL_DT="Đang trình";
+S.pma="";S.pinit=false;S.ptab=1;S.pm=[];S.pmK="";
+var PF=[
+ {id:"plDA",col:"Tên dự án",lb:"Dự án",k:"dd",req:1,w:1,g:1},
+ {id:"plHD",col:"Số hợp đồng",lb:"Số hợp đồng",k:"dd",req:1,w:1,g:1},
+ {id:"plNT",lb:"Nhà thầu",k:"ro",w:1,g:1},
+ {id:"plSo",col:"Số phụ lục",lb:"Số phụ lục",k:"t",req:1,g:2},
+ {id:"plNgay",col:"Ngày ký",lb:"Ngày ký",k:"d",req:1,g:2},
+ {id:"plLoai",col:"Loại điều chỉnh",lb:"Loại điều chỉnh",k:"dd",req:1,g:2},
+ {id:"plTT",col:"Trạng thái",lb:"Trạng thái",k:"dd",req:1,g:2},
+ {id:"plND",col:"Nội dung tóm tắt điều chỉnh",lb:"Nội dung tóm tắt điều chỉnh",k:"ta",req:1,w:1,g:2},
+ {id:"plCC",col:"Căn cứ / QĐ phê duyệt",lb:"Căn cứ / QĐ phê duyệt",k:"t",w:1,g:2},
+ {id:"plLD",col:"Lý do điều chỉnh",lb:"Lý do điều chỉnh",k:"ta",w:1,g:2},
+ {id:"plHan0",lb:"Hạn HĐ trước phụ lục",k:"ro",g:3},
+ {id:"plGH",col:"Gia hạn (ngày)",lb:"Gia hạn (ngày, âm = rút ngắn)",k:"s",g:3},
+ {id:"plHan",lb:"Hạn HĐ sau phụ lục",k:"d",g:3},
+ {id:"plGT",col:"Giá trị điều chỉnh trước thuế (VNĐ)",lb:"GT điều chỉnh trước thuế (VNĐ, âm = giảm)",k:"s",w:1,g:4},
+ {id:"plDCT",col:"Điều chỉnh thuế",lb:"Điều chỉnh thuế suất",k:"dd",g:4},
+ {id:"plVAT",col:"Thuế suất VAT",lb:"Thuế suất VAT",k:"dd",g:4},
+ {id:"plTV",col:"Tiền VAT (VNĐ)",lb:"Tiền VAT (VNĐ)",k:"ro",g:4},
+ {id:"plGS",lb:"GT điều chỉnh sau thuế (VNĐ)",k:"ro",g:4},
+ {id:"plGTT",col:"Giá trị thực điều chỉnh trước thuế (VNĐ)",lb:"GT thực điều chỉnh trước thuế (VNĐ)",k:"s",w:1,g:4,on:"Áp dụng giá trị HĐ thực"},
+ {id:"plR1",col:"Tỷ lệ phí mới",lb:"Tỷ lệ phí mới (%)",k:"p",g:5,hc:"Tỷ lệ phí",on:"Áp dụng giá trị HĐ thực"},
+ {id:"plR2",col:"Tỷ lệ tạm ứng mới",lb:"Tỷ lệ tạm ứng mới (%)",k:"p",g:5,hc:"Tỷ lệ tạm ứng",on:"Áp dụng tạm ứng"},
+ {id:"plR3",col:"Tỷ lệ thanh toán vật tư mới",lb:"Tỷ lệ TT vật tư mới (%)",k:"p",g:5,hc:"Tỷ lệ thanh toán vật tư",on:"Áp dụng thanh toán vật tư"},
+ {id:"plR4",col:"Tỷ lệ thanh toán theo đợt mới",lb:"Tỷ lệ TT theo đợt mới (%)",k:"p",g:5,hc:"Tỷ lệ thanh toán theo đợt",on:"Áp dụng thanh toán"},
+ {id:"plR5",col:"Tỷ lệ quyết toán mới",lb:"Tỷ lệ quyết toán mới (%)",k:"p",g:5,hc:"Tỷ lệ quyết toán",on:"Áp dụng thanh toán"},
+ {id:"plR6",col:"Tỷ lệ bảo hành mới",lb:"Tỷ lệ bảo hành mới (%)",k:"p",g:5,hc:"Tỷ lệ bảo hành",on:"Yêu cầu bảo hành"},
+ {id:"plB1",col:"Giá trị BL thực hiện HĐ mới (VNĐ)",lb:"GT BL thực hiện HĐ mới (VNĐ)",k:"n",g:6,hc:"Giá trị BL thực hiện HĐ (VNĐ)",on:"Yêu cầu BL thực hiện HĐ"},
+ {id:"plB2",col:"Số ngày hiệu lực BL thực hiện HĐ mới (ngày)",lb:"Hiệu lực BL THHĐ mới (ngày)",k:"n",g:6,hc:"Số ngày hiệu lực BL thực hiện HĐ (ngày)",on:"Yêu cầu BL thực hiện HĐ"},
+ {id:"plB3",col:"Giá trị BL tạm ứng mới (VNĐ)",lb:"GT BL tạm ứng mới (VNĐ)",k:"n",g:6,hc:"Giá trị BL tạm ứng (VNĐ)",on:"Yêu cầu BL tạm ứng"},
+ {id:"plB4",col:"Số ngày hiệu lực BL tạm ứng mới (ngày)",lb:"Hiệu lực BL tạm ứng mới (ngày)",k:"n",g:6,hc:"Số ngày hiệu lực BL tạm ứng (ngày)",on:"Yêu cầu BL tạm ứng"},
+ {id:"plB5",col:"Giá trị BL bảo hành mới (VNĐ)",lb:"GT BL bảo hành mới (VNĐ)",k:"n",g:6,hc:"Giá trị BL bảo hành (VNĐ)",on:"Yêu cầu BL bảo hành"},
+ {id:"plB6",col:"Thời gian hiệu lực BL bảo hành mới (tháng)",lb:"Hiệu lực BL bảo hành mới (tháng)",k:"n",g:6,hc:"Thời gian hiệu lực BL bảo hành (tháng)",on:"Yêu cầu BL bảo hành"}];
+function plfld(f){var h='<div class="f'+(f.w?" w":"")+'" id="f_'+f.id+'"><label>'+esc(f.lb)+(f.req?'<span class="req">*</span>':"")+"</label>",nm=f.k==="n"||f.k==="s"||f.k==="p";
+ if(f.k==="dd")h+='<div id="'+f.id+'"></div>';
+ else if(f.k==="ta")h+='<textarea class="t" id="'+f.id+'" rows="2" data-pl="1"></textarea>';
+ else if(f.k==="ro")h+='<input class="t" id="'+f.id+'" readonly tabindex="-1">';
+ else h+='<input class="t'+(nm?" num":"")+'" id="'+f.id+'" data-pl="'+(f.k==="n"||f.k==="s"?f.k:"1")+'"'+(f.k==="d"?' placeholder="dd/mm/yyyy" maxlength="10"':"")+(nm?' inputmode="decimal" autocomplete="off"':"")+">";
+ return h+'<div class="msg" id="m_'+f.id+'"></div><div class="wn" id="w_'+f.id+'"></div></div>';}
+function plv(id){var f=xf(PF,id),e;if(f&&f.k==="dd")return S.dd[id]?S.dd[id].get():"";e=$(id);return e?trim(e.value):"";}
+function plset(id,v){var f=xf(PF,id),e;if(!f)return;if(f.k==="dd"){S.dd[id].set(v==null?"":String(v),true);return;}e=$(id);if(!e)return;
+ if(f.k==="d")e.value=d2s(v);else if(f.k==="n"||f.k==="s")e.value=typeof v==="number"?(v?fmt(v):"0"):String(v==null?"":v);else if(f.k==="p")e.value=typeof v==="number"?p2s(v):String(v==null?"":v);else e.value=v==null?"":String(v);}
+function plSgn(el){var s=trim(el.value);if(s===""||s==="-")return;var v=num(s);el.value=v?fmt(v):(/^-?0+$/.test(s.replace(/[,\.\s]/g,""))?"0":"");}
+function plT(){return T("tbl_PhuLuc");}
+function plg(i,col){var t=plT(),c=t.h.indexOf(col);return c<0?"":t.v[i][c];}
+function plMaDA(){return String(bFind("tbl_DuAn","Tên dự án",plv("plDA"),"Mã DA (tự sinh)"));}
+function plHDs(){var t=T("tbl_HopDong"),m=plMaDA(),cD=t.c("Mã DA"),cS=t.c("Số hợp đồng"),a=[],i;if(!m)return a;for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&String(t.v[i][cD])===m&&act(t,i)&&a.indexOf(String(t.v[i][cS]))<0)a.push(String(t.v[i][cS]));return a;}
+function plHDr(){var t=T("tbl_HopDong"),m=plMaDA(),s=plv("plHD"),cD=t.c("Mã DA"),cS=t.c("Số hợp đồng"),i;if(!m||!s)return -1;for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&String(t.v[i][cD])===m&&String(t.v[i][cS])===s&&act(t,i))return i;return -1;}
+function plHDma(){var r=plHDr();return r<0?"":String(T("tbl_HopDong").v[r][0]);}
+function plYes(r,col){return r>=0&&String(hdg(r,col))==="Có";}
+function plHas(t){var l=plv("plLoai");return l===PL_KH||l===t;}
+function plShow(id){var f=xf(PF,id);if(f&&f.on)return plYes(plHDr(),f.on);return true;}
+function plRows(hd,excl){var t=plT(),o=[],i;if(!t||!hd)return o;for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&String(t.v[i][0])!==excl&&act(t,i)&&String(plg(i,"Mã HĐ"))===hd)o.push(i);
+ o.sort(function(a,b){return (Number(plg(a,"Ngày ký"))||0)-(Number(plg(b,"Ngày ký"))||0);});return o;}
+function plBase(r,hd,d){var o={gt:Number(hdg(r,"Giá trị HĐ ban đầu sau thuế (VNĐ)"))||0,han:Number(hdg(r,"Hạn HĐ ban đầu"))||0,n:0},a=plRows(hd,S.pma),i,k;
+ for(k=0;k<a.length;k++){i=a[k];if(String(plg(i,"Trạng thái"))===PL_KD)continue;if(d&&(Number(plg(i,"Ngày ký"))||0)>d)continue;o.gt+=Number(plg(i,"Giá trị điều chỉnh sau thuế (VNĐ)"))||0;if(o.han)o.han+=Number(plg(i,"Gia hạn (ngày)"))||0;o.n++;}return o;}
+function plCur(r,hd,f,d){var a=plRows(hd,S.pma),i,k,v,best=null;for(k=0;k<a.length;k++){i=a[k];if(String(plg(i,"Trạng thái"))===PL_KD)continue;if(d&&(Number(plg(i,"Ngày ký"))||0)>d)continue;v=plg(i,f.col);if(v!==""&&v!=null)best={v:v,so:String(plg(i,"Số phụ lục"))};}return best||{v:hdg(r,f.hc),so:""};}
+function plVatCur(r,hd,d){var a=plRows(hd,S.pma),i,k,v=hdg(r,"Thuế suất VAT");for(k=0;k<a.length;k++){i=a[k];if(String(plg(i,"Trạng thái"))===PL_KD||String(plg(i,"Điều chỉnh thuế"))!=="Có")continue;if(d&&(Number(plg(i,"Ngày ký"))||0)>d)continue;if(plg(i,"Thuế suất VAT")!=="")v=plg(i,"Thuế suất VAT");}return v;}
+function plVatLock(){var r=plHDr(),c;if(!plv("plDCT"))S.dd.plDCT.set("Không",true);if(r<0)return;c=vatTxt(plVatCur(r,plHDma(),s2d(plv("plNgay"))));if(plv("plDCT")!=="Có")S.dd.plVAT.set(c,true);else if(!plv("plVAT"))S.dd.plVAT.set(c,true);}
+function plMems(r,hd){var t=T("tbl_ThanhVienLD"),ld,cL,cH,cN,cV,cR,i,m,own=[],any=[];if(r<0||!t||String(hdg(r,"Hình thức nhà thầu"))!=="Liên danh"||!plYes(r,"Phân chia LD"))return [];
+ ld=String(hdg(r,"Mã NT / LD"));cL=t.c("Mã LD");cH=t.c("Mã HĐ");cN=t.c("Tên nhà thầu");cV=t.c("Vai trò");cR=t.c("Tỷ lệ giá trị");
+ for(i=0;i<t.v.length;i++){if(!String(t.v[i][0])||!act(t,i)||String(t.v[i][cL])!==ld)continue;m={ma:String(t.v[i][0]),ten:String(t.v[i][cN]),vt:String(t.v[i][cV]),tl:Number(t.v[i][cR])||0,gt:"",gtt:""};any.push(m);if(String(t.v[i][cH])===hd)own.push(m);}
+ return own.length?own:any;}
+function plTVrows(ma){var t=T("tbl_PhuLucTV"),o=[],cP,i;if(!t||!ma)return o;cP=t.c("Mã PL");for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&act(t,i)&&String(t.v[i][cP])===ma)o.push(i);return o;}
+function plMemSync(r,hd){var key=hd+"|"+(S.pma||""),a,t=T("tbl_PhuLucTV"),ex,i,j;if(S.pmK===key)return;S.pmK=key;a=plMems(r,hd);ex=plTVrows(S.pma);
+ for(i=0;i<a.length;i++)for(j=0;j<ex.length;j++)if(String(t.g(ex[j],"Mã TV"))===a[i].ma){a[i].gt=t.g(ex[j],"GT điều chỉnh TV trước thuế (VNĐ)");a[i].gtt=t.g(ex[j],"GT thực điều chỉnh TV trước thuế (VNĐ)");}
+ for(i=0;i<a.length;i++){a[i].gt=typeof a[i].gt==="number"?(a[i].gt?fmt(a[i].gt):"0"):"";a[i].gtt=typeof a[i].gtt==="number"?(a[i].gtt?fmt(a[i].gtt):"0"):"";}
+ S.pm=a;plMemRender();}
+function plMemRender(){var h="",i,m,th=plYes(plHDr(),"Áp dụng giá trị HĐ thực");for(i=0;i<S.pm.length;i++){m=S.pm[i];
+ h+='<div class="lmr"><div class="no">'+(i+1)+'</div><div class="nm"><b title="'+esc(m.ten)+'">'+esc(m.ten)+"</b><span>"+esc(m.vt)+(m.tl?" · tỷ lệ "+pct(m.tl):"")+'</span></div><div class="vt"><input class="t num" data-pm="'+i+'" data-pk="gt" value="'+esc(m.gt)+'" placeholder="GT điều chỉnh trước thuế" autocomplete="off">'+(th?'<input class="t num" style="margin-top:4px" data-pm="'+i+'" data-pk="gtt" value="'+esc(m.gtt)+'" placeholder="GT thực điều chỉnh" autocomplete="off">':"")+"</div></div>";}
+ $("plmem").innerHTML=h;}
+function plSplit(){var g=num(plv("plGT")),gt=num(plv("plGTT")),n=S.pm.length,i,a=0,b=0,x,y,tl=0;if(!n)return;for(i=0;i<n;i++)tl+=S.pm[i].tl;if(!tl){toast("Thành viên chưa có tỷ lệ giá trị","err");return;}
+ for(i=0;i<n;i++){if(i<n-1){x=Math.round(g*S.pm[i].tl/tl);y=Math.round(gt*S.pm[i].tl/tl);a+=x;b+=y;}else{x=g-a;y=gt-b;}S.pm[i].gt=x?fmt(x):"0";S.pm[i].gtt=y?fmt(y):"0";}plMemRender();plOnChange();}
+function plCalc(){var r=plHDr(),hd=plHDma(),d=s2d(plv("plNgay")),B=r>=0?plBase(r,hd,d):null,gt=num(plv("plGT")),vat=vatNum(plv("plVAT")),tv=Math.round(gt*vat),gs=gt+tv,on=plv("plTT")!==PL_KD,gh=num(plv("plGH"));
+ if(!plHas(PL_GT)){gt=0;tv=0;gs=0;}if(!plHas(PL_TD))gh=0;
+ $("plTV").value=gt?fmt(tv):"";$("plGS").value=gt?fmt(gs):"";$("plHan0").value=B&&B.han?d2s(B.han):"";
+ return {r:r,hd:hd,d:d,B:B,gt:gt,tv:tv,gs:gs,gh:gh,lk:B?B.gt+(on?gs:0):0,han:B&&B.han?B.han+(on?gh:0):0};}
+function plLock(on){var i,f,m;for(i=0;i<PF.length;i++){f=PF[i];if(f.g===1||f.k==="ro")continue;if(f.k==="dd")S.dd[f.id].disable(!on||(f.id==="plVAT"&&plv("plDCT")!=="Có"));else $(f.id).disabled=!on;}
+ cls($("plLk"),"hide",on);m=document.querySelectorAll("[data-pm]");for(i=0;i<m.length;i++)m[i].disabled=!on;}
+function plValidate(C){var E=[],W=[],ok=[],i,f,x,k,sum,sumt,nd,t=plT(),hd=C.hd,r=C.r,so=lowT(plv("plSo")),loai=plv("plLoai");
+ function bad(id,m){E.push({id:id,m:m});}function warn(id,m){W.push({id:id,m:m});}
+ for(i=0;i<PF.length;i++){f=PF[i];if(f.req&&!plv(f.id))bad(f.id,"Bắt buộc nhập "+f.lb.toLowerCase());}
+ if(plv("plDA")&&!plMaDA())bad("plDA","Dự án không còn trong danh sách");
+ if(plv("plHD")&&r<0)bad("plHD","Hợp đồng không thuộc dự án đã chọn");
+ if(r>=0&&String(hdg(r,"Trạng thái HĐ"))==="Đã thanh lý")warn("plHD","Hợp đồng đã thanh lý");
+ if(so&&hd)for(i=0;i<t.v.length;i++)if(String(t.v[i][0])&&String(t.v[i][0])!==S.pma&&act(t,i)&&String(plg(i,"Mã HĐ"))===hd&&lowT(plg(i,"Số phụ lục"))===so)bad("plSo","Số phụ lục đã có trong HĐ ("+t.v[i][0]+")");
+ if(plv("plNgay")&&!C.d)bad("plNgay","Ngày không hợp lệ (dd/mm/yyyy)");
+ if(C.d&&r>=0){nd=Number(hdg(r,"Ngày ký"))||0;if(nd&&C.d<nd)bad("plNgay","Ngày ký phụ lục trước ngày ký HĐ ("+d2s(nd)+")");if(C.d>today())warn("plNgay","Ngày ký sau ngày hôm nay");}
+ if(plHas(PL_TD)){if(!C.gh)bad("plGH","Nhập số ngày gia hạn hoặc hạn HĐ sau phụ lục");if(plv("plHan")&&!s2d(plv("plHan")))bad("plHan","Ngày không hợp lệ (dd/mm/yyyy)");
+  if(C.B&&!C.B.han)warn("plGH","HĐ chưa có hạn ban đầu – không tính được hạn mới");if(C.gh<0)warn("plGH","Rút ngắn "+(0-C.gh)+" ngày");}
+ if(plHas(PL_GT)){if(!plv("plGT"))bad("plGT","Nhập giá trị điều chỉnh (0 nếu chỉ thay thế hạng mục, âm nếu giảm)");else if(!C.gt)warn("plGT","Giá trị điều chỉnh bằng 0 – giá trị HĐ không đổi");
+  if(!plv("plVAT"))bad("plVAT","Chọn thuế suất VAT");if(C.B&&C.lk<0)bad("plGT","Giá trị HĐ sau phụ lục bị âm");
+  x=r>=0?Number(hdg(r,"Giá gói thầu sau thuế (VNĐ)"))||0:0;if(x&&C.lk>x)warn("plGT","GT HĐ sau PL "+fmt(C.lk)+" đ vượt giá gói thầu "+fmt(x)+" đ");
+  if(plShow("plGTT")&&!plv("plGTT")&&C.gt)warn("plGTT","HĐ áp dụng giá trị thực – nên nhập GT thực điều chỉnh");
+  if(S.pm.length){sum=0;sumt=0;for(i=0;i<S.pm.length;i++){sum+=num(S.pm[i].gt);sumt+=num(S.pm[i].gtt);}
+   if(sum!==C.gt)bad("plGT","Tổng phân chia thành viên "+fmt0(sum)+" đ ≠ GT điều chỉnh "+fmt0(C.gt)+" đ");else if(C.gt)ok.push("Phân chia thành viên khớp "+fmt(sum)+" đ");
+   if(plShow("plGTT")&&sumt!==num(plv("plGTT")))bad("plGTT","Tổng GT thực thành viên "+fmt0(sumt)+" đ ≠ "+fmt0(num(plv("plGTT")))+" đ");}}
+ if(plHas(PL_DK)){k=0;for(i=0;i<PF.length;i++){f=PF[i];if((f.g!==5&&f.g!==6)||!plShow(f.id)||!plv(f.id))continue;k++;
+   if(f.k==="p"){x=pnum(plv(f.id));if(x===null||x<0||x>100)bad(f.id,"Tỷ lệ phải từ 0 đến 100%");}else if(num(plv(f.id))<=0)bad(f.id,"Phải lớn hơn 0");}
+  if(loai===PL_DK&&!k)bad("plLoai","Phụ lục điều khoản: nhập ít nhất 1 điều khoản mới (tỷ lệ hoặc bảo lãnh)");else if(k)ok.push(k+" điều khoản được điều chỉnh");}
+ if(plv("plTT")===PL_KD)warn("plTT","Không duyệt – không tính vào giá trị và hạn HĐ lũy kế");
+ if(!E.length)ok.unshift("Thông tin phụ lục hợp lệ");
+ if(C.B&&plHas(PL_GT))ok.push("GT HĐ sau PL: "+fmt0(C.lk)+" đ");if(C.han&&plHas(PL_TD))ok.push("Hạn HĐ sau PL: "+d2s(C.han));
+ return {E:E,W:W,ok:ok};}
+function plSumBox(C){var e=$("plSum"),g0,dp;if(!C.B){cls(e,"hide",true);return;}cls(e,"hide",false);g0=Number(hdg(C.r,"Giá trị HĐ ban đầu sau thuế (VNĐ)"))||0;dp=g0?(C.lk/g0-1):0;
+ e.innerHTML="<span>GT HĐ: <b>"+fmt0(C.B.gt)+"</b> → <b>"+fmt0(C.lk)+"</b> đ"+(g0?" ("+(dp>=0?"+":"")+(Math.round(dp*1e4)/100)+"% so ban đầu)":"")+"</span><span>Hạn: <b>"+(C.B.han?d2s(C.B.han):"-")+"</b> → <b>"+(C.han?d2s(C.han):"-")+"</b> · đã có "+C.B.n+" PL</span>";}
+function plOnChange(){if(!S.ready||!S.pinit||!plT())return;var C,R,i,f,e,r,hd,cv,n5=0;plItems();plVatLock();C=plCalc();r=C.r;hd=C.hd;
+ $("plNT").value=r>=0?String(hdg(r,"Tên nhà thầu")):"";
+ if(document.activeElement!==$("plHan"))$("plHan").value=C.gh&&C.B&&C.B.han?d2s(C.B.han+C.gh):"";
+ plMemSync(r,hd);
+ cls($("plS3"),"hide",!plHas(PL_TD));cls($("plS4"),"hide",!plHas(PL_GT));cls($("plS5"),"hide",!plHas(PL_DK));cls($("plMW"),"hide",!S.pm.length);
+ for(i=0;i<PF.length;i++){f=PF[i];e=$("f_"+f.id);if(e)cls(e,"hide",!plShow(f.id));
+  if(f.g===5||f.g===6){if(plShow(f.id))n5++;if(r>=0){cv=plCur(r,hd,f,C.d);$(f.id).placeholder="Hiện hành: "+(f.k==="p"?(pct(cv.v)||"-"):fmt0(cv.v))+(cv.so?" · PL "+cv.so:"");}else $(f.id).placeholder="";}}
+ $("plS5n").innerHTML=r>=0&&!n5?"Hợp đồng không áp dụng tạm ứng, thanh toán, bảo hành hay bảo lãnh – không có điều khoản để điều chỉnh.":"Để trống = giữ nguyên giá trị hiện hành (ghi ở ô mờ).";
+ plLock(!!S.pma||r>=0);
+ R=plValidate(C);xshow(PF,R.E,R.W);xchk(R.E,R.W,R.ok,"plchkH","plchkL");plSumBox(C);
+ xbtn("plluu",R.E.length>0);xbtn("plhuy",!S.pma);plModeTxt();plRenderList();if(S.ptab===2)plHist();return R.E;}
+function plItems(){S.dd.plDA.setItems(bDAs());S.dd.plHD.setItems(plHDs());}
+function plOnDA(){if(plHDs().indexOf(plv("plHD"))<0)S.dd.plHD.set("",true);plOnHD();}
+function plOnHD(){S.pmK="";S.dd.plVAT.set("",true);plOnChange();}
+function plPill(s){var c=s===PL_DK2?"p-ok":s===PL_KD?"p-no":"p-wa";return '<span class="pill '+c+'">'+esc(s||"-")+"</span>";}
+function plRenderList(){var t=plT(),hd=plHDma(),da=plMaDA(),q=lowT($("pltim").value),h="",n=0,i,g,gh,id,a=[];if(!t)return;
+ for(i=0;i<t.v.length;i++){id=String(t.v[i][0]);if(!id||!act(t,i))continue;if(hd&&String(plg(i,"Mã HĐ"))!==hd)continue;if(!hd&&da&&String(plg(i,"Mã DA"))!==da)continue;
+  if(q&&lowT(plg(i,"Số phụ lục")+" "+plg(i,"Số hợp đồng")+" "+plg(i,"Nội dung tóm tắt điều chỉnh")+" "+plg(i,"Loại điều chỉnh")).indexOf(q)<0)continue;a.push(i);}
+ a.sort(function(x,y){var p=String(plg(x,"Số hợp đồng")),q2=String(plg(y,"Số hợp đồng"));return p<q2?-1:p>q2?1:(Number(plg(x,"Ngày ký"))||0)-(Number(plg(y,"Ngày ký"))||0);});
+ for(n=0;n<a.length;n++){i=a[n];id=String(t.v[i][0]);g=Number(plg(i,"Giá trị điều chỉnh sau thuế (VNĐ)"))||0;gh=Number(plg(i,"Gia hạn (ngày)"))||0;
+  h+='<div class="tr" data-pl2="'+esc(id)+'" style="cursor:pointer'+(id===S.pma?";background:#e3f2fd":"")+'"><div class="c1">'+(n+1)+'</div><div class="c2"><b>PL '+esc(plg(i,"Số phụ lục"))+"</b> · "+esc(plg(i,"Loại điều chỉnh"))+" · "+esc(d2s(plg(i,"Ngày ký")))+"<br><small>"+(hd?"":"HĐ "+esc(plg(i,"Số hợp đồng"))+" · ")+(g?(g>0?"+":"")+fmt(g)+" đ":"")+(g&&gh?" · ":"")+(gh?(gh>0?"+":"")+gh+" ngày":"")+(!g&&!gh?esc(String(plg(i,"Nội dung tóm tắt điều chỉnh")).slice(0,60)):"")+'</small></div><div class="c3">'+plPill(String(plg(i,"Trạng thái")))+"</div></div>";}
+ $("plds").innerHTML=h||'<div class="empty">Chưa có phụ lục'+(hd?" cho hợp đồng này":da?" cho dự án này":"")+"</div>";$("plcnt").innerHTML=a.length;
+ $("pldsN").innerHTML=hd?"Đang lọc theo HĐ "+esc(plv("plHD"))+". Bấm một dòng để mở/sửa.":da?"Đang lọc theo dự án. Chọn hợp đồng để thu hẹp.":"Toàn bộ phụ lục. Bấm một dòng để mở/sửa.";}
+function plHist(){var e=$("plhist"),r=plHDr(),hd=plHDma(),a,i,k,h="",g,gh,lk,han,g0,h0,st,on,n=0,gg,c;if(!e)return;
+ if(r<0){e.innerHTML='<div class="empty">Chọn Dự án và Hợp đồng ở tab Nhập phụ lục để xem lịch sử điều chỉnh</div>';$("plkpi").innerHTML="";return;}
+ g0=Number(hdg(r,"Giá trị HĐ ban đầu sau thuế (VNĐ)"))||0;h0=Number(hdg(r,"Hạn HĐ ban đầu"))||0;lk=g0;han=h0;
+ h+='<div class="tr"><div class="c1">0</div><div class="c2"><b>HĐ ban đầu</b> · ký '+esc(d2s(hdg(r,"Ngày ký")))+"<br><small>"+fmt0(g0)+" đ · hạn "+(h0?d2s(h0):"-")+'</small></div><div class="c3"></div></div>';
+ a=plRows(hd,"");
+ for(k=0;k<a.length;k++){i=a[k];st=String(plg(i,"Trạng thái"));on=st!==PL_KD;g=Number(plg(i,"Giá trị điều chỉnh sau thuế (VNĐ)"))||0;gh=Number(plg(i,"Gia hạn (ngày)"))||0;if(on){lk+=g;if(han)han+=gh;n++;}
+  h+='<div class="tr" data-pl2="'+esc(plT().v[i][0])+'" style="cursor:pointer'+(on?"":";opacity:.55")+'"><div class="c1">'+(k+1)+'</div><div class="c2"><b>PL '+esc(plg(i,"Số phụ lục"))+"</b> · "+esc(plg(i,"Loại điều chỉnh"))+" · "+esc(d2s(plg(i,"Ngày ký")))+"<br><small>"+(g?(g>0?"+":"")+fmt(g)+" đ → ":"")+"lũy kế "+fmt0(lk)+" đ"+(gh?" · "+(gh>0?"+":"")+gh+" ngày":"")+" · hạn "+(han?d2s(han):"-")+'</small></div><div class="c3">'+plPill(st)+"</div></div>";}
+ e.innerHTML=h;gg=Number(hdg(r,"Giá gói thầu sau thuế (VNĐ)"))||0;c=gg&&lk>gg?"no":"";
+ $("plkpi").innerHTML='<div class="note" style="margin:0 0 6px">HĐ '+esc(plv("plHD"))+" · "+esc(hdg(r,"Tên nhà thầu"))+'</div><div class="bkp">'+bk("GT HĐ ban đầu",fmt0(g0)+" đ")+bk("GT HĐ hiện hành",fmt0(lk)+" đ",c)+bk("Điều chỉnh lũy kế",g0?((lk-g0>=0?"+":"")+fmt0(lk-g0)+" đ ("+(Math.round((lk/g0-1)*1e4)/100)+"%)"):"-")+bk("Giá gói thầu",gg?fmt0(gg)+" đ":"-")+bk("Hạn HĐ hiện hành",han?d2s(han):"-",han&&han<(S.NBC||today())?"wa":"")+bk("Gia hạn lũy kế",h0&&han?(han-h0)+" ngày":"-")+bk("Số phụ lục hiệu lực",String(n))+"</div>";}
+function plClear(keep){var i,f;for(i=0;i<PF.length;i++){f=PF[i];if(f.id==="plDA"||(keep&&f.id==="plHD"))continue;plset(f.id,"");}}
+function plNew(keep){S.pma="";S.pmK="";plClear(keep);plset("plTT",PL_DK2);plset("plDCT","Không");plset("plNgay",today());plOnChange();}
+function plOpen(ma,silent,stay){var i=tRow("tbl_PhuLuc",ma),j,f,v;if(i<0){toast("Không tìm thấy phụ lục "+ma,"err");return;}
+ if(!stay){if(S.mod!==5)setMod(5);if(S.ptab!==1)pltab(1);}S.pma=ma;S.pmK="";
+ plset("plDA",plg(i,"Tên dự án"));plItems();plset("plHD",plg(i,"Số hợp đồng"));
+ for(j=0;j<PF.length;j++){f=PF[j];if(f.g===1||!f.col||f.k==="ro")continue;v=plg(i,f.col);if(f.id==="plVAT")v=vatTxt(v);plset(f.id,v);}
+ if(!plv("plDCT"))plset("plDCT","Không");plset("plHan","");plOnChange();if(!silent)window.scrollTo(0,0);}
+function plSave(){var R=plOnChange(),isNew=!S.pma,ma=isNew?nextMa("tbl_PhuLuc","PL"):S.pma,data={},i,f,v,C=plCalc(),hd=C.hd,so=plv("plSo"),jobs=[],tpv=T("tbl_PhuLucTV"),ex=plTVrows(S.pma),keep={},mx=0,s,n;
+ if(R&&R.length){toast("Còn "+R.length+" lỗi – xem các ô viền đỏ","err");return;}
+ for(i=0;i<PF.length;i++){f=PF[i];if(!f.col||f.k==="ro")continue;v=plv(f.id);if(!plShow(f.id)||(f.g===3&&!plHas(PL_TD))||(f.g===4&&!plHas(PL_GT))||((f.g===5||f.g===6)&&!plHas(PL_DK)))v="";
+  if(f.k==="d")v=v?s2d(v):"";else if(f.k==="n"||f.k==="s")v=v===""?"":num(v);else if(f.k==="p")v=v===""?"":pnum(v)/100;else if(f.id==="plVAT")v=vatSave(v);else if(f.id==="plSo"&&v)v="'"+v;data[f.col]=v;}
+ data["Tiền VAT (VNĐ)"]=plHas(PL_GT)?C.tv:"";data["Loại gia hạn"]=plHas(PL_TD)&&C.gh?"Thời gian":"";
+ if(isNew){data["Mã PL (tự sinh)"]=ma;data["Trạng thái dòng"]=S.HD;}
+ if(tpv)for(i=0;i<tpv.v.length;i++){s=String(tpv.v[i][0]);n=parseInt(s.substr(4),10);if(s.substr(0,4)==="PLTV"&&!isNaN(n)&&n>mx)mx=n;}
+ if(S.pm.length&&plHas(PL_GT))S.pm.forEach(function(m){var d={"Mã PL":ma,"Mã HĐ":hd,"Mã TV":m.ma,"GT điều chỉnh TV trước thuế (VNĐ)":m.gt===""?"":num(m.gt),"GT thực điều chỉnh TV trước thuế (VNĐ)":plShow("plGTT")&&m.gtt!==""?num(m.gtt):"","Trạng thái dòng":S.HD},j,old=-1;
+  for(j=0;j<ex.length;j++)if(String(tpv.g(ex[j],"Mã TV"))===m.ma)old=ex[j];if(old>=0)keep[old]=1;else d["Mã PLTV (tự sinh)"]="PLTV"+p2(++mx);
+  jobs.push({find:function(Fm,H){var a=H.indexOf("Mã PL"),b=H.indexOf("Mã TV"),k;for(k=0;k<Fm.length;k++)if(String(Fm[k][a])===ma&&String(Fm[k][b])===m.ma)return k;return -1;},data:d,isNew:true});});
+ ex.forEach(function(j){if(!keep[j])jobs.push({find:byMa(String(tpv.v[j][0])),data:{"Trạng thái dòng":S.HUY},isNew:false});});
+ busy(true);
+ Excel.run(function(ctx){return writeRow(ctx,"tbl_PhuLuc",isNew?noRow:byMa(ma),data,isNew).then(function(){var ch=P().resolve();jobs.forEach(function(x){ch=ch.then(function(){return writeRow(ctx,"tbl_PhuLucTV",x.find,x.data,x.isNew);});});return ch;});})
+ .then(function(){return loadAll();}).then(function(){fillLists();hRefresh();plOpen(ma,true);toast((isNew?"Đã thêm phụ lục ":"Đã cập nhật phụ lục ")+so,"ok");})["catch"](fail).then(function(){busy(false);});}
+function plCancel(){if(!S.pma)return;var ma=S.pma,so=plv("plSo"),t=T("tbl_PhuLucTV"),tv=plTVrows(ma).map(function(i){return String(t.v[i][0]);});
+ ask("Hủy phụ lục "+so+"?","Phụ lục sẽ được đánh dấu '"+S.HUY+"' (không xóa hẳn) và không còn tính vào giá trị / hạn hợp đồng.",function(){busy(true);
+  Excel.run(function(ctx){return writeRow(ctx,"tbl_PhuLuc",byMa(ma),{"Trạng thái dòng":S.HUY},false).then(function(){var ch=P().resolve();tv.forEach(function(x){ch=ch.then(function(){return writeRow(ctx,"tbl_PhuLucTV",byMa(x),{"Trạng thái dòng":S.HUY},false);});});return ch;});})
+  .then(function(){return loadAll();}).then(function(){fillLists();S.pma="";hRefresh();plNew(true);toast("Đã đánh dấu hủy phụ lục "+so,"ok");})["catch"](fail).then(function(){busy(false);});});}
+function plBuild(){var g,i,h,bs;
+ for(g=1;g<=6;g++){h='<div class="grid">';for(i=0;i<PF.length;i++)if(PF[i].g===g)h+=plfld(PF[i]);$("pl"+g).innerHTML=h+"</div>";}
+ new DD("plDA","Chọn dự án…",plOnDA,1);new DD("plHD","Chọn hợp đồng…",plOnHD,1);new DD("plLoai","Chọn loại điều chỉnh…",plOnChange);new DD("plTT","Chọn trạng thái…",plOnChange);new DD("plDCT","Có / Không",plOnChange);new DD("plVAT","Chọn thuế suất…",plOnChange);
+ bs=document.querySelectorAll("[data-placts]");for(i=0;i<bs.length;i++)bs[i].innerHTML='<button class="btn pri" data-a="plluu">&#128190; LƯU</button><button class="btn sec2" data-a="plmoi" title="Phụ lục mới (giữ dự án và hợp đồng đang chọn)">&#10227; MỚI</button><button class="btn dan" data-a="plhuy">&#128465; HỦY</button>';
+ $("tabsP").onclick=function(e){var t=e.target;while(t&&t.tagName!=="A")t=t.parentNode;if(t)pltab(+t.getAttribute("data-pt"));};
+ $("plds").onclick=$("plhist").onclick=function(e){var t=e.target;while(t&&t!==this&&!t.getAttribute("data-pl2"))t=t.parentNode;if(t&&t!==this)plOpen(t.getAttribute("data-pl2"));};
+ document.body.addEventListener("click",function(e){var t=e.target;while(t&&t!==document.body&&!t.getAttribute("data-a"))t=t.parentNode;if(!t||t===document.body||t.disabled)return;var a=t.getAttribute("data-a");
+  if(a==="plluu")plSave();else if(a==="plmoi")plNew(true);else if(a==="plhuy")plCancel();else if(a==="plchia")plSplit();});
+ document.body.addEventListener("input",function(e){var t=e.target,k=t.getAttribute("data-pl"),m=t.getAttribute("data-pm"),C,x;if(t.id==="pltim"){plRenderList();return;}
+  if(m!==null){plSgn(t);S.pm[+m][t.getAttribute("data-pk")]=t.value;plOnChange();return;}
+  if(k===null)return;if(k==="n")fmtNum(t);else if(k==="s")plSgn(t);
+  if(t.id==="plHan"){C=plCalc();x=s2d(t.value);if(x&&C.B&&C.B.han)$("plGH").value=x-C.B.han?fmt(x-C.B.han):"";}
+  plOnChange();});}
+function pltab(n){S.ptab=n;var a=$("tabsP").children,i;for(i=0;i<a.length;i++)cls(a[i],"on",+a[i].getAttribute("data-pt")===n);for(i=1;i<=2;i++)cls($("pp"+i),"on",i===n);if(OPEN)OPEN.close();plModeTxt();if(n===2&&S.pinit)plHist();}
+function plModeTxt(){if(S.mod!==5)return;$("mode").innerHTML=S.ptab===2?"Lịch sử điều chỉnh theo hợp đồng":(S.pma?"&#9998; Đang sửa phụ lục · "+esc(plv("plSo")):"&#10133; Nhập phụ lục mới");}
+function plMode(){pltab(S.ptab||1);if(S.pinit)plOnChange();}
+function plRefresh(){if(!S.dd.plDA||!S.ready||!plT())return;
+ S.dd.plLoai.setItems(S.L.lst_LoaiPL&&S.L.lst_LoaiPL.length?S.L.lst_LoaiPL:[PL_GT,PL_TD,PL_DK,PL_KH]);S.dd.plTT.setItems(S.L.lst_TrangThaiPL&&S.L.lst_TrangThaiPL.length?S.L.lst_TrangThaiPL:[PL_DT,PL_DK2,PL_KD]);
+ S.dd.plDCT.setItems(["Không","Có"]);S.dd.plVAT.setItems((S.L.lst_ThueVAT||[]).map(vatTxt));S.pmK="";
+ if(!S.pinit){S.pinit=true;plNew();}else if(S.pma&&tRow("tbl_PhuLuc",S.pma)>=0)plOpen(S.pma,true,true);else{S.pma="";plOnChange();}}
 /* ---------- khoi dong ---------- */
-Office.onReady(function(){build();hBuild();uBuild();bBuild();busy(true);
+Office.onReady(function(){build();hBuild();uBuild();bBuild();plBuild();busy(true);
  loadAll().then(function(){S.ready=true;fillLists();buildKM();newForm();hRefresh();})["catch"](function(e){fail(e);$("mode").innerHTML="Không đọc được dữ liệu – kiểm tra file đang mở có đúng bảng tbl_DuAn…";}).then(function(){busy(false);});});
 })();
 </script>
